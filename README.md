@@ -3,7 +3,7 @@
 ## Grupo
 ### Integrantes
 * 47064 - Serra, Gonzalo
-* xxxxx - Bitti, Guido
+* 48937 - Bitti, Guido
 * xxxxx - Bertone, Valentin
 
 ### Repositorios
