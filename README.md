@@ -4,7 +4,7 @@
 ### Integrantes
 * 47064 - Serra, Gonzalo
 * 48937 - Bitti, Guido
-* xxxxx - Bertone, Valentin
+* 48028 - Bertone, Valentin
 
 ### Repositorios
 * [Frontend app](github.com/tonchiserra/services-dsw)
