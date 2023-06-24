@@ -15,7 +15,7 @@
 Red social de contratación de servicios.
 
 ### Modelo
-![Imagen de Diagrama Entidad Relación]()
+![Imagen de Diagrama Entidad Relación](https://drive.google.com/file/d/1ptEQxyAbnv-1uzNrHGa9wbfU5mzrEZ5Y/view?usp=sharing)
 
 ## Alcance Funcional 
 
