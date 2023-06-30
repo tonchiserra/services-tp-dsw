@@ -15,7 +15,7 @@
 Red social de contratación de servicios.
 
 ### Modelo
-[![Modelo-DSW.jpg](https://i.postimg.cc/W1m7pkTS/Modelo-DSW.jpg)](https://postimg.cc/QFt70VBW)
+![Modelo-DSW.jpg](https://i.postimg.cc/W1m7pkTS/Modelo-DSW.jpg)
 
 ## Alcance Funcional 
 
