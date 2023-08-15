@@ -1,0 +1,11 @@
+@mixin mobile-up {
+    @media (min-width: $mobile-breakpoint) {
+      @content;
+    }
+}
+
+@mixin content-up {
+    @media (min-width: $content-width + 1) {
+      @content;
+    }
+}
