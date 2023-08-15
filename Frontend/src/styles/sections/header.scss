@@ -1,0 +1,86 @@
+main-header {
+    background-color: $white-color;
+    border-top: 1px solid $border-color;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+
+    @include mobile-up {
+        width: 30vw;
+        max-width: 250px;
+        height: 100vh;
+        border-top: unset;
+        border-right: 1px solid $border-color;
+        position: unset;
+    }
+
+    @include content-up {
+        border-left: 1px solid $border-color;
+        left: calc((100vw - $content-width)/2);
+    }
+
+    .menu {
+        padding: 10px 20px;
+
+        &-items {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @include mobile-up {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            &__item {
+                list-style: none;
+                transition: all 300ms ease;
+
+                @include mobile-up {
+                    width: 100%;
+                }
+
+                a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 10px;
+
+                    @include mobile-up {
+                        padding: 5px 10px;
+                        border-radius: 1000px;
+                        
+                        &:hover {
+                            background: $gray-color;
+                        }
+                    }
+
+                    svg {
+                        height: 24px;
+                    }
+
+                    span {
+                        font-size: 1.6rem;
+                        font-weight: medium;
+                        display: none;
+
+                        @include mobile-up {
+                            display: unset;
+                        }
+                    }
+
+                    &.active {
+                        @include mobile-up {
+                            background: $gray-color;
+                        }
+        
+                        path {
+                            fill: $main-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

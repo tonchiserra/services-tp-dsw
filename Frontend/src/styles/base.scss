@@ -15,6 +15,21 @@ html {
   
 body {
     background: $white-color;
+    position: relative;
+    min-height: 100vh;
+
+    @include mobile-up {
+        app-root {
+            display: flex;
+        }
+    }
+
+    @include content-up {
+        width: 100%;
+        max-width: $content-width;
+        margin: 0 auto;
+        border-right: 1px solid $border-color;
+    }
 
     h1, h2, h3 {
         font-family: $heading-font-family;

@@ -1,8 +1,9 @@
 // UI app colors
-$main-color: blue; //we need to choose a main color
-$second-color: red; //we need to choose a second color
+$main-color: #5e6f5d; //we need to choose a main color
+$second-color: #212121; //we need to choose a second color
 $third-color: yellow; //we need to choose a third color
 $text-color: #222;
+$border-color: #333;
 
 // Base colors
 $white-color: #fff;
@@ -15,4 +16,4 @@ $font-family: sans-serif; //we need to choose a general font family
 
 // Breakpoints
 $content-width: 1200px;
-$mobile-breakpoint: 680px;
+$mobile-breakpoint: 700px;
