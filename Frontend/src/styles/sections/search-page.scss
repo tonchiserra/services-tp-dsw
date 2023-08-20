@@ -45,10 +45,15 @@ search-page {
 
             &.show-error {
                 justify-content: center;
+
+                .search-result__message {
+                    display: unset;
+                }
             }
 
             .search-result__message {
                 font-size: 1.6rem;
+                display: none;
             }
         }
     }

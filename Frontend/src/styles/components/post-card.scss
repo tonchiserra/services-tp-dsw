@@ -1,0 +1,71 @@
+post-card {
+    width: 100%;
+    border-bottom: 1px solid $border-color;
+
+    .post-card__container {
+        padding: 10px 20px;
+    
+        .profile-information {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+
+            &__image {
+                width: 45px;
+                height: 45px;
+                border-radius: 100px;
+                background-color: $gray-color;
+            }
+
+            &__name {
+                font-size: 1.4rem;
+                font-weight: bold;
+            }
+
+            &__username {
+                font-size: 1.4rem;
+                color: $second-text-color;
+            }
+        }
+
+        .post-information {
+            margin-left: 55px;
+        
+            &__text {
+                font-size: 1.4rem;
+            }
+
+            &__stats {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 30px;
+                padding-top: 15px;
+
+                .likes,
+                .reposts {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 5px;
+
+                    &__quantity {
+                        font-size: 1.3rem;
+                    }
+                }
+
+                .like-btn,
+                .repost-btn {
+                    border: none;
+                    background: transparent;
+                    padding: 0;
+
+                    svg {
+                        width: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
