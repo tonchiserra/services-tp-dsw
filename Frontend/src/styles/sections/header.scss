@@ -16,7 +16,6 @@ main-header {
     }
 
     @include content-up {
-        border-left: 1px solid $border-color;
         left: calc((100vw - $content-width)/2);
     }
 
