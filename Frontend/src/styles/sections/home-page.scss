@@ -1,0 +1,65 @@
+app-home-page{
+    h2{
+        padding: 10px;
+    }
+    .new-post{
+        width: 100%;
+        border-bottom: 1px solid $border-color;
+        border-top: 1px solid $border-color;
+        margin-top: 10px;
+        @include mobile-up{
+            width: 70vw;
+        }
+        .type-post{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            padding-bottom: 0px;
+            p{
+                width: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 5px;
+                padding: 2px;
+                padding-right: 5px;
+                border: 1px solid $border-color;
+                background-color: $gray-color;
+                position: relative;
+            }
+            button{
+                margin: 5px;
+                width: 60px;
+                height: 25px;
+                background-color: $light-blue-color;
+                box-sizing: border-box;
+                outline: none;
+                border-radius: 10px;
+                border: 1px solid $border-color;
+            }
+        }
+
+        .text-post{
+            padding: 10px;
+        }
+
+        textarea{
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid $border-color;
+            outline: none;
+            resize: none;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: $gray-color;
+        }
+    }
+
+    span.arrow{
+        position: absolute;
+        right: 0;
+        padding-right: 5px;
+    }
+    border-right: 1px solid $border-color;
+}
