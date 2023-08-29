@@ -1,4 +1,6 @@
 search-page {
+    overflow-y: auto;
+    background-color: $white-color;
     width: 100%;
     
     .search-page__container {

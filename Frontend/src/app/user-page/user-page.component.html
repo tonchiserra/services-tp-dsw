@@ -1,1 +1,56 @@
-<p>user-page works!</p>
+<div class="user-info">
+    <div class="top">
+        <div class="user-info__image">
+            <!-- profile image from database -->
+        </div>
+        <div class="user-info__buttons">
+            <!-- if currentUser === user loged -->
+            <button class="button__edit-profile secondary-button">Edit profile</button>
+
+            <!-- else if userLoged.follows.contains(currentUser) -->
+            <!-- <button class="button__unfollow primary-button">Unfollow</button> -->
+            <!-- else -->
+            <!-- <button class="button__follow secondary-button">Follow</button> -->
+        </div>
+    </div>
+
+    <div class="bottom">
+        <h2 class="user-info__name">Nombre del usuario</h2>
+        <p class="user-info__username">@username</p>
+
+        <p class="user-info__description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iste error, voluptatum beatae distinctio vero at nihil, consectetur magnam vel iure enim facere. Laboriosam dolor ullam dolorum ipsum, sed incidunt!</p>
+        <!-- More info that we don't have at the moment -->
+
+        <div class="user-info__follows">
+            <p class="following">489 <span>Following</span></p>
+            <p class="followers">2145 <span>Followers</span></p>
+        </div>
+    </div> 
+</div>
+
+<div class="user-posts">
+    <div class="user-posts__tabs">
+        <!-- We need do this with router outlet -->
+
+        <div class="tab active">Posts</div>
+        <div class="tab">Likes</div>
+        <div class="tab">Media</div>
+    </div>
+
+    <div class="search-results">
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+        <post-card></post-card>
+    </div>
+</div>

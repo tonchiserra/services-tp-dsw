@@ -20,6 +20,7 @@ const routes: Routes = [
     AppComponent,
     MainHeaderComponent,
     SearchPageComponent,
+    UserPageComponent,
     PostCardComponent
   ],
   imports: [
