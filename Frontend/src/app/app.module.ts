@@ -7,6 +7,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { MainHeaderComponent } from './header/main-header.component';
+import { PostCardComponent } from './post-card/post-card.component';
 
 const routes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -18,6 +19,9 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MainHeaderComponent,
+    SearchPageComponent,
+    UserPageComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,

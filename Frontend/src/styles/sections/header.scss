@@ -5,6 +5,7 @@ main-header {
     bottom: 0;
     left: 0;
     width: 100vw;
+    z-index: 1;
 
     @include mobile-up {
         width: 30vw;
@@ -16,7 +17,6 @@ main-header {
     }
 
     @include content-up {
-        border-left: 1px solid $border-color;
         left: calc((100vw - $content-width)/2);
     }
 
