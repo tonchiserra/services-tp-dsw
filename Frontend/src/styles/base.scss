@@ -17,6 +17,7 @@ body {
     background: $white-color;
     position: relative;
     min-height: 100vh;
+    font-size: 1.4rem;
 
     @include mobile-up {
         overflow: hidden;
@@ -33,31 +34,70 @@ body {
         border-right: 1px solid $border-color;
     }
 
+    .hidden {
+        display: none !important;
+    }
+
     h1, h2, h3 {
         font-family: $heading-font-family;
         line-height: 1;
     }
 
-    button {
+    button, select {
         cursor: pointer;
         position: relative;
         font-weight: bold;
-        font-size: 1rem;
+        font-size: 1.4rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 5px 15px;
+        border-radius: 100px;
+        transition: all 300ms ease;
+        outline: none;
+        height: 32px;
+
+        &.primary {
+            background: $main-color;
+            border: 1px solid $main-color;
+            color: $white-color;
+
+            &:hover {
+                background: $white-color;
+                color: $main-color;
+            }
+        }
+
+        &.secondary {
+            background: $white-color;
+            border: 1px solid $main-color;
+            color: $main-color;
+            
+            &:hover {
+                background: $main-color;
+                color: $white-color;
+            }
+        }
+    }
+
+    input,
+    textarea {
+        font-size: 1.4rem;
+        outline: 1px solid transparent;
+        transition: all 300ms ease;
     
-        span {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        &:focus,
+        &:hover {
+            outline: 1px solid $main-color;
         }
     }
 
     input {
-        font-size: 1rem;
+        background: $gray-color;
+        border-radius: 100px;
+        border: none;
     }
-      
+
     a {
         text-decoration: none;
         color: $second-color;

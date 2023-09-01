@@ -3,6 +3,10 @@ search-page {
     background-color: $white-color;
     width: 100%;
     
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    
     .search-page__container {
 
         .search-form {
@@ -12,12 +16,7 @@ search-page {
             position: relative;
 
             input {
-                background-color: $gray-color;
-                border: none;
-                outline: none;
                 padding: 10px 45px 10px 15px;
-                border-radius: 100px;
-                font-size: 1.4rem;
                 width: 100%;
             }
 
