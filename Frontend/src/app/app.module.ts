@@ -8,8 +8,11 @@ import { SearchPageComponent } from './search-page/search-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { MainHeaderComponent } from './header/main-header.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginPageComponent },
+  { path: '', component: HomePageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchPageComponent },
   { path: 'user', component: UserPageComponent },
@@ -21,7 +24,8 @@ const routes: Routes = [
     MainHeaderComponent,
     SearchPageComponent,
     UserPageComponent,
-    PostCardComponent
+    PostCardComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,

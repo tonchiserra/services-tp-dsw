@@ -1,9 +1,11 @@
 post-card {
     width: 100%;
-    border-bottom: 1px solid $border-color;
+    padding: 0 20px 20px 20px;
 
     .post-card__container {
         padding: 10px 20px;
+        background: $white-color;
+        border-radius: 10px;
     
         .profile-information {
             display: flex;

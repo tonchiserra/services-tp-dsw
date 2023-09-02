@@ -1,11 +1,15 @@
-<h2>Home</h2>
-<div class="new-post">
-    <div class="type-post">
-        <p>Prestar servicio<span class="arrow"><i class="fa-solid fa-caret-down fa-xl"></i></span></p>
-        <button>Post</button>
-    </div>
-    
-    <div class="text-post">
-        <textarea name="text-post" id="text-post" placeholder="Escribe algo..."></textarea>
-    </div>
+<div class="new-post page-width">
+    <form class="form-post">
+        <div class="top">
+            <div class="user-image">
+                <!-- imagen -->
+            </div>
+            <select name="post[type]" id="typePost" class="secondary">
+                <option value="give" selected>Give service</option>
+                <option value="contract" selected>Contract service</option>
+            </select>
+            <button class="primary" type="submit">Post</button>
+        </div>
+        <textarea name="post[text]" id="textPost" placeholder="Type something..."></textarea>
+    </form>
 </div>
