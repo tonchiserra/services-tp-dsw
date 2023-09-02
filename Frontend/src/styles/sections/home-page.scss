@@ -36,6 +36,12 @@ home-page {
                 }
             }
 
+            select {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+            }
+
             textarea {
                 width: 100%;
                 resize: none;

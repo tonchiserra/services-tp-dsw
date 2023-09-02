@@ -16,7 +16,7 @@ export class LoginPageComponent {
 
   private setEvents(): void {
     document.addEventListener("DOMContentLoaded", () => {
-      if (location.pathname !== 'login') return 
+      if (location.pathname !== '/login') return 
 
       this.signUpContainer = document.querySelector('#sign-up') as HTMLElement
       this.signInContainer = document.querySelector('#sign-in') as HTMLElement

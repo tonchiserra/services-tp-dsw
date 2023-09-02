@@ -14,13 +14,13 @@ html {
 }
   
 body {
-    background: $white-color;
+    background: $third-color;
     position: relative;
     min-height: 100vh;
     font-size: 1.4rem;
-
+    overflow: hidden;
+    
     @include mobile-up {
-        overflow: hidden;
 
         app-root {
             display: flex;
@@ -60,22 +60,22 @@ body {
         &.primary {
             background: $main-color;
             border: 1px solid $main-color;
-            color: $white-color;
+            color: $third-color;
 
             &:hover {
-                background: $white-color;
+                background: $third-color;
                 color: $main-color;
             }
         }
 
         &.secondary {
-            background: $white-color;
+            background: $third-color;
             border: 1px solid $main-color;
             color: $main-color;
             
             &:hover {
                 background: $main-color;
-                color: $white-color;
+                color: $third-color;
             }
         }
     }

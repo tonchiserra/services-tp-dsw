@@ -1,11 +1,6 @@
 search-page {
-    overflow-y: auto;
-    background-color: $white-color;
+    background-color: $third-color;
     width: 100%;
-    
-    &::-webkit-scrollbar {
-        display: none;
-    }
     
     .search-page__container {
 
@@ -42,7 +37,17 @@ search-page {
             align-items: center;
             justify-content: flex-start;
             position: relative;
+            padding-top: 20px;
             height: calc(100vh - 44px - 57px);
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            @include mobile-up {
+                height: calc(100vh - 57px);
+            }
 
             &.show-error {
                 justify-content: center;

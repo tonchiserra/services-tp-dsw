@@ -1,6 +1,8 @@
 user-page {
-    overflow-y: auto;
-    background-color: $white-color;
+    background-color: $third-color;
+    height: 100vh;
+    display: block;
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
         display: none;
@@ -86,11 +88,15 @@ user-page {
                 height: 32px;
                 transition: all 300ms ease;
                 cursor: pointer;
+                border-bottom: 2px solid transparent;
 
-                &.active,
-                &:hover {
+                &.active {
                     opacity: 1;
                     border-bottom: 2px solid $main-color;
+                }
+
+                &:hover {
+                    opacity: 1;
                 }
             }
         }
@@ -101,7 +107,18 @@ user-page {
             align-items: center;
             justify-content: flex-start;
             position: relative;
-            height: calc(100vh - 44px - 57px);
+            height: calc(100vh - 33px);
+            padding-top: 20px;
+            padding-bottom: 44px;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            @include mobile-up {
+                padding-bottom: 0;
+            }
     
             &.show-error {
                 justify-content: center;
