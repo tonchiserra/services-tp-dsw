@@ -25,7 +25,8 @@ const routes: Routes = [
     SearchPageComponent,
     UserPageComponent,
     PostCardComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
