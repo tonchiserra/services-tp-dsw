@@ -1,0 +1,19 @@
+<div class="new-post page-width">
+    <form class="form-post">
+        <div class="top">
+            <div class="user-image">
+                <!-- imagen -->
+            </div>
+            <div class="field">
+                <input type="checkbox" name="post[type]" id="typePost" [formControl]="postFormState.isServicePost">
+                <label for="typePost">Service post</label>
+            </div>
+            <select name="post[service]" id="servicePost" class="secondary" *ngIf="postFormState.isServicePost.value">
+                <option value="" selected disabled>Select a service</option>
+                <!-- for service in user.services -->
+            </select>
+            <button class="primary" type="submit">Post</button>
+        </div>
+        <textarea name="post[text]" id="textPost" placeholder="Type something..."></textarea>
+    </form>
+</div>

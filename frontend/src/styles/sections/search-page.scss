@@ -1,7 +1,7 @@
 search-page {
     background-color: $third-color;
     width: 100%;
-    
+
     .search-page__container {
 
         .search-form {
@@ -9,6 +9,9 @@ search-page {
             padding-top: 10px;
             padding-bottom: 10px;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
             input {
                 padding: 10px 45px 10px 15px;
@@ -19,14 +22,14 @@ search-page {
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                right: 0;
+                right: 120px;
                 margin: auto 30px;
                 border: none;
                 background: transparent;
                 padding: 0;
 
                 svg {
-                    
+
                 }
             }
         }
