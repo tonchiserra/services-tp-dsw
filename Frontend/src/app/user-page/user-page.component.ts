@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './user-page.component.html'
 })
 export class UserPageComponent {
-
+  
 }

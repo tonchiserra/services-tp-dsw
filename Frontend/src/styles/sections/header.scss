@@ -1,5 +1,5 @@
 main-header {
-    background-color: $white-color;
+    background-color: $third-color;
     border-top: 1px solid $border-color;
     position: fixed;
     bottom: 0;
@@ -72,7 +72,7 @@ main-header {
 
                     &.active {
                         @include mobile-up {
-                            background: $gray-color;
+                            background: $white-color;
                         }
         
                         path {

@@ -1,8 +1,7 @@
 search-page {
-    overflow-y: auto;
-    background-color: $white-color;
+    background-color: $third-color;
     width: 100%;
-    
+
     .search-page__container {
 
         .search-form {
@@ -10,14 +9,12 @@ search-page {
             padding-top: 10px;
             padding-bottom: 10px;
             position: relative;
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
             input {
-                background-color: $gray-color;
-                border: none;
-                outline: none;
                 padding: 10px 45px 10px 15px;
-                border-radius: 100px;
-                font-size: 1.4rem;
                 width: 100%;
             }
 
@@ -25,14 +22,14 @@ search-page {
                 position: absolute;
                 top: 0;
                 bottom: 0;
-                right: 0;
+                right: 120px;
                 margin: auto 30px;
                 border: none;
                 background: transparent;
                 padding: 0;
 
                 svg {
-                    
+
                 }
             }
         }
@@ -43,7 +40,17 @@ search-page {
             align-items: center;
             justify-content: flex-start;
             position: relative;
+            padding-top: 20px;
             height: calc(100vh - 44px - 57px);
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            @include mobile-up {
+                height: calc(100vh - 57px);
+            }
 
             &.show-error {
                 justify-content: center;

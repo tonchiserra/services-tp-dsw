@@ -5,12 +5,12 @@
         </div>
         <div class="user-info__buttons">
             <!-- if currentUser === user loged -->
-            <button class="button__edit-profile secondary-button">Edit profile</button>
+            <button class="button__edit-profile secondary">Edit profile</button>
 
             <!-- else if userLoged.follows.contains(currentUser) -->
-            <!-- <button class="button__unfollow primary-button">Unfollow</button> -->
+            <!-- <button class="button__unfollow primary">Unfollow</button> -->
             <!-- else -->
-            <!-- <button class="button__follow secondary-button">Follow</button> -->
+            <!-- <button class="button__follow secondary">Follow</button> -->
         </div>
     </div>
 
@@ -32,9 +32,9 @@
     <div class="user-posts__tabs">
         <!-- We need do this with router outlet -->
 
-        <div class="tab active">Posts</div>
-        <div class="tab">Likes</div>
-        <div class="tab">Media</div>
+        <a routerLink="/user/posts" routerLinkActive="active" class="tab" data-tab="posts">Posts</a>
+        <a routerLink="/user/likes" routerLinkActive="active" class="tab" data-tab="likes">Likes</a>
+        <a routerLink="/user/media" routerLinkActive="active" class="tab" data-tab="media">Media</a>
     </div>
 
     <div class="search-results">
