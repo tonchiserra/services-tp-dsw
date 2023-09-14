@@ -1,0 +1,48 @@
+### obetener todos los users.
+GET http://localhost:3000/api/users
+
+### obtener un usuario por userId
+GET http://localhost:3000/api/users/e79228b1-7842-4c5d-ab36-ccadaebcb783
+
+### crear un nuevo user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "name": "Marcos",
+  "surname": "Perez",
+  "phone": 3415087211,
+  "mail": "marcosperez@gmail.com",
+  "username": "MarcosPerez",
+  "password": "c0ntrasen1a",
+  "profileImg": "./src/profile/marcosperez.jpg",
+  "description": "Soy Marcos y me encanta Python"
+}
+
+### modificar un usuario con put (total)
+PUT http://localhost:3000/api/users/a0b1f3d3-8761-4d88-88ea-7d385ec04bba
+Content-Type: application/json
+
+{
+  "name": "Roman",
+  "surname": "Perez",
+  "phone": 3415087211,
+  "mail": "romanperez@gmail.com",
+  "username": "RomanPerez",
+  "password": "c0ntrasen1a",
+  "profileImg": "./src/profile/marcosperez.jpg",
+  "description": "Soy Roman y me encanta Python"   
+}
+
+###modificar un usuario con patch (parcial)
+PATCH http://localhost:3000/api/users/87909c67-c5f6-4878-ab1f-4c2cb916401e
+Content-Type: application/json
+
+{
+  "mail": "guiditobitti@gmail.com",
+  "username": "GuiditoBitti",
+  "password": "pa$$w0rd2.0"
+}
+
+### borrar un character
+DELETE http://localhost:3000/api/users/871fedff-cb79-4d55-a3c9-9f98570197e0
