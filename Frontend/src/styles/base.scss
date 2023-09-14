@@ -78,6 +78,15 @@ body {
                 color: $third-color;
             }
         }
+
+        &.no-btn {
+            border: none;
+            outline: none;
+            height: unset;
+            padding: unset;
+            font-weight: unset;
+            background-color: unset;
+        }
     }
 
     input,
