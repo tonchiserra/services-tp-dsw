@@ -1,0 +1,38 @@
+### obetener todos los users.
+GET http://localhost:3000/api/addresses
+
+### obtener un direction por directionId
+GET http://localhost:3000/api/addresses/2d890b92-50b5-4c2a-b2be-db7df4aa2c35
+
+### crear un nuevo direction
+POST http://localhost:3000/api/addresses
+Content-Type: application/json
+
+{
+    "street": "Balcarce",
+    "streetNumber": -38,
+    "country": "Argentina",
+    "city": "Rosario"
+}
+
+### modificar un direction con put (total)
+PUT http://localhost:3000/api/addresses/1d504d77-a3ad-4542-951a-a9385f0f1898
+Content-Type: application/json
+
+{
+    "street": "La Paz",
+    "strNumber": 1232,
+    "country": "Argentina",
+    "city": "Rosario"
+}
+
+###modificar un direction con patch (parcial)
+PATCH http://localhost:3000/api/addresses/6ccf2185-e2ed-4dd5-913f-d604e38fafac
+Content-Type: application/json
+
+{
+  "strNumber": 1890
+}
+
+### delete address
+DELETE http://localhost:3000/api/addresses/1e04719a-2ed3-4a6e-8943-cbb6fc78f6f8
