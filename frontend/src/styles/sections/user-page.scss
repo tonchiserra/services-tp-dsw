@@ -8,6 +8,23 @@ user-page {
         display: none;
     }
 
+    .modal__edit-profile {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        z-index: 2;
+        width: 100vw;
+        height: 100vh;
+        background: #000000aa;
+
+        form {
+            
+        }
+    }
+
     .user-info {
         display: flex;
         flex-direction: column;

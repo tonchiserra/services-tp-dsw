@@ -5,7 +5,7 @@ main-header {
     bottom: 0;
     left: 0;
     width: 100vw;
-    z-index: 1;
+    z-index: 2;
 
     @include mobile-up {
         width: 30vw;
@@ -22,6 +22,8 @@ main-header {
 
     .menu {
         padding: 10px 20px;
+        position: relative;
+        background-color: $third-color;
 
         &-items {
             display: flex;
@@ -41,7 +43,8 @@ main-header {
                     width: 100%;
                 }
 
-                a {
+                a, 
+                button {
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
@@ -77,6 +80,98 @@ main-header {
         
                         path {
                             fill: $main-color;
+                        }
+                    }
+                }
+            }
+
+            .submenu {
+                border-top: 1px solid $border-color;
+                width: 100%;
+                height: 200px;
+                position: absolute;
+                z-index: -1;
+                left: 0;
+                bottom: -210px;
+                transition: all 300ms ease;
+                background-color: $third-color;
+            
+                &.open {
+                    bottom: 100%;
+                }
+
+                ul {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+
+                li {
+                    width: 100%;
+                    height: 40px;
+                    font-size: 1.5rem;
+
+                    a {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        &:hover {
+                            background-color: $gray-color;
+                        }
+                    }
+                }
+            }
+
+            @include mobile-up {
+                .menu-btn {
+                    order: 1;
+                    margin-top: 50px;
+
+                    button{
+                        display: none;
+                    }
+                }
+
+                .submenu {
+                    border-top: none;
+                    height: max-content;
+                    position: unset;
+                    z-index: unset;
+                
+                    &.open {
+                        bottom: unset;
+                    }
+    
+                    ul {
+                        height: unset;
+                        width: unset;
+                        display: unset;
+                    }
+    
+                    li {
+                        width: 100%;
+                        height: max-content;
+                        font-size: 1.6rem;
+                        list-style: none;
+    
+                        a {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            padding: 5px 10px;
+                            width: 100%;
+                            height: 34px;
+    
+                            &:hover {
+                                background-color: $gray-color;
+                            }
                         }
                     }
                 }
