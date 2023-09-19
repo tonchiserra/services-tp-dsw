@@ -7,7 +7,7 @@ const repository = new AddressRepository()
 function sanitizeAddressInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
         street: req.body.street,
-        strNumber: req.body.strNumber,
+        streetNumber: req.body.streetNumber,
         country: req.body.country,
         city: req.body.city
     }
@@ -26,16 +26,19 @@ function findAll(req: Request, res: Response) {
 }
 
 function findOne(req: Request, res: Response) {
-    const id = req.params.id
+    const id = req.params.addressId
+
     const address = repository.findOne({ id })
 
-    if(!address) return res.status(404).send({ message: "Address not found" })
+    if(!address){
+        return res.status(404).send({ message: "Address not found" })
+    }
 
     res.json({ data: address })
 }
 
 function add(req: Request, res: Response) {
-    const input = req.body.sanitizeAddressInput
+    const input = req.body.sanitizedInput
     const addressInput = new Address(
         input.street,
         input.streetNumber,
@@ -49,9 +52,9 @@ function add(req: Request, res: Response) {
 }
 
 function update(req: Request, res: Response) {
-    req.body.sanitizeAddressInput = req.params.id
+    req.body.sanitizedInput.addressId = req.params.addressId
 
-    const address = repository.update(req.body.sanitizeAddressInput)
+    const address = repository.update(req.body.sanitizedInput)
 
     if(!address) return res.status(404).send({ message: 'Address not found' })
 
@@ -59,7 +62,7 @@ function update(req: Request, res: Response) {
 }
 
 function remove(req: Request, res: Response) {
-    const id = req.params.id
+    const id = req.params.addressId
     const address = repository.remove({ id })
 
     if(!address) return res.status(404).send({ message: 'Address not found' })

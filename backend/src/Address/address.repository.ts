@@ -16,7 +16,7 @@ export class AddressRepository implements Repository<Address>{
     }
     
     public findOne(item: {id: string}): Address | undefined {
-        return addresses.find(address => address.addressId === item.id) // call to ddbb
+        return addresses.find((address) => address.addressId === item.id) // call to ddbb
     }
     
     public add(item: Address): Address | undefined {
@@ -25,7 +25,7 @@ export class AddressRepository implements Repository<Address>{
     }
     
     public update(item: Address): Address | undefined {
-        const addressIdx = addresses.findIndex(address => address.addressId = item.addressId)
+        const addressIdx = addresses.findIndex((address) =>address.addressId = item.addressId)
 
         if(addressIdx !== -1) {
             addresses[addressIdx] = {...addresses[addressIdx], ...item}
@@ -35,8 +35,7 @@ export class AddressRepository implements Repository<Address>{
     }
     
     public remove(item: { id: string}): Address | undefined {
-        const addressIdx = addresses.findIndex(address => (address.addressId as string) = item.id)
-        
+        const addressIdx = addresses.findIndex((address) =>address.addressId === item.id);
         if(addressIdx !== -1) {
             const deletedAddress = addresses[addressIdx]
             addresses.splice(addressIdx, 1)
