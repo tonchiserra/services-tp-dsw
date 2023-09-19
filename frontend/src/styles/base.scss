@@ -56,6 +56,7 @@ body {
         transition: all 300ms ease;
         outline: none;
         height: 32px;
+        border: none;
 
         &.primary {
             background: $main-color;
@@ -115,13 +116,39 @@ body {
         appearance: none;
         background: $third-color;
         border: 1px solid $main-color;
-        width: 20px;
-        height: 20px;
+        width: 15px;
+        height: 15px;
         cursor: pointer;
         border-radius: 5px;
+        
+        @include mobile-up {
+            width: 20px;
+            height: 20px;
+        }
+
+        & + img {
+            display: none;
+        }
 
         &:checked {
             background: $main-color;
+
+            & + img {
+                display: unset;
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                margin: auto 0;
+                width: 15px;
+                height: 15px;
+                pointer-events: none;
+
+                @include mobile-up {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
         }
 
         &:focus {

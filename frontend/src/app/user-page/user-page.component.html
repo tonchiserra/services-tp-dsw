@@ -1,3 +1,12 @@
+<!-- if currentUser === user loged -->
+<div class="modal__edit-profile hidden">
+    <form>
+        <button class="close-btn" (click)="openEditProfileModal($event)">
+            x
+        </button>
+    </form>
+</div>
+
 <div class="user-info">
     <div class="top">
         <div class="user-info__image">
@@ -5,7 +14,7 @@
         </div>
         <div class="user-info__buttons">
             <!-- if currentUser === user loged -->
-            <button class="button__edit-profile secondary">Edit profile</button>
+            <button class="button__edit-profile secondary" (click)="openEditProfileModal($event)">Edit profile</button>
 
             <!-- else if userLoged.follows.contains(currentUser) -->
             <!-- <button class="button__unfollow primary">Unfollow</button> -->
