@@ -9,9 +9,9 @@ export class UserPageComponent {
     event.preventDefault()
     event.stopPropagation()
 
-    let editProfileModal = document.querySelector<HTMLElement>('.modal__edit-profile')
+    let editProfileModal = document.querySelector<HTMLElement>('edit-profile-form')
     if(!editProfileModal) return
 
-    editProfileModal.classList.toggle('hidden')
+    editProfileModal.classList.toggle('active')
   }
 }

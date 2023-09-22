@@ -193,4 +193,70 @@ body {
     .d-none {
         display: none;
     }
+
+    .form-container {
+        form {
+            background-color: $white-color;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: start;
+
+            .field {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+                width: 100%;
+            
+                .top {
+                    width: 100%;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
+                }
+
+                input {
+                    padding: 5px 15px;
+                    height: 36px;
+                }
+
+                textarea {
+                    height: 72px;
+                    width: 100%;
+                    resize: none;
+                    padding: 10px 10px;
+                    font-family: $font-family;
+                    color: $text-color;
+                    border: none;
+                    background-color: $gray-color;
+                    border-radius: 10px;
+                    &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+            }
+
+            .group-field {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+                gap: 10px;
+            }
+
+            button {
+                margin-top: 10px;
+                height: 36px;
+            }
+        }
+
+        .message {
+            margin-bottom: 20px;
+
+            &.secondary {
+                font-size: 1.2rem;
+            }
+        }
+    }
 }
