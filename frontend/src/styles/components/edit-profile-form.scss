@@ -1,0 +1,87 @@
+edit-profile-form {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    z-index: 2;
+    width: 100%;
+    height: 100vh;
+    background: #000000aa;
+    display: none;
+    
+    @include mobile-up {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        display: none;
+    }
+
+    &.active {
+        display: unset;
+
+        @include mobile-up {
+            display: flex;
+        }
+
+        .modal__edit-profile {
+            animation: showForm 700ms ease;
+        }
+    }
+
+    .modal__edit-profile {
+        background-color: $white-color;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+        @include mobile-up {
+            height: max-content;
+            width: 100%;
+            max-width: 600px;
+            padding: 50px 0;
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: max-content;
+            height: max-content;
+            padding: 10px;
+            background-color: $white-color;
+            transition: all 300ms ease;
+
+            &:hover {
+                background-color: $gray-color;
+            }
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 40px;
+        }
+    
+        form {
+            
+            @include mobile-up {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+@keyframes showForm {
+    0% {
+        transform: translateY(600px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
