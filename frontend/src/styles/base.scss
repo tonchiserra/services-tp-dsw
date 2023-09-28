@@ -210,7 +210,7 @@ body {
                 flex-direction: column;
                 gap: 7px;
                 width: 100%;
-            
+
                 .top {
                     width: 100%;
                     display: flex;
@@ -234,6 +234,19 @@ body {
                     background-color: $gray-color;
                     border-radius: 10px;
                     &::-webkit-scrollbar {
+                        display: none;
+                    }
+                }
+
+                .has-error {
+                    outline: 1px solid $error-color;
+                }
+
+                .error-message {
+                    font-size: 1.2rem;
+                    color: $error-color;
+
+                    &:empty {
                         display: none;
                     }
                 }
