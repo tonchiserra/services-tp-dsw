@@ -1,10 +1,11 @@
 <div class="login-page__container page-width">
     <div id="sign-in" class="hidden form-container">
         <h2>Sign In</h2>
-        <form action="">
+        <form (submit)="submitHandler($event)" id="SignInForm">
             <div class="field">
                 <label for="emailLogin">E-mail:</label>
-                <input type="email" name="login[email]" id="emailLogin" placeholder="Type your e-mail">
+                <input type="email" name="email" id="emailLogin" placeholder="Type your e-mail" [formControl]="signInFormState.email">
+                <span class="error-message"></span>
             </div>
 
             <div class="field">
@@ -12,7 +13,8 @@
                     <label for="passwordLogin">Password:</label>
                     <a href="#">Forgot your password?</a>
                 </div>
-                <input type="password" name="login[password]" id="passwordLogin" placeholder="Type your password">
+                <input type="password" name="password" id="passwordLogin" placeholder="Type your password" [formControl]="signInFormState.password">
+                <span class="error-message"></span>
             </div>
 
             <button type="submit" class="primary">Login</button>
@@ -23,33 +25,38 @@
     
     <div id="sign-up" class="hidden form-container">
         <h2>Sign Up</h2>
-        <form action="">
+        <form (submit)="submitHandler($event)" id="SignUpForm">
             <div class="group-field">
                 <div class="field">
                     <label for="nameRegister">Name:</label>
-                    <input type="text" name="register[name]" id="nameRegister" placeholder="Type your name">
+                    <input type="text" name="name" id="nameRegister" placeholder="Type your name" [formControl]="signUpFormState.name">
+                    <span class="error-message"></span>
                 </div>
 
                 <div class="field">
                     <label for="usernameRegister">Username:</label>
-                    <input type="text" name="register[username]" id="usernameRegister" placeholder="Type your username">
+                    <input type="text" name="username" id="usernameRegister" placeholder="Type your username" [formControl]="signUpFormState.username">
+                    <span class="error-message"></span>
                 </div>
             </div>
 
             <div class="field">
                 <label for="emailRegister">E-mail:</label>
-                <input type="email" name="register[email]" id="emailRegister" placeholder="Type your e-mail">
+                <input type="email" name="email" id="emailRegister" placeholder="Type your e-mail" [formControl]="signUpFormState.email">
+                <span class="error-message"></span>
             </div>
 
             <div class="group-field">
                 <div class="field">
                     <label for="passwordRegister">Password:</label>
-                    <input type="password" name="register[password]" id="passwordRegister" placeholder="Type your password">
+                    <input type="password" name="password" id="passwordRegister" placeholder="Type your password" [formControl]="signUpFormState.password">
+                    <span class="error-message"></span>
                 </div>
     
                 <div class="field">
                     <label for="passwordRepeatRegister">Repeat your password:</label>
-                    <input type="password" name="register[passwordRepeat]" id="passwordRepeatRegister" placeholder="Type your password">
+                    <input type="password" name="passwordRepeat" id="passwordRepeatRegister" placeholder="Type your password" [formControl]="signUpFormState.passwordRepeat">
+                    <span class="error-message"></span>
                 </div>
             </div>
 

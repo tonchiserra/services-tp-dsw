@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { IPostForm, IPostFormData } from '../../interfaces/PostFormInterface';
+import { IPostForm, IPostFormData } from './post-form.interface';
 
 @Component({
   selector: 'post-form',
