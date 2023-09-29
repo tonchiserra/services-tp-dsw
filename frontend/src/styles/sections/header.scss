@@ -125,6 +125,10 @@ main-header {
                         &:hover {
                             background-color: $gray-color;
                         }
+
+                        &.active {
+                            background: $white-color;
+                        }
                     }
                 }
             }

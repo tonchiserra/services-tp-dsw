@@ -112,6 +112,13 @@ body {
         cursor: pointer;
     }
 
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    input[type=number] { -moz-appearance:textfield; }
+
     input[type="checkbox"] {
         appearance: none;
         background: $third-color;
@@ -195,6 +202,12 @@ body {
     }
 
     .form-container {
+        text-align: center;
+
+        h2 {
+            font-size: 3rem;
+        }
+        
         form {
             background-color: $white-color;
             padding: 20px;

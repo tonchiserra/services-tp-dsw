@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule, Routes } from '@angular/router';
 
 import { UserPageComponent } from './user-page.component';
@@ -19,6 +20,7 @@ const routesChild: Routes = [
     ],
     imports: [
         RouterModule.forChild(routesChild),
+        ReactiveFormsModule
     ],
     exports: [
         UserPageComponent,

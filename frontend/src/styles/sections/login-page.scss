@@ -9,10 +9,6 @@ login-page {
         width: 100%;
         max-width: 500px;
 
-        h2 {
-            font-size: 3rem;
-        }
-
         a {
             text-decoration: underline;
             color: $main-color;
@@ -20,11 +16,6 @@ login-page {
             &:hover {
                 color: $text-color;
             }
-        }
-
-        #sign-in,
-        #sign-up {
-            text-align: center;
         }
     }
 }
