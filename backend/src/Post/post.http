@@ -1,0 +1,29 @@
+### obetener todos los posts.
+GET http://localhost:3000/api/posts
+
+### obtener un post por postId
+GET http://localhost:3000/api/posts/5957e5d5-795c-4247-9421-be810129b964
+
+### crear un nuevo post
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+{
+    "content": "este es un post creado.",
+    "likes": 110,
+    "rePosts": 43,
+    "media": "imgPostcreadov2.jpg",
+    "postType": "Without service",
+    "date": "9/12/2018"
+}
+
+###modificar un post con patch (parcial)
+PATCH http://localhost:3000/api/posts/5957e5d5-795c-4247-9421-be810129b964
+Content-Type: application/json
+
+{
+  "likes": 91218
+}
+
+### delete post
+DELETE http://localhost:3000/api/posts/c3f0d666-2025-415f-a39b-0f141eaeb75c
