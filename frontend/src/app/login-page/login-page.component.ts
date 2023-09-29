@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms'
-import { ISignUpForm, ISignInForm } from 'src/app/login-page/login-page.interface';
 import { signUpPasswordSchema, signInSchema } from './login-page.schema';
+import { showErrors, cleanErrors } from 'src/helpers/form-errors';
 
 @Component({
   selector: 'login-page',
@@ -50,10 +50,10 @@ export class LoginPageComponent {
     event.stopPropagation()
     let form = event.target as HTMLElement
 
-    this.cleanErrors(form)
+    cleanErrors(form)
 
     if(form.id === 'SignUpForm') {
-      let data: ISignUpForm = {
+      let data = {
         name: this.signUpFormState.name.value || '',
         username: this.signUpFormState.username.value ?? '',
         email: this.signUpFormState.email.value ?? '',
@@ -63,7 +63,7 @@ export class LoginPageComponent {
       
       const result = this.getSignUpErrors(data)
       if(!result.success) {
-        this.showErrors(result.error.message, form)
+        showErrors(result.error.message, form)
       }else {
         console.log(result.data)
 
@@ -72,14 +72,14 @@ export class LoginPageComponent {
     }
 
     if(form.id === 'SignInForm') {
-      let data: ISignInForm = {
+      let data = {
         email: this.signInFormState.email.value || '',
         password: this.signInFormState.password.value || ''
       }
 
       const result = this.getSignInErrors(data)
       if(!result.success) {
-        this.showErrors(result.error.message, form)
+        showErrors(result.error.message, form)
       }else {
         console.log(result.data)
 
@@ -95,27 +95,5 @@ export class LoginPageComponent {
 
   private getSignInErrors(data: any) {
     return signInSchema.safeParse(data)
-  }
-
-  private cleanErrors(form: HTMLElement) {
-    let allFields = Array.from(form.querySelectorAll<HTMLElement>('input'))
-    allFields.forEach(field => {
-      field.classList.remove('has-error')
-      let errorMessage = field.nextElementSibling as HTMLElement
-      errorMessage.innerText = ''
-    })
-  }
-
-  private showErrors(message: string, form: HTMLElement) {
-    let errors = JSON.parse(message)
-
-    errors.forEach((error: any) => {
-      let fieldWithError = form.querySelector<HTMLElement>(`input[name="${error.path[0] ?? 'passwordRepeat'}"]`)
-      if(fieldWithError) {
-        fieldWithError.classList.add('has-error')
-        let errorMessage = fieldWithError.nextElementSibling as HTMLElement
-        errorMessage.innerText = error.message
-      }
-    })
   }
 }

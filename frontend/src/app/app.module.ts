@@ -10,6 +10,7 @@ import { MainHeaderComponent } from './header/main-header.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ServiceFormComponent } from './service-form/service-form.component';
 
 import { UserPageModule } from './user-page/user-page.module';
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'home', component: HomePageComponent },
   { path: 'search', component: SearchPageComponent },
-  { path: 'user', component: UserPageComponent }
+  { path: 'user', component: UserPageComponent },
+  { path: 'new-service', component: ServiceFormComponent }
 ]
 
 @NgModule({
@@ -28,7 +30,8 @@ const routes: Routes = [
     SearchPageComponent,
     LoginPageComponent,
     HomePageComponent,
-    PostFormComponent
+    PostFormComponent,
+    ServiceFormComponent
   ],
   imports: [
     BrowserModule,

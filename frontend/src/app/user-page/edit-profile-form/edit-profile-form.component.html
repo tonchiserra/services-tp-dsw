@@ -4,22 +4,53 @@
     </button>
     <div class="form-container page-width">
         <h2>Edit Profile</h2>
-        <form>
+        <form (submit)="submitHandler($event)">
             <div class="group-field">
                 <div class="field">
-                    <label for="usernameProfile">Username:</label>
-                    <input type="text" name="editprofile[username]" id="usernameProfile" placeholder="Type your new username" value="username">
+                    <div class="user-info__image">
+                        <!-- user image -->
+                    </div>
                 </div>
-        
+
                 <div class="field">
-                    <label for="nameProfile">Name:</label>
-                    <input type="text" name="editprofile[name]" id="nameProfile" placeholder="Type your new name" value="Nombre de usuario">
+                    <div class="field">
+                        <label for="usernameProfile">Username:</label>
+                        <input type="text" name="username" id="usernameProfile" placeholder="Type your new username" [formControl]="editProfileState.username">
+                        <span class="error-message"></span>
+                    </div>
+            
+                    <div class="field">
+                        <label for="nameProfile">Name:</label>
+                        <input type="text" name="name" id="nameProfile" placeholder="Type your new name" [formControl]="editProfileState.name">
+                        <span class="error-message"></span>
+                    </div>
                 </div>
             </div>
     
             <div class="field">
                 <label for="descriptionProfile">Description:</label>
-                <textarea name="editprofile[description]" id="descriptionProfile" placeholder="Type your new description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iste error, voluptatum beatae distinctio vero at nihil, consectetur magnam vel iure enim facere. Laboriosam dolor ullam dolorum ipsum, sed incidunt!</textarea>
+                <textarea name="description" id="descriptionProfile" placeholder="Type your new description" [formControl]="editProfileState.description"></textarea>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="group-field">
+                <div class="field">
+                    <label for="cityProfile">City:</label>
+                    <input type="text" name="city" id="cityProfile" placeholder="Type your new city" value="Rosario" [formControl]="editProfileState.city">
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="field">
+                    <label for="provinceProfile">Province:</label>
+                    <input type="text" name="province" id="provinceProfile" placeholder="Type your new province" value="Santa Fe" [formControl]="editProfileState.province">
+                    <span class="error-message"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="countryProfile">Country:</label>
+                <input type="text" name="country" id="countryProfile" placeholder="Type your new country" value="Argentina" [formControl]="editProfileState.country">
+                <span class="error-message"></span>
             </div>
 
             <div class="group-field">

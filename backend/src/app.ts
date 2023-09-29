@@ -9,7 +9,6 @@ app.use(express.json())
 
 app.use('/api/addresses', addressRouter)
 app.use('/api/users', userRouter)
-// this.app.use('/api/users', userRoutes)
 
 app.use('/*', (_, res) => res.sendStatus(404))
 

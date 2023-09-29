@@ -1,0 +1,40 @@
+<div class="service-form__container page-width">
+    <div class="form-container">
+        <h2>Service</h2>
+        <form (submit)="submitHandler($event)">
+            <div class="group-field">
+                <div class="field">
+                    <label for="typeService">Type of service:</label>
+                    <select name="type" id="typeService" class="secondary" [formControl]="serviceState.type">
+                        <option value="" selected disabled>Type of service</option>
+                        <!-- for type in serviceTypes -->
+                        <option value="software">software</option>
+                        <option value="design">design</option>
+                        <option value="lawyer">lawyer</option>
+                        <option value="stadistics">stadistics</option>
+                        <option value="cooking">cooking</option>
+                        <option value="fashion">fashion</option>
+                    </select>
+                    <span class="error-message"></span>
+                </div>
+
+                <div class="field">
+                    <label for="priceService">Price:</label>
+                    <input type="number" name="price" id="priceService" placeholder="Type price of your service" [formControl]="serviceState.price">
+                    <span class="error-message"></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="descriptionService">Description:</label>
+                <textarea name="description" id="descriptionService" placeholder="Type description of your service" [formControl]="serviceState.description"></textarea>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="group-field">
+                <button type="submit" class="primary">Save</button>
+                <button class="secondary" (click)="closeServiceForm()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

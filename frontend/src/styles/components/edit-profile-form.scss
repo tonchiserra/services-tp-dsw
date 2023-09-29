@@ -60,12 +60,6 @@ edit-profile-form {
                 background-color: $gray-color;
             }
         }
-
-        h2 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 40px;
-        }
     
         form {
             
@@ -74,6 +68,11 @@ edit-profile-form {
                 margin: 0 auto;
             }
         }
+    }
+
+    .user-info__image {
+        height: 125px;
+        width: 125px;
     }
 }
 
