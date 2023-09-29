@@ -1,0 +1,25 @@
+### obetener todos los services.
+GET http://localhost:3000/api/services
+
+### obtener un direction por userId
+GET http://localhost:3000/api/services/97524e89-8582-48e7-9847-27f1928773f5
+
+### crear un nuevo service
+POST http://localhost:3000/api/services
+Content-Type: application/json
+
+{
+    "description": "2 pages web",
+    "price": 830
+}
+
+###modificar un service con patch (parcial)
+PATCH http://localhost:3000/api/services/97524e89-8582-48e7-9847-27f1928773f5
+Content-Type: application/json
+
+{
+  "price": 810
+}
+
+### delete service
+DELETE http://localhost:3000/api/services/97524e89-8582-48e7-9847-27f1928773f5

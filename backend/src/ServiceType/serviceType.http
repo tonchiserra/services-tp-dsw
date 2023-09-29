@@ -1,0 +1,24 @@
+### obetener todos los servicetypes.
+GET http://localhost:3000/api/serviceTypes
+
+### obtener un serviceTpye por serviceTypeId
+GET http://localhost:3000/api/serviceTypes/5957e5d5-795c-4247-9421-be810129b964
+
+### crear un nuevo serviceType
+POST http://localhost:3000/api/serviceTypes
+Content-Type: application/json
+
+{
+    "name": "Web Application"
+}
+
+###modificar un serviceType con patch (parcial)
+PATCH http://localhost:3000/api/serviceTypes/5957e5d5-795c-4247-9421-be810129b964
+Content-Type: application/json
+
+{
+  "name": "Name change"
+}
+
+### delete serviceType
+DELETE http://localhost:3000/api/serviceTypes/e53b1e4a-0bfa-42c9-b7d9-6eb78a707b19
