@@ -13,37 +13,37 @@ const posts: Post[] = [
 ] // our temporally ddbb
 
 export class PostRepository implements Repository<Post>{
-    public findAll(): Post[] | undefined {
-        return posts // call to ddbb
+    public async findAll(): Promise<Post[] | undefined> {
+        return await posts // call to ddbb
     }
     
-    public findOne(item: {id: string}): Post | undefined {
-        return posts.find((post) => post.postId === item.id) // call to ddbb
+    public async findOne(item: {id: string}): Promise<Post | undefined> {
+        return await posts.find((post) => post.postId === item.id) // call to ddbb
     }
     
-    public add(item: Post): Post | undefined {
+    public async add(item: Post): Promise<Post | undefined> {
         posts.push(item) // call to ddbb
-        return item
+        return await item
     }
     
-    public update(item: Post): Post | undefined {
+    public async update(item: Post): Promise<Post | undefined> {
         const postIdx = posts.findIndex((post) =>post.postId = item.postId)
 
         if(postIdx !== -1) {
             posts[postIdx] = {...posts[postIdx], ...item}
         }
 
-        return posts[postIdx]
+        return await posts[postIdx]
     }
     
-    public remove(item: { id: string}): Post | undefined {
+    public async remove(item: { id: string}): Promise<Post | undefined> {
         const postIdx = posts.findIndex((post) =>post.postId === item.id);
         if(postIdx !== -1) {
             const deletedPost = posts[postIdx]
             posts.splice(postIdx, 1)
-            return deletedPost
+            return await deletedPost
         }
 
-        return posts[postIdx]
+        return await posts[postIdx]
     }
 } 

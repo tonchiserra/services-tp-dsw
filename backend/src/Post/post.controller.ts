@@ -23,14 +23,14 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-function findAll(req: Request, res: Response) {
-    res.json({ data: repository.findAll() })
+async function findAll(req: Request, res: Response) {
+    res.json({ data: await repository.findAll() })
 }
 
-function findOne(req: Request, res: Response) {
+async function findOne(req: Request, res: Response) {
     const id = req.params.postId
 
-    const post = repository.findOne({ id })
+    const post = await repository.findOne({ id })
 
     if(!post){
         return res.status(404).send({ message: "Post not found" })
@@ -39,7 +39,7 @@ function findOne(req: Request, res: Response) {
     res.json({ data: post })
 }
 
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const postInput = new Post(
         input.content,
@@ -50,24 +50,24 @@ function add(req: Request, res: Response) {
         input.date
     )
 
-    const post = repository.add(postInput)
+    const post = await repository.add(postInput)
 
     return res.status(201).send({ message: 'Post created', data: post })
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
     req.body.sanitizedInput.postId = req.params.postId
 
-    const post = repository.update(req.body.sanitizedInput)
+    const post = await repository.update(req.body.sanitizedInput)
 
     if(!post) return res.status(404).send({ message: 'Post not found' })
 
     return res.status(200).send({ message: 'Post updated successfully', data: post }) 
 }
 
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
     const id = req.params.postId
-    const post = repository.remove({ id })
+    const post = await repository.remove({ id })
 
     if(!post) return res.status(404).send({ message: 'post not found' })
 

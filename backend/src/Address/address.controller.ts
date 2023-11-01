@@ -21,14 +21,14 @@ function sanitizeAddressInput(req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-function findAll(req: Request, res: Response) {
-    res.json({ data: repository.findAll() })
+async function findAll(req: Request, res: Response) {
+    res.json({ data: await repository.findAll() })
 }
 
-function findOne(req: Request, res: Response) {
+async function findOne(req: Request, res: Response) {
     const id = req.params.addressId
 
-    const address = repository.findOne({ id })
+    const address = await repository.findOne({ id })
 
     if(!address){
         return res.status(404).send({ message: "Address not found" })
@@ -37,7 +37,7 @@ function findOne(req: Request, res: Response) {
     res.json({ data: address })
 }
 
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const addressInput = new Address(
         input.street,
@@ -46,24 +46,24 @@ function add(req: Request, res: Response) {
         input.city
     )
 
-    const address = repository.add(addressInput)
+    const address = await repository.add(addressInput)
 
     return res.status(201).send({ message: 'Address created', data: address })
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
     req.body.sanitizedInput.addressId = req.params.addressId
 
-    const address = repository.update(req.body.sanitizedInput)
+    const address = await repository.update(req.body.sanitizedInput)
 
     if(!address) return res.status(404).send({ message: 'Address not found' })
 
     return res.status(200).send({ message: 'Address updated successfully', data: address }) 
 }
 
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
     const id = req.params.addressId
-    const address = repository.remove({ id })
+    const address = await repository.remove({ id })
 
     if(!address) return res.status(404).send({ message: 'Address not found' })
 

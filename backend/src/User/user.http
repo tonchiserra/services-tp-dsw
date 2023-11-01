@@ -9,7 +9,7 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "nameSurname": "MarcosPerez",
+    "name": "MarcosPerez",
     "phone": 3415093210,
     "mail": "marcosperez@gmail.com",
     "username": "m.perez",
@@ -23,7 +23,7 @@ PATCH http://localhost:3000/api/users/69bc83ff-e578-4bba-b735-bc2e6447d922
 Content-Type: application/json
 
 {
-  "nameSurname": "Guidito123",
+  "name": "Guidito123",
   "mail": "guidito123@gmail.com"
 }
 

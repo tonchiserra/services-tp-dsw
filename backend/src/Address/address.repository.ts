@@ -11,37 +11,37 @@ const addresses: Address[] = [
 ] // our temporally ddbb
 
 export class AddressRepository implements Repository<Address>{
-    public findAll(): Address[] | undefined {
-        return addresses // call to ddbb
+    public async findAll(): Promise<Address[] | undefined> {
+        return await addresses // call to ddbb
     }
     
-    public findOne(item: {id: string}): Address | undefined {
-        return addresses.find((address) => address.addressId === item.id) // call to ddbb
+    public async findOne(item: {id: string}): Promise<Address | undefined> {
+        return await addresses.find((address) => address.addressId === item.id) // call to ddbb
     }
     
-    public add(item: Address): Address | undefined {
+    public async add(item: Address): Promise<Address | undefined> {
         addresses.push(item) // call to ddbb
-        return item
+        return await item
     }
     
-    public update(item: Address): Address | undefined {
+    public async update(item: Address): Promise<Address | undefined> {
         const addressIdx = addresses.findIndex((address) =>address.addressId = item.addressId)
 
         if(addressIdx !== -1) {
             addresses[addressIdx] = {...addresses[addressIdx], ...item}
         }
 
-        return addresses[addressIdx]
+        return await addresses[addressIdx]
     }
     
-    public remove(item: { id: string}): Address | undefined {
+    public async remove(item: { id: string}): Promise<Address | undefined> {
         const addressIdx = addresses.findIndex((address) =>address.addressId === item.id);
         if(addressIdx !== -1) {
             const deletedAddress = addresses[addressIdx]
             addresses.splice(addressIdx, 1)
-            return deletedAddress
+            return await deletedAddress
         }
 
-        return addresses[addressIdx]
+        return await addresses[addressIdx]
     }
 } 

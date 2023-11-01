@@ -18,14 +18,14 @@ function sanitizeServiceTypeInput(req: Request, res: Response, next: NextFunctio
     next()
 }
 
-function findAll(req: Request, res: Response) {
-    res.json({ data: repository.findAll() })
+async function findAll(req: Request, res: Response) {
+    res.json({ data: await repository.findAll() })
 }
 
-function findOne(req: Request, res: Response) {
+async function findOne(req: Request, res: Response) {
     const id = req.params.serviceTypeId
 
-    const serviceType = repository.findOne({ id })
+    const serviceType = await repository.findOne({ id })
 
     if(!serviceType){
         return res.status(404).send({ message: "ServiceType not found" })
@@ -34,30 +34,30 @@ function findOne(req: Request, res: Response) {
     res.json({ data: serviceType })
 }
 
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const serviceTypeInput = new ServiceType(
         input.name
     )
 
-    const serviceType = repository.add(serviceTypeInput)
+    const serviceType = await repository.add(serviceTypeInput)
 
     return res.status(201).send({ message: 'ServiceType created', data: serviceType })
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
     req.body.sanitizedInput.serviceTypeId = req.params.serviceTypeId
 
-    const serviceType = repository.update(req.body.sanitizedInput)
+    const serviceType = await repository.update(req.body.sanitizedInput)
 
     if(!serviceType) return res.status(404).send({ message: 'ServiceType not found' })
 
     return res.status(200).send({ message: 'ServiceType updated successfully', data: serviceType }) 
 }
 
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
     const id = req.params.serviceTypeId
-    const serviceType = repository.remove({ id })
+    const serviceType = await repository.remove({ id })
 
     if(!serviceType) return res.status(404).send({ message: 'ServiceType not found' })
 
