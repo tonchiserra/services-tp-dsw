@@ -15,7 +15,6 @@ app.use('/api/users', userRouter)
 app.use('/api/posts', postRouter)
 app.use('/api/serviceTypes', serviceTypeRouter)
 app.use('/api/services', serviceRouter)
-// this.app.use('/api/users', userRoutes)
 
 app.use('/*', (_, res) => res.sendStatus(404))
 

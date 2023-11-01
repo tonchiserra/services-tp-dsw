@@ -6,7 +6,7 @@ const repository = new UserRepository()
 
 function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
-        nameSurname: req.body.nameSurname,
+        name: req.body.name,
         phone: req.body.phone,
         mail: req.body.mail,
         username: req.body.username,
@@ -24,14 +24,14 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-function findAll(req: Request, res: Response) {
-    res.json({ data: repository.findAll() })
+async function findAll(req: Request, res: Response) {
+    res.json({ data: await repository.findAll() })
 }
 
-function findOne(req: Request, res: Response) {
+async function findOne(req: Request, res: Response) {
     const id = req.params.userId
 
-    const user = repository.findOne({ id })
+    const user = await repository.findOne({ id })
 
     if(!user){
         return res.status(404).send({ message: "User not found" })
@@ -40,10 +40,10 @@ function findOne(req: Request, res: Response) {
     res.json({ data: user })
 }
 
-function add(req: Request, res: Response) {
+async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const userInput = new User(
-        input.nameSurname,
+        input.name,
         input.phone,
         input.mail,
         input.username,
@@ -51,24 +51,24 @@ function add(req: Request, res: Response) {
         input.profileImg,
         input.description
     )
-    const user = repository.add(userInput)
+    const user = await repository.add(userInput)
 
     return res.status(201).send({ message: 'User created', data: user })
 }
 
-function update(req: Request, res: Response) {
+async function update(req: Request, res: Response) {
     req.body.sanitizedInput.userId = req.params.userId
 
-    const user = repository.update(req.body.sanitizedInput)
+    const user = await repository.update(req.body.sanitizedInput)
 
     if(!user) return res.status(404).send({ message: 'User not found' })
 
     return res.status(200).send({ message: 'User updated successfully', data: user }) 
 }
 
-function remove(req: Request, res: Response) {
+async function remove(req: Request, res: Response) {
     const id = req.params.userId
-    const user = repository.remove({ id })
+    const user = await repository.remove({ id })
 
     if(!user) return res.status(404).send({ message: 'User not found' })
 

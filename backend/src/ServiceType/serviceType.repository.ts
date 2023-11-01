@@ -8,30 +8,30 @@ const serviceTypes: ServiceType[] = [
 ]
 
 export class ServiceTypeRepository implements Repository <ServiceType>{
-    public findAll(): ServiceType[] | undefined {
-        return serviceTypes
+    public async findAll(): Promise<ServiceType[] | undefined> {
+        return await serviceTypes
     }
 
-    public findOne(item: { id: string; }): ServiceType | undefined {
-        return serviceTypes.find((serviceType) => serviceType.serviceTypeId === item.id)    
+    public async findOne(item: { id: string; }): Promise<ServiceType | undefined> {
+        return await serviceTypes.find((serviceType) => serviceType.serviceTypeId === item.id)    
     }
 
-    public add(item: ServiceType): ServiceType | undefined {
+    public async add(item: ServiceType): Promise<ServiceType | undefined> {
         serviceTypes.push(item)
-        return item
+        return await item
     }
 
-    public update(item: ServiceType): ServiceType | undefined {
+    public async update(item: ServiceType): Promise<ServiceType | undefined> {
         const serviceTypeIdx = serviceTypes.findIndex((serviceType) =>serviceType.serviceTypeId = item.serviceTypeId)
 
         if(serviceTypeIdx !== -1) {
             serviceTypes[serviceTypeIdx] = {...serviceTypes[serviceTypeIdx], ...item}
         }
 
-        return serviceTypes[serviceTypeIdx]
+        return await serviceTypes[serviceTypeIdx]
     }
 
-    public remove(item: { id: string}): ServiceType | undefined {
+    public async remove(item: { id: string}): Promise<ServiceType | undefined> {
         const serviceTypeIdx = serviceTypes.findIndex((serviceType) =>serviceType.serviceTypeId === item.id);
         if(serviceTypeIdx !== -1) {
             const deletedServiceType = serviceTypes[serviceTypeIdx]
@@ -39,6 +39,6 @@ export class ServiceTypeRepository implements Repository <ServiceType>{
             return deletedServiceType
         }
 
-        return serviceTypes[serviceTypeIdx]
+        return await serviceTypes[serviceTypeIdx]
     }
 }

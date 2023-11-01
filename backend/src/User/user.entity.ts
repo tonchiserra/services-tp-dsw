@@ -2,7 +2,7 @@ import crypto from 'node:crypto'
 
 export class User {
     constructor(
-        public nameSurname: string,
+        public name: string,
         public phone: number,
         public mail: string,
         public username: string,

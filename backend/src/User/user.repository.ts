@@ -1,7 +1,8 @@
 import { Repository } from '../shared/repository.js'
 import { User } from './user.entity.js'
+import { db } from '../shared/db/connection.js'
 
-const users: User[] = [
+const usersArray: User[] = [
     new User(
         "GuidoBitti",
         3415087210,
@@ -13,38 +14,40 @@ const users: User[] = [
     )
 ] // our temporally ddbb
 
+const users = db.collection<User>('users')
+
 export class UserRepository implements Repository<User>{
-    public findAll(): User[] | undefined {
-        return users // call to ddbb
+    public async findAll(): Promise<User[] | undefined> {
+        return await users.find().toArray()
     }
     
-    public findOne(item: {id: string}): User | undefined {
-        return users.find((user) => user.userId === item.id) // call to ddbb
+    public async findOne(item: {id: string}): Promise<User | undefined> {
+        return await usersArray.find((user) => user.userId === item.id) // call to ddbb
     }
     
-    public add(item: User): User | undefined {
-        users.push(item) // call to ddbb
+    public async add(item: User): Promise<User | undefined> {
+        await usersArray.push(item) // call to ddbb
         return item
     }
     
-    public update(item: User): User | undefined {
-        const userIdx = users.findIndex((user) =>user.userId = item.userId)
+    public async update(item: User): Promise<User | undefined> {
+        const userIdx = usersArray.findIndex((user) =>user.userId = item.userId)
 
         if(userIdx !== -1) {
-            users[userIdx] = {...users[userIdx], ...item}
+            usersArray[userIdx] = {...usersArray[userIdx], ...item}
         }
 
-        return users[userIdx]
+        return await usersArray[userIdx]
     }
     
-    public remove(item: { id: string}): User | undefined {
-        const userIdx = users.findIndex((user) =>user.userId === item.id);
+    public async remove(item: { id: string}): Promise<User | undefined> {
+        const userIdx = usersArray.findIndex((user) =>user.userId === item.id);
         if(userIdx !== -1) {
-            const deletedUser = users[userIdx]
-            users.splice(userIdx, 1)
+            const deletedUser = usersArray[userIdx]
+            usersArray.splice(userIdx, 1)
             return deletedUser
         }
 
-        return users[userIdx]
+        return await usersArray[userIdx]
     }
 } 
