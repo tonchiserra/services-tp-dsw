@@ -24,4 +24,4 @@ Content-Type: application/json
 }
 
 ### delete address
-DELETE http://localhost:3000/api/addresses/3b2f05f8-465e-4ddb-8428-257f6ebf49ef
+DELETE http://localhost:3000/api/addresses/dbaca7f1-fc6a-4154-9fea-f0859caba252
