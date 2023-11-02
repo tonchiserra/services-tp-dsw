@@ -1,13 +1,13 @@
-import { Router } from 'express'
+// import { Router } from 'express'
 
-import { sanitizeServiceTypeInput, findAll, findOne, add, update, remove } from './serviceType.controller.js'
+// import { sanitizeServiceTypeInput, findAll, findOne, add, update, remove } from './serviceType.controller.js'
 
-const serviceTypeRouter = Router()
+// const serviceTypeRouter = Router()
 
-serviceTypeRouter.get('/', findAll)
-serviceTypeRouter.get('/:serviceTypeId', findOne)
-serviceTypeRouter.post('/', sanitizeServiceTypeInput, add)
-serviceTypeRouter.patch('/:serviceTypeId', sanitizeServiceTypeInput, update)
-serviceTypeRouter.delete('/:serviceTypeId', remove)
+// serviceTypeRouter.get('/', findAll)
+// serviceTypeRouter.get('/:serviceTypeId', findOne)
+// serviceTypeRouter.post('/', sanitizeServiceTypeInput, add)
+// serviceTypeRouter.patch('/:serviceTypeId', sanitizeServiceTypeInput, update)
+// serviceTypeRouter.delete('/:serviceTypeId', remove)
 
-export { serviceTypeRouter }
+// export { serviceTypeRouter }

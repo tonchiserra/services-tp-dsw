@@ -1,7 +1,7 @@
 ### obetener todos los users.
 GET http://localhost:3000/api/users
 
-### obtener un direction por userId
+### obtener un user por _id
 GET http://localhost:3000/api/users/69bc83ff-e578-4bba-b735-bc2e6447d922
 
 ### crear un nuevo user
