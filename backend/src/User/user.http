@@ -2,24 +2,24 @@
 GET http://localhost:3000/api/users
 
 ### obtener un user por _id
-GET http://localhost:3000/api/users/69bc83ff-e578-4bba-b735-bc2e6447d922
+GET http://localhost:3000/api/users/6543f7ed22939aa00b6f3112
 
 ### crear un nuevo user
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-    "name": "MarcosPerez",
-    "phone": 3415093210,
-    "mail": "marcosperez@gmail.com",
-    "username": "m.perez",
-    "password": "contrasen1a",
-    "profileImg": "/img003",
-    "description": "Me llamo Marcos"
+    "name": "JuanPerez",
+    "phone": 3415087211,
+    "mail": "juanperez@gmail.com",
+    "username": "j.perez",
+    "password": "pa$$w0rd",
+    "profileImg": "/img004",
+    "description": "Me llamo Juan"
 }
 
 ###modificar un user con patch (parcial)
-PATCH http://localhost:3000/api/users/69bc83ff-e578-4bba-b735-bc2e6447d922
+PATCH http://localhost:3000/api/users/6543f89f751cd68be7870a86
 Content-Type: application/json
 
 {
@@ -28,4 +28,4 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/users/69bc83ff-e578-4bba-b735-bc2e6447d922
+DELETE http://localhost:3000/api/users/654405072394cee5096aea9b

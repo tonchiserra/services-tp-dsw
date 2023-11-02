@@ -35,24 +35,13 @@ export class UserRepository implements Repository<User>{
         return item
     }
     
-    public async update(item: User): Promise<User | undefined> {
-        const userIdx = usersArray.findIndex((user) =>user._id = item._id)
-
-        if(userIdx !== -1) {
-            usersArray[userIdx] = {...usersArray[userIdx], ...item}
-        }
-
-        return await usersArray[userIdx]
+    public async update(id: string, item: User): Promise<User | undefined> {
+        const _id = new ObjectId(id)
+        return await users.findOneAndUpdate({ _id }, { $set: item }, { returnDocument: 'after' }) as User
     }
     
-    public async remove(item: { id: ObjectId}): Promise<User | undefined> {
-        const userIdx = usersArray.findIndex((user) =>user._id === item.id);
-        if(userIdx !== -1) {
-            const deletedUser = usersArray[userIdx]
-            usersArray.splice(userIdx, 1)
-            return deletedUser
-        }
-
-        return await usersArray[userIdx]
+    public async delete(item: { id: string}): Promise<User | undefined> {
+        const _id = new ObjectId(item.id)
+        return await users.findOneAndDelete({ _id}) as User
     }
 } 

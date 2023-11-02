@@ -66,18 +66,18 @@ async function add(req: Request, res: Response) {
 }
 
 async function update(req: Request, res: Response) {
-    req.body.sanitizedInput._id = req.params._id
+    const user = await repository.update(req.params._id, req.body.sanitizedInput)
 
-    const user = await repository.update(req.body.sanitizedInput)
+    if(!user){
+        return res.status(404).send({ message: 'User not found'})
+    }
 
-    if(!user) return res.status(404).send({ message: 'User not found' })
-
-    return res.status(200).send({ message: 'User updated successfully', data: user }) 
+    return res.status(200).send({ message: 'User updated successfully', data:user})
 }
 
 async function remove(req: Request, res: Response) {
-    const id = new ObjectId(req.params._id)
-    const user = await repository.remove({ id })
+    const id = req.params._id
+    const user = await repository.delete({ id })
 
     if(!user) return res.status(404).send({ message: 'User not found' })
 
