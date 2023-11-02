@@ -1,4 +1,4 @@
-import crypto from 'node:crypto'
+import { ObjectId } from 'mongodb';
 
 export class Address {
     constructor(
@@ -6,6 +6,6 @@ export class Address {
         public streetNumber: number,
         public country: string,
         public city: string,
-        public addressId = crypto.randomUUID()
+        public _id = ObjectId
     ) {}
 }

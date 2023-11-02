@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { UserRepository } from "./user.repository.js"
 import { User } from "./user.entity.js"
+import { ObjectId } from "mongodb"
 
 const repository = new UserRepository()
 
@@ -8,7 +9,7 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
         name: req.body.name,
         phone: req.body.phone,
-        mail: req.body.mail,
+        email: req.body.email,
         username: req.body.username,
         password: req.body.password,
         profileImg: req.body.profileImg,
@@ -29,7 +30,7 @@ async function findAll(req: Request, res: Response) {
 }
 
 async function findOne(req: Request, res: Response) {
-    const id = req.params.userId
+    const id = new ObjectId(req.params._id)
 
     const user = await repository.findOne({ id })
 
@@ -40,12 +41,20 @@ async function findOne(req: Request, res: Response) {
     res.json({ data: user })
 }
 
+async function findByEmailAndPassword(req: Request, res: Response) {
+    const user = await repository.findByEmailAndPassword({ email: req.params.email, password: req.params.password })
+
+    if(!user) return res.status(404).send({ message: "User not found" })
+
+    res.json({ data: user })
+}
+
 async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const userInput = new User(
         input.name,
         input.phone,
-        input.mail,
+        input.email,
         input.username,
         input.password,
         input.profileImg,
@@ -57,7 +66,7 @@ async function add(req: Request, res: Response) {
 }
 
 async function update(req: Request, res: Response) {
-    req.body.sanitizedInput.userId = req.params.userId
+    req.body.sanitizedInput._id = req.params._id
 
     const user = await repository.update(req.body.sanitizedInput)
 
@@ -67,7 +76,7 @@ async function update(req: Request, res: Response) {
 }
 
 async function remove(req: Request, res: Response) {
-    const id = req.params.userId
+    const id = new ObjectId(req.params._id)
     const user = await repository.remove({ id })
 
     if(!user) return res.status(404).send({ message: 'User not found' })
@@ -75,4 +84,4 @@ async function remove(req: Request, res: Response) {
     return res.status(200).send({ message: 'User deleted successfully', data: user }) 
 }
 
-export { sanitizeUserInput, findAll, findOne, add, update, remove }
+export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword }

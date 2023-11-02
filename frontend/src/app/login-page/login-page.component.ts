@@ -65,9 +65,7 @@ export class LoginPageComponent {
       if(!result.success) {
         showErrors(result.error.message, form)
       }else {
-        console.log(result.data)
-
-        // send data to backend
+        this.signUp(result.data, form)
       }
     }
 
@@ -81,9 +79,7 @@ export class LoginPageComponent {
       if(!result.success) {
         showErrors(result.error.message, form)
       }else {
-        console.log(result.data)
-
-        // send data to backend
+        this.signIn(result.data, form)
       }
     }
 
@@ -95,5 +91,65 @@ export class LoginPageComponent {
 
   private getSignInErrors(data: any) {
     return signInSchema.safeParse(data)
+  }
+
+  private async signUp(userData: any, form: HTMLElement) {
+    try {
+      let response = await fetch(`http://localhost:3000/api/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData)
+      })
+      let userRegistered = await response.json()
+
+      if(!response.ok) {
+        throw {
+          status: response.status,
+          statusText: response.statusText,
+          message: `[{
+            "validation": "email",
+            "code": "invalid_string",
+            "message": "Try again later",
+            "path": ["email"]
+          }]`
+        }
+      }
+
+      console.log(userRegistered)
+
+    } catch(error: any) {
+      console.error(error)
+
+      showErrors(error.message, form)
+    }
+  
+  }
+
+  private async signIn(userData: {email: string, password: string}, form: HTMLElement) {
+    try {
+      let response = await fetch(`http://localhost:3000/api/users/${userData.email}/${userData.password}`)
+      let userLogged = await response.json()
+
+      if(!response.ok) {
+        throw {
+          status: response.status,
+          statusText: response.statusText,
+          message: `[{
+            "validation": "email",
+            "code": "invalid_string",
+            "message": "Wrong email or password",
+            "path": ["email"]
+          }]`
+        }
+      }
+
+      console.log(userLogged)
+
+    } catch(error: any) {
+      console.error(error)
+
+      showErrors(error.message, form)
+    }
+  
   }
 }

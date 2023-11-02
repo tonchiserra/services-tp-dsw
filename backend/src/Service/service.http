@@ -1,7 +1,7 @@
 ### obetener todos los services.
 GET http://localhost:3000/api/services
 
-### obtener un direction por userId
+### obtener un direction por _id
 GET http://localhost:3000/api/services/97524e89-8582-48e7-9847-27f1928773f5
 
 ### crear un nuevo service
