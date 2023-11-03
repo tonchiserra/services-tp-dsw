@@ -1,48 +1,33 @@
-// import { ObjectId } from 'mongodb'
-// import { Repository } from '../shared/repository.js'
-// import { Address } from './address.entity.js'
+import { Repository } from '../shared/repository.js'
+import { Address } from './address.entity.js'
+import { db } from '../shared/db/connection.js'
+import { ObjectId } from 'mongodb';
 
-// const addresses: Address[] = [
-//     new Address(
-//         'Zeballos',
-//         1300,
-//         'Argentina',
-//         'Rosario'
-//     )
-// ] // our temporally ddbb
 
-// export class AddressRepository implements Repository<Address>{
-//     public async findAll(): Promise<Address[] | undefined> {
-//         return await addresses // call to ddbb
-//     }
-    
-//     public async findOne(item: {id: ObjectId}): Promise<Address | undefined> {
-//         return await addresses.findOne({ _id: item.id }) // call to ddbb
-//     }
-    
-//     public async add(item: Address): Promise<Address | undefined> {
-//         addresses.push(item) // call to ddbb
-//         return await item
-//     }
-    
-//     public async update(item: Address): Promise<Address | undefined> {
-//         const addressIdx = addresses.findIndex((address) =>address._id = item.addressId)
+const addresses = db.collection<Address>('addresses')
 
-//         if(addressIdx !== -1) {
-//             addresses[addressIdx] = {...addresses[addressIdx], ...item}
-//         }
 
-//         return await addresses[addressIdx]
-//     }
-    
-//     public async remove(item: { id: string}): Promise<Address | undefined> {
-//         const addressIdx = addresses.findIndex((address) =>address.addressId === item.id);
-//         if(addressIdx !== -1) {
-//             const deletedAddress = addresses[addressIdx]
-//             addresses.splice(addressIdx, 1)
-//             return await deletedAddress
-//         }
+export class AddressRepository implements Repository<Address>{
+  public async findAll(): Promise<Address[] | undefined> {
+    return await addresses.find().toArray()
+  }
 
-//         return await addresses[addressIdx]
-//     }
-// } 
+  public async findOne(item: {id: ObjectId}): Promise<Address | undefined> {
+    return await addresses.findOne({ _id: item.id }) as Address
+  }
+
+  public async add(item: Address): Promise<Address | undefined> {
+    await addresses.insertOne(item)
+    return item
+  }
+
+  public async update(id: string, item: Address): Promise<Address | undefined> {
+    const _id = new ObjectId(id)
+    return await addresses.findOneAndUpdate({ _id }, { $set: item }, { returnDocument: 'after' }) as Address
+  }
+
+  public async delete(item: { id: string}): Promise<Address | undefined> {
+    const _id = new ObjectId(item.id)
+    return await addresses.findOneAndDelete({ _id }) as Address
+  }
+}

@@ -1,44 +1,32 @@
-// import { Repository } from "../shared/repository";
-// import { ServiceType } from "./serviceType.entity.js";
+import { Repository } from "../shared/repository";
+import { ServiceType } from "./serviceType.entity.js"
+import { db } from '../shared/db/connection.js'
+import { ObjectId } from 'mongodb';
+import { Service } from "../Service/service.entity";
 
-// const serviceTypes: ServiceType[] = [
-//     new ServiceType(
-//         'Plomeria'
-//     )
-// ]
+const serviceTypes = db.collection<ServiceType>('serviceTypes')
 
-// export class ServiceTypeRepository implements Repository <ServiceType>{
-//     public async findAll(): Promise<ServiceType[] | undefined> {
-//         return await serviceTypes
-//     }
+export class ServiceTypeRepository implements Repository <ServiceType>{
+    public async findAll(): Promise<ServiceType[] | undefined> {
+        return await serviceTypes.find().toArray();
+    }
 
-//     public async findOne(item: { id: string; }): Promise<ServiceType | undefined> {
-//         return await serviceTypes.find((serviceType) => serviceType.serviceTypeId === item.id)    
-//     }
+    public async findOne(item: { id: ObjectId; }): Promise<ServiceType | undefined> {
+        return await serviceTypes.findOne({ _id: item.id }) as ServiceType    
+    }
 
-//     public async add(item: ServiceType): Promise<ServiceType | undefined> {
-//         serviceTypes.push(item)
-//         return await item
-//     }
+    public async add(item: ServiceType): Promise<ServiceType | undefined> {
+        await serviceTypes.insertOne(item)
+        return item
+    }
 
-//     public async update(item: ServiceType): Promise<ServiceType | undefined> {
-//         const serviceTypeIdx = serviceTypes.findIndex((serviceType) =>serviceType.serviceTypeId = item.serviceTypeId)
+    public async update(id: string, item: ServiceType): Promise<ServiceType | undefined> {
+        const _id = new ObjectId(id)
+        return await serviceTypes.findOneAndUpdate({ _id }, { $set: item}, { returnDocument: 'after'}) as ServiceType
+    }
 
-//         if(serviceTypeIdx !== -1) {
-//             serviceTypes[serviceTypeIdx] = {...serviceTypes[serviceTypeIdx], ...item}
-//         }
-
-//         return await serviceTypes[serviceTypeIdx]
-//     }
-
-//     public async remove(item: { id: string}): Promise<ServiceType | undefined> {
-//         const serviceTypeIdx = serviceTypes.findIndex((serviceType) =>serviceType.serviceTypeId === item.id);
-//         if(serviceTypeIdx !== -1) {
-//             const deletedServiceType = serviceTypes[serviceTypeIdx]
-//             serviceTypes.splice(serviceTypeIdx, 1)
-//             return deletedServiceType
-//         }
-
-//         return await serviceTypes[serviceTypeIdx]
-//     }
-// }
+    public async delete(item: { id: string}): Promise<ServiceType | undefined> {
+        const _id = new ObjectId(item.id)
+        return await serviceTypes.findOneAndDelete({ _id }) as ServiceType
+    }
+}

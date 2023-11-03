@@ -1,4 +1,4 @@
-import crypto from 'node:crypto'
+import { ObjectId } from 'mongodb';
 
 export class Post {
     constructor(
@@ -8,6 +8,6 @@ export class Post {
         public media: string,
         public postType : string,
         public date: string,
-        public postId = crypto.randomUUID()
+        public _id?: ObjectId
     ) {}
 }

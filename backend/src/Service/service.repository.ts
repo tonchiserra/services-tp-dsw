@@ -1,45 +1,31 @@
-// import { Repository } from '../shared/repository.js'
-// import { Service } from './service.entity.js'
+import { Repository } from '../shared/repository.js'
+import { Service } from './service.entity.js'
+import { db } from '../shared/db/connection.js'
+import { ObjectId } from 'mongodb';
 
-// const services: Service[] = [
-//     new Service(
-//         "1 Page web",
-//         580
-//     )
-// ] // our temporally ddbb
+const services = db.collection<Service>('services')
 
-// export class ServiceRepository implements Repository<Service>{
-//     public async findAll(): Promise<Service[] | undefined> {
-//         return await services // call to ddbb
-//     }
-    
-//     public async findOne(item: {id: string}): Promise<Service | undefined> {
-//         return await services.find((service) => service.serviceId === item.id) // call to ddbb
-//     }
-    
-//     public async add(item: Service): Promise<Service | undefined> {
-//         services.push(item) // call to ddbb
-//         return await item
-//     }
-    
-//     public async update(item: Service): Promise<Service | undefined> {
-//         const serviceIdx = services.findIndex((service) =>service.serviceId = item.serviceId)
+export class ServiceRepository implements Repository<Service>{
+    public async findAll(): Promise<Service[] | undefined> {
+        return await services.find().toArray()
+    }
 
-//         if(serviceIdx !== -1) {
-//             services[serviceIdx] = {...services[serviceIdx], ...item}
-//         }
+    public async findOne(item: {id: ObjectId}): Promise<Service | undefined> {
+        return await services.findOne({ _id: item.id }) as Service
+    }
 
-//         return await services[serviceIdx]
-//     }
-    
-//     public async remove(item: { id: string}): Promise<Service | undefined> {
-//         const serviceIdx = services.findIndex((service) =>service.serviceId === item.id);
-//         if(serviceIdx !== -1) {
-//             const deletedService = services[serviceIdx]
-//             services.splice(serviceIdx, 1)
-//             return deletedService
-//         }
+    public async add(item: Service): Promise<Service | undefined> {
+        await services.insertOne(item)
+        return item
+    }
 
-//         return await services[serviceIdx]
-//     }
-// } 
+    public async update(id: string, item: Service): Promise<Service | undefined> {
+        const _id = new ObjectId(id)
+        return await services.findOneAndUpdate({ _id }, { $set: item }, { returnDocument: 'after' }) as Service
+    }
+
+    public async delete(item: { id: string}): Promise<Service | undefined> {
+        const _id = new ObjectId(item.id)
+        return await services.findOneAndDelete({ _id }) as Service
+    }
+}
