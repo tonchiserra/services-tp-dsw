@@ -1,9 +1,9 @@
-import crypto from 'node:crypto'
+import { ObjectId } from 'mongodb';
 
 export class Service {
     constructor(
         public description: string,
         public price: number,
-        public serviceId = crypto.randomUUID()
+        public _id?: ObjectId
     ) {}
 }

@@ -10,8 +10,8 @@ Content-Type: application/json
 
 {
     "name": "JuanPerez",
-    "phone": 3415087211,
-    "mail": "juanperez@gmail.com",
+    "phone": 341,
+    "email": 6,
     "username": "j.perez",
     "password": "pa$$w0rd",
     "profileImg": "/img004",
@@ -28,4 +28,4 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/users/654405072394cee5096aea9b
+DELETE http://localhost:3000/api/users/65443fb2e985e0ac7c960698
