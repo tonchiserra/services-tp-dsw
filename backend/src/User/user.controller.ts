@@ -3,7 +3,10 @@ import { UserRepository } from "./user.repository.js"
 import { User } from "./user.entity.js"
 import { ObjectId } from "mongodb"
 
+import jwt from 'jsonwebtoken'
+
 const repository = new UserRepository()
+const jwtSecret: string = 'services-tp-dsw-user-token'
 
 function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
@@ -42,11 +45,24 @@ async function findOne(req: Request, res: Response) {
 }
 
 async function findByEmailAndPassword(req: Request, res: Response) {
-    const user = await repository.findByEmailAndPassword({ email: req.params.email, password: req.params.password })
+    
+    const user = await repository.findByEmailAndPassword({ email: req.body.email })
 
-    if(!user) return res.status(404).send({ message: "User not found" })
+    if(!user) {
+        res.status(404)
+        res.statusMessage = `[{"validation": "email","code": "invalid_string","message": "Email doesn't exists","path": ["email"]}]`
+        return res.send({ message: "Email doesn't exists" })
+    }
+      
+    if(user.password !== req.body.password) {
+        res.status(404)
+        res.statusMessage = '[{"validation": "password","code": "invalid_string","message": "Wrong password","path": ["password"]}]'
+        return res.send({ message: "Wrong password"})
+    }
 
-    res.json({ data: user })
+    const token = jwt.sign({_id: user._id}, jwtSecret)
+
+    res.json({ message: 'User logged', data: user, token: token })
 }
 
 async function add(req: Request, res: Response) {
@@ -60,9 +76,12 @@ async function add(req: Request, res: Response) {
         input.profileImg,
         input.description
     )
-    const user = await repository.add(userInput)
 
-    return res.status(201).send({ message: 'User created', data: user })
+    const user = await repository.add(userInput)
+    if(!user) return res.status(500).send({ message: 'Internal server error' })
+
+    const token = jwt.sign({_id: user._id}, jwtSecret)
+    return res.status(201).send({ message: 'User created', data: user, token: token })
 }
 
 async function update(req: Request, res: Response) {
@@ -84,4 +103,17 @@ async function remove(req: Request, res: Response) {
     return res.status(200).send({ message: 'User deleted successfully', data: user }) 
 }
 
-export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword }
+function verifyToken(req: Request, res: Response, next: NextFunction) {
+    if(!req.headers.authorization) return res.status(401).send("You don't have permissions")
+
+    const token = req.headers.authorization.split(' ')[1]
+    if(token === 'null') return res.status(401).send("You don't have permissions")
+
+    const payload = jwt.verify(token, jwtSecret)
+    if(typeof payload === 'string') return res.status(401).send("You don't have permissions")
+    else req.body.userId = payload._id
+
+    next()
+}
+
+export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken }

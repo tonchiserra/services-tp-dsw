@@ -121,6 +121,7 @@ main-header {
                         display: flex;
                         align-items: center;
                         justify-content: center;
+                        cursor: pointer;
 
                         &:hover {
                             background-color: $gray-color;
@@ -138,7 +139,7 @@ main-header {
                     order: 1;
                     margin-top: 50px;
 
-                    button{
+                    & > button{
                         display: none;
                     }
                 }

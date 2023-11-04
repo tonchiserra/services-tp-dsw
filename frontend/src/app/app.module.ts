@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router, RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -14,13 +15,16 @@ import { ServiceFormComponent } from './service-form/service-form.component';
 
 import { UserPageModule } from './user-page/user-page.module';
 
+import { authGuard } from './auth.guard';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+
 const routes: Routes = [
-  { path: 'login', component: LoginPageComponent },
-  { path: '', component: HomePageComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: 'search', component: SearchPageComponent },
-  { path: 'user', component: UserPageComponent },
-  { path: 'new-service', component: ServiceFormComponent }
+  { path: 'login', component: LoginPageComponent, canActivate: [authGuard]},
+  { path: '', component: HomePageComponent, canActivate: [authGuard] },
+  { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
+  { path: 'search', component: SearchPageComponent, canActivate: [authGuard] },
+  { path: 'user', component: UserPageComponent, canActivate: [authGuard] },
+  { path: 'new-service', component: ServiceFormComponent, canActivate: [authGuard] }
 ]
 
 @NgModule({
@@ -37,12 +41,19 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    UserPageModule
+    UserPageModule,
+    HttpClientModule
   ],
   exports: [
     RouterModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
