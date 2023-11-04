@@ -9,7 +9,7 @@ POST http://localhost:3000/api/serviceTypes
 Content-Type: application/json
 
 {
-    "name": "Web Application"
+    "name": "Fashion"
 }
 
 ###modificar un serviceType con patch (parcial)
