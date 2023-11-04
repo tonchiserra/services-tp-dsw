@@ -8,7 +8,8 @@ const repository = new ServiceRepository()
 function sanitizeServiceInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
        description: req.body.description,
-       price: req.body.price
+       price: req.body.price,
+       type: req.body.type
     }
 
     Object.keys(req.body.sanitizedInput).forEach((key)=> {
@@ -39,8 +40,9 @@ async function findOne(req: Request, res: Response){
 async function add(req:Request, res:Response){
     const input = req.body.sanitizedInput
     const postInput = new Service(
-      input.description,
-      input.price
+        input.type,
+        input.description,
+        input.price
     )
     const service = await repository.add(postInput)
   
