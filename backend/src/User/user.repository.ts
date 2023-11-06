@@ -14,8 +14,8 @@ export class UserRepository implements Repository<User>{
         return await users.findOne({ _id: item.id }) as User
     }
 
-    public async findByEmailAndPassword(item: {email: string, password: string}): Promise<User | undefined> {
-        return await users.findOne({ email: item.email, password: item.password }) as User
+    public async findByEmailAndPassword(item: {email: string}): Promise<User | undefined> {
+        return await users.findOne({ email: item.email }) as User
     }
     
     public async add(item: User): Promise<User | undefined> {

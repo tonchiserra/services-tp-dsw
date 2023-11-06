@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms'
 import { signUpPasswordSchema, signInSchema } from './login-page.schema';
 import { showErrors, cleanErrors } from 'src/helpers/form-errors';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'login-page',
@@ -24,7 +26,11 @@ export class LoginPageComponent {
     password: new FormControl('')
   }
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) {
+
     this.setEvents()
   }
 
@@ -94,62 +100,32 @@ export class LoginPageComponent {
   }
 
   private async signUp(userData: any, form: HTMLElement) {
-    try {
-      let response = await fetch(`http://localhost:3000/api/users`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userData)
-      })
-      let userRegistered = await response.json()
-
-      if(!response.ok) {
-        throw {
-          status: response.status,
-          statusText: response.statusText,
-          message: `[{
-            "validation": "email",
-            "code": "invalid_string",
-            "message": "Try again later",
-            "path": ["email"]
-          }]`
+    this.authService.signUp(userData)
+      .subscribe(
+        (res: any) => {
+          console.log(res)
+          localStorage.setItem('services-tp-dsw-user-token', res.token)
+          this.router.navigate(['/'])
+        },
+        (err: Error) => {
+          console.log(err)
         }
-      }
-
-      console.log(userRegistered)
-
-    } catch(error: any) {
-      console.error(error)
-
-      showErrors(error.message, form)
-    }
-  
+      )
   }
 
   private async signIn(userData: {email: string, password: string}, form: HTMLElement) {
-    try {
-      let response = await fetch(`http://localhost:3000/api/users/${userData.email}/${userData.password}`)
-      let userLogged = await response.json()
-
-      if(!response.ok) {
-        throw {
-          status: response.status,
-          statusText: response.statusText,
-          message: `[{
-            "validation": "email",
-            "code": "invalid_string",
-            "message": "Wrong email or password",
-            "path": ["email"]
-          }]`
+    this.authService.signIn(userData)
+      .subscribe(
+        (res: any) => {
+          console.log(res)
+          localStorage.setItem('services-tp-dsw-user-token', res.token)
+          this.router.navigate(['/'])
+        },
+        (err: any) => {
+          console.log(err)
+          showErrors(err.statusText, form)
         }
-      }
-
-      console.log(userLogged)
-
-    } catch(error: any) {
-      console.error(error)
-
-      showErrors(error.message, form)
-    }
+      )
   
   }
 }
