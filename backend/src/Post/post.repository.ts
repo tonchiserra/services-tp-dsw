@@ -1,49 +1,31 @@
-// import { Repository } from '../shared/repository.js'
-// import { Post } from './post.entity.js'
+import { Repository } from '../shared/repository.js'
+import { Post } from './post.entity.js'
+import { db } from '../shared/db/connection.js'
+import { ObjectId } from 'mongodb';
 
-// const posts: Post[] = [
-//     new Post(
-//         'Hola me llamo guido bitti y es mi primer post',
-//         58,
-//         13,
-//         'imgPostGuidov1.jpg',
-//         'With service',
-//         '29/9/2023'
-//     )
-// ] // our temporally ddbb
+const posts = db.collection<Post>('posts')
 
-// export class PostRepository implements Repository<Post>{
-//     public async findAll(): Promise<Post[] | undefined> {
-//         return await posts // call to ddbb
-//     }
-    
-//     public async findOne(item: {id: string}): Promise<Post | undefined> {
-//         return await posts.find((post) => post.postId === item.id) // call to ddbb
-//     }
-    
-//     public async add(item: Post): Promise<Post | undefined> {
-//         posts.push(item) // call to ddbb
-//         return await item
-//     }
-    
-//     public async update(item: Post): Promise<Post | undefined> {
-//         const postIdx = posts.findIndex((post) =>post.postId = item.postId)
+export class PostRepository implements Repository<Post>{
+    public async findAll(): Promise<Post[] | undefined> {
+        return await posts.find().toArray()
+    }
 
-//         if(postIdx !== -1) {
-//             posts[postIdx] = {...posts[postIdx], ...item}
-//         }
+    public async findOne(item: {id: ObjectId}): Promise<Post | undefined> {
+        return await posts.findOne({ _id: item.id }) as Post
+    }
 
-//         return await posts[postIdx]
-//     }
-    
-//     public async remove(item: { id: string}): Promise<Post | undefined> {
-//         const postIdx = posts.findIndex((post) =>post.postId === item.id);
-//         if(postIdx !== -1) {
-//             const deletedPost = posts[postIdx]
-//             posts.splice(postIdx, 1)
-//             return await deletedPost
-//         }
+    public async add(item: Post): Promise<Post | undefined> {
+        await posts.insertOne(item)
+        return item
+    }
 
-//         return await posts[postIdx]
-//     }
-// } 
+    public async update(id: string, item: Post): Promise<Post | undefined> {
+        const _id = new ObjectId(id)
+        return await posts.findOneAndUpdate({ _id }, { $set: item }, { returnDocument: 'after' }) as Post
+    }
+
+    public async delete(item: { id: string}): Promise<Post | undefined> {
+        const _id = new ObjectId(item.id)
+        return await posts.findOneAndDelete({ _id }) as Post
+    }
+}

@@ -13,7 +13,7 @@
 Red social de contratación de servicios.
 
 ### Modelo
-![Modelo-DSW.jpg](https://i.postimg.cc/W1m7pkTS/Modelo-DSW.jpg)
+![image](https://github.com/tonchiserra/services-tp-dsw/assets/103657441/612afb97-b15d-44c5-8ff4-aaf08102d6ca)
 
 ## Alcance Funcional 
 

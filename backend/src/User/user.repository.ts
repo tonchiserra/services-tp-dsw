@@ -3,18 +3,6 @@ import { User } from './user.entity.js'
 import { db } from '../shared/db/connection.js'
 import { ObjectId } from 'mongodb';
 
-const usersArray: User[] = [
-    new User(
-        "GuidoBitti",
-        3415087210,
-        "guidobitti@gmail.com",
-        "g.bitti",
-        "pa$$w0rd",
-        "/img002",
-        "Me llamo Guido"
-    )
-] // our temporally ddbb
-
 const users = db.collection<User>('users')
 
 export class UserRepository implements Repository<User>{
