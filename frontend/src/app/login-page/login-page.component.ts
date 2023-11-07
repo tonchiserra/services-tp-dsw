@@ -102,9 +102,10 @@ export class LoginPageComponent {
   private async signUp(userData: any, form: HTMLElement) {
     this.authService.signUp(userData)
       .subscribe(
-        (res: any) => {
+        async (res: any) => {
           console.log(res)
           localStorage.setItem('services-tp-dsw-user-token', res.token)
+          await this.updateUserToken(res.data, res.token)
           this.router.navigate(['/'])
         },
         (err: Error) => {
@@ -116,9 +117,10 @@ export class LoginPageComponent {
   private async signIn(userData: {email: string, password: string}, form: HTMLElement) {
     this.authService.signIn(userData)
       .subscribe(
-        (res: any) => {
+        async (res: any) => {
           console.log(res)
           localStorage.setItem('services-tp-dsw-user-token', res.token)
+          await this.updateUserToken(res.data, res.token)
           this.router.navigate(['/'])
         },
         (err: any) => {
@@ -126,6 +128,18 @@ export class LoginPageComponent {
           showErrors(err.statusText, form)
         }
       )
-  
+  }
+
+  private async updateUserToken(user: any, token: string) {
+    user.token = token
+    this.authService.updateUserToken(user)
+    .subscribe(
+      (res: any) => {
+        console.log(res)
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
   }
 }

@@ -17,6 +17,10 @@ export class UserRepository implements Repository<User>{
     public async findByEmailAndPassword(item: {email: string}): Promise<User | undefined> {
         return await users.findOne({ email: item.email }) as User
     }
+
+    public async findByToken(item: {token: string}): Promise<User | undefined> {
+        return await users.findOne({ token: item.token }) as User
+    }
     
     public async add(item: User): Promise<User | undefined> {
         await users.insertOne(item)

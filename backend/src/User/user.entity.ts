@@ -9,6 +9,7 @@ export class User {
         public password: string,
         public profileImg: string,
         public description: string,
+        public token: string,
         public _id?: ObjectId
     ) {}
 }
