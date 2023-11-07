@@ -15,11 +15,11 @@ export class AuthService {
     ) { }
 
   signUp(user: any){
-    return this.http.post<any>(`${this.URL}/users/`, user)
+    return this.http.post(`${this.URL}/users/`, user)
   }
 
   signIn(user: any){
-    return this.http.post<any>(`${this.URL}/users/signin`, user)
+    return this.http.post(`${this.URL}/users/signin`, user)
   }
 
   logOut(){
@@ -33,5 +33,13 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('services-tp-dsw-user-token')
+  }
+
+  updateUserToken(user: any) {
+    return this.http.patch(`${this.URL}/users/${user._id}`, user)
+  }
+
+  getUserLogged() {
+    return this.http.get(`${this.URL}/users/token/${this.getToken()}`)
   }
 }

@@ -16,7 +16,8 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
         username: req.body.username,
         password: req.body.password,
         profileImg: req.body.profileImg,
-        description: req.body.description
+        description: req.body.description,
+        token: req.body.token
     }
   
     Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -34,7 +35,6 @@ async function findAll(req: Request, res: Response) {
 
 async function findOne(req: Request, res: Response) {
     const id = new ObjectId(req.params._id)
-
     const user = await repository.findOne({ id })
 
     if(!user){
@@ -65,6 +65,16 @@ async function findByEmailAndPassword(req: Request, res: Response) {
     res.json({ message: 'User logged', data: user, token: token })
 }
 
+async function findByToken(req: Request, res: Response) {
+    const user = await repository.findByToken({ token: req.params.token })
+
+    if(!user){
+        return res.status(404).send({ message: "Token not found" })
+    }
+
+    res.json({ data: user })
+}
+
 async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const userInput = new User(
@@ -74,7 +84,8 @@ async function add(req: Request, res: Response) {
         input.username,
         input.password,
         input.profileImg,
-        input.description
+        input.description,
+        input.token
     )
 
     const user = await repository.add(userInput)
@@ -116,4 +127,4 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken }
+export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken, findByToken }

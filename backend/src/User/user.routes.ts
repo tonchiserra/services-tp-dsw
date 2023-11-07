@@ -1,10 +1,11 @@
 import { Router } from 'express'
 
-import { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken } from './user.controller.js'
+import { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken, findByToken } from './user.controller.js'
 
 const userRouter = Router()
 
 userRouter.get('/', verifyToken, findAll)
+userRouter.get('/token/:token', verifyToken, findByToken)
 userRouter.get('/:_id', verifyToken, findOne)
 userRouter.post('/signin', findByEmailAndPassword)
 userRouter.post('/', sanitizeUserInput, add)

@@ -1,7 +1,7 @@
 <!-- if currentUser === user loged -->
 <edit-profile-form></edit-profile-form>
 
-<div class="user-info">
+<div class="user-info" *ngIf="userLogged">
     <div class="top">
         <div class="user-info__image">
             <!-- profile image from database -->
@@ -18,10 +18,10 @@
     </div>
 
     <div class="bottom">
-        <h2 class="user-info__name">Nombre del usuario</h2>
-        <p class="user-info__username">@username</p>
+        <h2 class="user-info__name">{{ this.userLogged.name }}</h2>
+        <p class="user-info__username">@{{ this.userLogged.username }}</p>
 
-        <p class="user-info__description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad iste error, voluptatum beatae distinctio vero at nihil, consectetur magnam vel iure enim facere. Laboriosam dolor ullam dolorum ipsum, sed incidunt!</p>
+        <p class="user-info__description">{{ this.userLogged.description }}</p>
         <!-- More info that we don't have at the moment -->
 
         <div class="user-info__follows">
