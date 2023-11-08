@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 
 import { cleanErrors, showErrors } from 'src/helpers/form-errors';
 import { serviceSchema } from './service-form.schema';
+import { AuthService } from '../services/auth.service';
+import { ServicesService } from '../services/services.service';
 
 @Component({
   selector: 'service-form',
@@ -17,19 +19,15 @@ export class ServiceFormComponent {
     description: new FormControl('')
   }
 
-  constructor() {
+  constructor(
+    private authService: AuthService,
+    private servicesService: ServicesService
+    ) {
     this.closeSubmenu()
   }
 
   async ngOnInit(): Promise<void>{
     await this.fetchDataServiceTypes();
-    const selectServiceType = document.querySelector('#typeService') as HTMLSelectElement;
-    this.serviceTypeData.forEach((serviceType:any) => {
-      const option = document.createElement('option');
-      option.value = serviceType.name;
-      option.innerHTML = serviceType.name;
-      selectServiceType?.appendChild(option);
-    })
   }
 
   async fetchDataServiceTypes() {
@@ -51,7 +49,7 @@ export class ServiceFormComponent {
     location.href = '/home'
   }
 
-  submitHandler(event: Event): void {
+  async submitHandler(event: Event): Promise<void> {
     event.preventDefault()
     event.stopPropagation()
     let form = event.target as HTMLElement
@@ -69,21 +67,42 @@ export class ServiceFormComponent {
       showErrors(result.error.message, form)
     }else {
 
-      // send data to backend
-      fetch('http://localhost:3000/api/services', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
+      this.authService.getUserLogged().subscribe(
+        (res: any) => {
+          let userLogged = res.data
+
+          this.servicesService.create({service: result.data, user: userLogged}).subscribe(
+            (res: any) => {
+              console.log(res)
+            },
+            (err: any) => {
+              console.log(err)
+            }
+          )
         },
-        body: JSON.stringify(result.data)
-      })
-        .then(response => response.json())
-        .then(responseData => {
-          console.log('Respuesta del servidor:', responseData);
-        })
-        .catch(error => {
-          console.error('Error al realizar la solicitud POST:', error);
-        });
+        (err: any) => {
+          console.log(err)
+        }
+      )
     }
   }
+
+  // createService(service, userLogged) {
+  //   let response = await fetch('http://localhost:3000/api/services', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(result.data)
+  //   })
+
+  //   let data = await response.json()
+  //     .then(response => response.json())
+  //     .then(responseData => {
+  //       this.updateUserServicesList()
+  //     })
+  //     .catch(error => {
+  //       console.error('Error al realizar la solicitud POST:', error);
+  //     });
+  // }
 }
