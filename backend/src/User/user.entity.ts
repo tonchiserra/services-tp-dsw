@@ -10,6 +10,7 @@ export class User {
         public profileImg: string,
         public description: string,
         public token: string,
+        public services: ObjectId[],
         public _id?: ObjectId
     ) {}
 }

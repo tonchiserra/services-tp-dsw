@@ -2,14 +2,17 @@ import { NextFunction, Request, Response } from "express"
 import { ServiceRepository } from "./service.repository.js"
 import { Service } from "./service.entity.js"
 import { ObjectId } from "mongodb"
+import { UserRepository } from "../User/user.repository.js"
 
 const repository = new ServiceRepository()
+const userRepository = new UserRepository()
 
 function sanitizeServiceInput(req: Request, res: Response, next: NextFunction) {
+    let service = req.body.service ? req.body.service : req.body
     req.body.sanitizedInput = {
-       description: req.body.description,
-       price: req.body.price,
-       type: req.body.type
+       description: service.description,
+       price: service.price,
+       type: service.type
     }
 
     Object.keys(req.body.sanitizedInput).forEach((key)=> {
@@ -44,8 +47,21 @@ async function add(req:Request, res:Response){
         input.description,
         input.price
     )
+
     const service = await repository.add(postInput)
+
+    if(!service) return res.status(404).send({ message: 'Service not found' })
+    
+    const userToUpdate = req.body.user
+    userToUpdate.services ? userToUpdate.services.push(service._id) : userToUpdate.services = [service._id]
+    
+    let userId = userToUpdate._id
+    delete userToUpdate._id
+
+    const userUpdated = await userRepository.update(userId, userToUpdate)
   
+    if(!userUpdated) return res.status(404).send({ message: 'User not found' })
+
     return res.status(201).send({ message: 'Service created', data:service })
 }
 
