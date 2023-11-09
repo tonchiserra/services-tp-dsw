@@ -1,5 +1,6 @@
 ### obetener todos los users.
 GET http://localhost:3000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 
 ### obtener un user por _id
 GET http://localhost:3000/api/users/6543f7ed22939aa00b6f3112
@@ -28,4 +29,4 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/users/65443fb2e985e0ac7c960698
+DELETE http://localhost:3000/api/users/654d3898d2c16fec60c75572

@@ -11,6 +11,7 @@
             </div>
             <select name="post[service]" id="servicePost" class="secondary" *ngIf="postFormState.isServicePost.value" [formControl]="postFormState.service">
                 <option value="" selected disabled>Select a service</option>
+                <option *ngFor="let service of serviceData" [value]="service.description">{{ service.description }}</option>
                 <!-- for service in user.services -->
             </select>
             <button class="primary" type="submit">Post</button>
