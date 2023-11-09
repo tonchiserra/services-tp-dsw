@@ -18,7 +18,8 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
         profileImg: req.body.profileImg,
         description: req.body.description,
         token: req.body.token,
-        services: req.body.services
+        services: req.body.services,
+        posts: req.body.posts
     }
   
     Object.keys(req.body.sanitizedInput).forEach((key) => {
@@ -87,7 +88,8 @@ async function add(req: Request, res: Response) {
         input.profileImg,
         input.description,
         input.token,
-        input.services
+        input.services,
+        input.posts
     )
 
     const user = await repository.add(userInput)

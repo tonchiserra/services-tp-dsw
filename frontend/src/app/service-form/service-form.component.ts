@@ -66,7 +66,8 @@ export class ServiceFormComponent {
     if(!result.success) {
       showErrors(result.error.message, form)
     }else {
-
+    console.log(data)
+    console.log(result)
       this.authService.getUserLogged().subscribe(
         (res: any) => {
           let userLogged = res.data

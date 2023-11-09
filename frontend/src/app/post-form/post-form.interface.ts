@@ -9,7 +9,8 @@ export interface IPostForm {
 
 export interface IPostFormData {
     isServicePost: boolean,
-    service: string,
-    text: string,
-    files: FileList | null
+    postType: string,
+    content: string,
+    media: FileList | null,
+    date: Date
 }

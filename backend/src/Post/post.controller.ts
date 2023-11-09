@@ -2,18 +2,21 @@ import { NextFunction, Request, Response } from "express"
 import { PostRepository } from "./post.repository.js"
 import { Post } from "./post.entity.js"
 import { ObjectId } from "mongodb"
+import { UserRepository } from "../User/user.repository.js"
 
 const repository = new PostRepository()
+const userRepository = new UserRepository()
 
 function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
-    req.body.sanitizedInput = {
-       content: req.body.content,
-       likes: req.body.likes,
-       rePosts: req.body.rePosts,
-       media: req.body.media,
-       postType: req.body.postType,
-       date: req.body.date
-    }
+    let post = req.body.post ? req.body.post: req.body
+    req.body.sanitizedInput ={
+        content: post.content,
+        media: post.media,
+        postType: post.postType,
+        date: post.date,
+        likes: post.likes,
+        rePosts: post.rePosts
+    }   
 
     Object.keys(req.body.sanitizedInput).forEach((key)=> {
         if(req.body.sanitizedInput[key] === undefined){
@@ -44,14 +47,26 @@ async function add(req:Request, res:Response){
     const input = req.body.sanitizedInput
     const postInput = new Post(
       input.content,
-      input.likes,
-      input.rePosts,
       input.media,
       input.postType,
-      input.date
+      input.date,
+      input.likes,
+      input.rePosts
     )
     const post = await repository.add(postInput)
-  
+    
+    if(!post) return res.status(404).send({ message: 'Post not found' })
+
+    const userToUpdate = req.body.user
+    userToUpdate.posts ? userToUpdate.posts.push(post._id) : userToUpdate.posts = [post._id]
+
+    let userId = userToUpdate._id
+    delete userToUpdate._id
+    
+    const userUpdated = await userRepository.update(userId, userToUpdate)
+
+    if(!userUpdated) return res.status(404).send({ message: 'User not found' })
+    
     return res.status(201).send({ message: 'Post created', data:post })
 }
 
