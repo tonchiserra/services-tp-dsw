@@ -114,8 +114,6 @@ export class PostFormComponent {
         }
       )
     }
-
-    // enviar datos al backend
   }
 
 }
