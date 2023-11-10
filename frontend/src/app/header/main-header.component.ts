@@ -9,6 +9,18 @@ export class MainHeaderComponent {
   constructor(private authService: AuthService){ }
 
   auth = this.authService
+  profileURL = '/user/'
+
+  ngOnInit() {
+    this.authService.getUserLogged().subscribe(
+      (res: any) => {
+        this.profileURL += res.data._id
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
+  }
 
   showSubmenu(event: MouseEvent) {
     let button = (event.target as HTMLElement).closest('button')

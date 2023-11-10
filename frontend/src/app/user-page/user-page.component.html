@@ -1,27 +1,31 @@
 <!-- if currentUser === user loged -->
 <edit-profile-form></edit-profile-form>
 
-<div class="user-info" *ngIf="userLogged">
+<div class="user-info" *ngIf="user">
     <div class="top">
         <div class="user-info__image">
             <!-- profile image from database -->
         </div>
         <div class="user-info__buttons">
             <!-- if currentUser === user loged -->
-            <button class="button__edit-profile secondary" (click)="openEditProfileModal($event)">Edit profile</button>
+            <ng-container *ngIf="this.userLogged._id === this.user._id; else elseBlockFollow">
+                <button class="button__edit-profile secondary" (click)="openEditProfileModal($event)">Edit profile</button>
+            </ng-container>
 
             <!-- else if userLoged.follows.contains(currentUser) -->
             <!-- <button class="button__unfollow primary">Unfollow</button> -->
             <!-- else -->
-            <!-- <button class="button__follow secondary">Follow</button> -->
+            <ng-template #elseBlockFollow>
+                <button class="button__follow secondary">Follow</button>
+            </ng-template>
         </div>
     </div>
 
     <div class="bottom">
-        <h2 class="user-info__name">{{ this.userLogged.name }}</h2>
-        <p class="user-info__username">@{{ this.userLogged.username }}</p>
+        <h2 class="user-info__name">{{ this.user.name }}</h2>
+        <p class="user-info__username">@{{ this.user.username }}</p>
 
-        <p class="user-info__description">{{ this.userLogged.description }}</p>
+        <p class="user-info__description">{{ this.user.description }}</p>
         <!-- More info that we don't have at the moment -->
 
         <div class="user-info__follows">
@@ -35,12 +39,12 @@
     <div class="user-posts__tabs">
         <!-- We need do this with router outlet -->
 
-        <a routerLink="/user/posts" routerLinkActive="active" class="tab" data-tab="posts">Posts</a>
-        <a routerLink="/user/likes" routerLinkActive="active" class="tab" data-tab="likes">Likes</a>
-        <a routerLink="/user/media" routerLinkActive="active" class="tab" data-tab="media">Media</a>
+        <a [routerLink]="this.userPostsURL" routerLinkActive="active" class="tab" data-tab="posts">Posts</a>
+        <a [routerLink]="this.userLikesURL" routerLinkActive="active" class="tab" data-tab="likes">Likes</a>
+        <a [routerLink]="this.userMediaURL" routerLinkActive="active" class="tab" data-tab="media">Media</a>
     </div>
 
-    <div class="search-results" *ngIf="userLogged && userLogged.posts.length > 0">
-        <post-card *ngFor="let post of userLogged.posts" [user]="userLogged" [post]="post"></post-card>
+    <div class="search-results" *ngIf="user && user.posts && user.posts.length > 0">
+        <post-card *ngFor="let post of user.posts" [user]="user" [post]="post"></post-card>
     </div>
 </div>
