@@ -46,13 +46,18 @@
         </div>
     
         <div class="extra-information">
+            <p><strong>Date:</strong> {{ post.date }}</p>
             <p><strong>Email:</strong> {{ user.email }}</p>
             <p><strong>Post type:</strong> {{ post.postType }}</p>
-            <p><strong>Date:</strong> {{ post.date }}</p>
+            <ng-container *ngIf="post.service">
+                <p><strong>Service:</strong> {{ post.service.type }}</p>
+                <p><strong>Price:</strong> {{ post.service.price }}</p>
+                <p><strong>Description:</strong> {{ post.service.description }}</p>
+            </ng-container>
             <p><strong>Content:</strong> <br>{{ post.content }}</p>
         </div>
     
-        <div class="contact-button">
+        <div class="contact-button" *ngIf="post.postType === 'service'">
             <button class="primary">Quick contact</button>
         </div>
     </div>
