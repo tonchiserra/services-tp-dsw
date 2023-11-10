@@ -87,23 +87,4 @@ export class ServiceFormComponent {
       )
     }
   }
-
-  // createService(service, userLogged) {
-  //   let response = await fetch('http://localhost:3000/api/services', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(result.data)
-  //   })
-
-  //   let data = await response.json()
-  //     .then(response => response.json())
-  //     .then(responseData => {
-  //       this.updateUserServicesList()
-  //     })
-  //     .catch(error => {
-  //       console.error('Error al realizar la solicitud POST:', error);
-  //     });
-  // }
 }

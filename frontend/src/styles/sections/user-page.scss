@@ -3,6 +3,7 @@ user-page {
     height: 100vh;
     display: block;
     overflow-y: scroll;
+    width: 100%;
 
     &::-webkit-scrollbar {
         display: none;
@@ -103,11 +104,10 @@ user-page {
         
         .search-results {
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
             justify-content: flex-start;
             position: relative;
-            height: calc(100vh - 33px);
             padding-top: 20px;
             padding-bottom: 44px;
             overflow-y: scroll;

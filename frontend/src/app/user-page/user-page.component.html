@@ -40,20 +40,7 @@
         <a routerLink="/user/media" routerLinkActive="active" class="tab" data-tab="media">Media</a>
     </div>
 
-    <div class="search-results">
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
-        <post-card></post-card>
+    <div class="search-results" *ngIf="userLogged && userLogged.posts.length > 0">
+        <post-card *ngFor="let post of userLogged.posts" [user]="userLogged" [post]="post"></post-card>
     </div>
 </div>

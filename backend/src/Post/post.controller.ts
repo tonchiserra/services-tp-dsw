@@ -15,6 +15,7 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         postType: post.postType,
         date: post.date,
         likes: post.likes,
+        userId: req.body.user._id,
         rePosts: post.rePosts
     }   
 
@@ -51,14 +52,15 @@ async function add(req:Request, res:Response){
       input.postType,
       input.date,
       input.likes,
-      input.rePosts
+      input.rePosts,
+      input.userId
     )
     const post = await repository.add(postInput)
     
     if(!post) return res.status(404).send({ message: 'Post not found' })
 
     const userToUpdate = req.body.user
-    userToUpdate.posts ? userToUpdate.posts.push(post._id) : userToUpdate.posts = [post._id]
+    userToUpdate.posts ? userToUpdate.posts.push(post) : userToUpdate.posts = [post]
 
     let userId = userToUpdate._id
     delete userToUpdate._id

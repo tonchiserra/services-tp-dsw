@@ -8,6 +8,7 @@ export class Post {
         public date: string,
         public Likes: ObjectId[],
         public rePosts: ObjectId[],
+        public userId: ObjectId,
         public _id?: ObjectId
     ) {}
 }
