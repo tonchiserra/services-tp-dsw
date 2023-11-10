@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: '', component: HomePageComponent, canActivate: [authGuard] },
   { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
   { path: 'search', component: SearchPageComponent, canActivate: [authGuard] },
-  { path: 'user', component: UserPageComponent, canActivate: [authGuard] },
+  { path: 'user/:id', component: UserPageComponent, canActivate: [authGuard] },
   { path: 'new-service', component: ServiceFormComponent, canActivate: [authGuard] }
 ]
 
