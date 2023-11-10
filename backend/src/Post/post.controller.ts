@@ -8,6 +8,7 @@ const repository = new PostRepository()
 const userRepository = new UserRepository()
 
 function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
+    console.log(req.body)
     let post = req.body.post ? req.body.post: req.body
     req.body.sanitizedInput ={
         content: post.content,
@@ -16,6 +17,7 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         date: post.date,
         likes: post.likes,
         userId: req.body.user._id,
+        service: post.service,
         rePosts: post.rePosts
     }   
 
@@ -53,7 +55,8 @@ async function add(req:Request, res:Response){
       input.date,
       input.likes,
       input.rePosts,
-      input.userId
+      input.userId,
+      input.service
     )
     const post = await repository.add(postInput)
     
