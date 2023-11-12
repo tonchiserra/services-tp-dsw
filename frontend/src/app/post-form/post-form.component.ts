@@ -35,11 +35,9 @@ export class PostFormComponent {
       (res: any) => {
         let userLogged = res.data
         userLogged.services.forEach(async (service: any) =>{
-          console.log(service)
           await fetch('http://localhost:3000/api/services/'+  service)
           .then(res => res.json())
           .then(async response => {
-            console.log(await response.data)
             this.serviceData.push(await response.data);
           })
         })

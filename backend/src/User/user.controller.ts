@@ -17,11 +17,12 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
         password: req.body.password,
         profileImg: req.body.profileImg,
         description: req.body.description,
+        address: req.body.address,
         token: req.body.token,
         services: req.body.services,
         posts: req.body.posts
     }
-  
+
     Object.keys(req.body.sanitizedInput).forEach((key) => {
         if (req.body.sanitizedInput[key] === undefined) {
             delete req.body.sanitizedInput[key]
@@ -87,6 +88,7 @@ async function add(req: Request, res: Response) {
         input.password,
         input.profileImg,
         input.description,
+        input.address,
         input.token,
         input.services,
         input.posts

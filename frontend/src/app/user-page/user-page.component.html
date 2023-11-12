@@ -1,5 +1,6 @@
-<!-- if currentUser === user loged -->
-<edit-profile-form></edit-profile-form>
+<ng-container *ngIf="this.userLogged">
+    <edit-profile-form [user]="this.userLogged"></edit-profile-form>
+</ng-container>
 
 <div class="user-info" *ngIf="user">
     <div class="top">

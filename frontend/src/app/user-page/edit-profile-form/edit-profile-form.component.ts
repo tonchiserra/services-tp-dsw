@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { cleanErrors, showErrors } from 'src/helpers/form-errors';
@@ -9,13 +9,18 @@ import { editProfileSchema } from './edit-profile-form.schema';
   templateUrl: './edit-profile-form.component.html'
 })
 export class EditProfileFormComponent {
-  editProfileState = {
-    username: new FormControl('tonchiserra'),
-    name: new FormControl('Gonzalo S'),
-    description: new FormControl('Esta es una descripción de pruba nada detallada pero estoy escribiendo mucho para que sea un pooooco más larga.'),
-    city: new FormControl('Rosario'),
-    province: new FormControl('Santa Fe'),
-    country: new FormControl('Argentina')
+  @Input() user: any;
+  editProfileState: any = {};
+
+  ngOnInit() {
+    this.editProfileState = {
+      username: new FormControl(this.user.username || ''),
+      name: new FormControl(this.user.name || ''),
+      description: new FormControl(this.user.description || ''),
+      city: new FormControl(this.user.city || ''),
+      province: new FormControl(this.user.province || ''),
+      country: new FormControl(this.user.country || '')
+    }
   }
 
   closeEditProfileModal(event: MouseEvent) {
@@ -48,9 +53,47 @@ export class EditProfileFormComponent {
     if(!result.success) {
       showErrors(result.error.message, form)
     }else {
-      console.log(result.data)
+      this.updateUserData(result.data)
+    }
+  }
 
-      // send data to backend
+  async updateUserData(user: any) {
+    try {
+      let authHeader = new Headers();
+      authHeader.append("Authorization", `Bearer ${this.user.token}`);
+      authHeader.append("Content-Type", 'application/json')
+
+      let addressPayload = {
+        city: user.city,
+        province: user.province,
+        country: user.country
+      }
+
+      let responseAddress = await fetch('http://localhost:3000/api/addresses/', {
+        method: 'POST',
+        headers: authHeader,
+        body: JSON.stringify(addressPayload)
+      })
+
+      let address = await responseAddress.json()
+
+      let userPayload = {
+        username: user.username,
+        name: user.name,
+        description: user.description,
+        address: address.data
+      }
+
+      let responseUser = await fetch(`http://localhost:3000/api/users/${this.user._id}`, {
+        method: 'PATCH',
+        headers: authHeader,
+        body: JSON.stringify(userPayload)
+      })
+
+      let userUpdated = await responseUser.json()
+
+    }catch(err) {
+      console.log(err)
     }
   }
 }
