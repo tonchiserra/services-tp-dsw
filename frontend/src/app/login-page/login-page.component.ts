@@ -103,7 +103,6 @@ export class LoginPageComponent {
     this.authService.signUp(userData)
       .subscribe(
         async (res: any) => {
-          console.log(res)
           localStorage.setItem('services-tp-dsw-user-token', res.token)
           await this.updateUserToken(res.data, res.token)
           this.router.navigate(['/'])
@@ -118,7 +117,6 @@ export class LoginPageComponent {
     this.authService.signIn(userData)
       .subscribe(
         async (res: any) => {
-          console.log(res)
           localStorage.setItem('services-tp-dsw-user-token', res.token)
           await this.updateUserToken(res.data, res.token)
           this.router.navigate(['/'])

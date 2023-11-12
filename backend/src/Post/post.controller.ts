@@ -8,7 +8,6 @@ const repository = new PostRepository()
 const userRepository = new UserRepository()
 
 function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
-    console.log(req.body)
     let post = req.body.post ? req.body.post: req.body
     req.body.sanitizedInput ={
         content: post.content,
