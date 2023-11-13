@@ -8,16 +8,17 @@
             <!-- profile image from database -->
         </div>
         <div class="user-info__buttons">
-            <!-- if currentUser === user loged -->
             <ng-container *ngIf="this.userLogged._id === this.user._id; else elseBlockFollow">
                 <button class="button__edit-profile secondary" (click)="openEditProfileModal($event)">Edit profile</button>
             </ng-container>
 
-            <!-- else if userLoged.follows.contains(currentUser) -->
-            <!-- <button class="button__unfollow primary">Unfollow</button> -->
-            <!-- else -->
             <ng-template #elseBlockFollow>
-                <button class="button__follow secondary">Follow</button>
+                <ng-container *ngIf="this.userLogged.follows && this.userLogged.follows.includes(this.user._id); else elseBlockFollowing">
+                    <button id="follow-btn" class="button__follow primary">Following</button>
+                </ng-container>
+                <ng-template #elseBlockFollowing>
+                    <button id="follow-btn" class="button__follow secondary">Follow</button>
+                </ng-template>
             </ng-template>
         </div>
     </div>
@@ -27,19 +28,20 @@
         <p class="user-info__username">@{{ this.user.username }}</p>
 
         <p class="user-info__description">{{ this.user.description }}</p>
-        <!-- More info that we don't have at the moment -->
+        
+        <ng-container *ngIf="this.user.address">
+            <p *ngIf="!!this.user.address.city || !!this.user.address.province || !!this.user.address.country" class="user-info__address"> {{ this.user.address.city }}, {{ this.user.address.province }}, {{ this.user.address.country }}</p>
+        </ng-container>
 
         <div class="user-info__follows">
-            <p class="following">489 <span>Following</span></p>
-            <p class="followers">2145 <span>Followers</span></p>
+            <p class="following">{{ this.user.follows ? this.user.follows.length : '0' }} <span>Following</span></p>
+            <p class="followers">{{ this.user.followers ? this.user.followers.length : '0' }} <span>Followers</span></p>
         </div>
     </div> 
 </div>
 
 <div class="user-posts">
     <div class="user-posts__tabs">
-        <!-- We need do this with router outlet -->
-
         <a [routerLink]="this.userPostsURL" routerLinkActive="active" class="tab" data-tab="posts">Posts</a>
         <a [routerLink]="this.userLikesURL" routerLinkActive="active" class="tab" data-tab="likes">Likes</a>
         <a [routerLink]="this.userMediaURL" routerLinkActive="active" class="tab" data-tab="media">Media</a>

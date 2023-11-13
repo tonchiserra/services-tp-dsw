@@ -15,6 +15,8 @@ export class User {
         public token: string,
         public services: ObjectId[],
         public posts: Post[],
+        public followers: ObjectId[],
+        public follows: ObjectId[],
         public _id?: ObjectId
     ) {}
 }
