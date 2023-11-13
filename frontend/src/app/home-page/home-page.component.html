@@ -1,1 +1,7 @@
 <post-form></post-form>
+
+<div class="search-results" *ngIf="postsToShow.length > 0">
+  <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post"></post-card>
+</div>
+
+<!-- Ordenarlos por fecha antes de mostrarlos -->

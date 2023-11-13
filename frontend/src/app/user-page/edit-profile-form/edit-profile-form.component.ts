@@ -17,9 +17,9 @@ export class EditProfileFormComponent {
       username: new FormControl(this.user.username || ''),
       name: new FormControl(this.user.name || ''),
       description: new FormControl(this.user.description || ''),
-      city: new FormControl(this.user.city || ''),
-      province: new FormControl(this.user.province || ''),
-      country: new FormControl(this.user.country || '')
+      city: new FormControl(this.user.address.city || ''),
+      province: new FormControl(this.user.address.province || ''),
+      country: new FormControl(this.user.address.country || '')
     }
   }
 
