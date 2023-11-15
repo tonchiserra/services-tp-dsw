@@ -15,7 +15,7 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         postType: post.postType,
         date: post.date,
         likes: post.likes,
-        userId: req.body.user._id,
+        userId: req.body.userId,
         rePosts: post.rePosts
     }   
 
@@ -74,7 +74,7 @@ async function add(req:Request, res:Response){
 
 async function update(req: Request, res: Response) {
     const post = await repository.update(req.params._id, req.body.sanitizedInput)
-  
+    
     if (!post) {
       return res.status(404).send({ message: 'Post not found' })
     }
