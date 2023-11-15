@@ -16,6 +16,7 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         date: post.date,
         likes: post.likes,
         userId: req.body.userId,
+        service: post.service,
         rePosts: post.rePosts
     }   
 
@@ -53,7 +54,8 @@ async function add(req:Request, res:Response){
       input.date,
       input.likes,
       input.rePosts,
-      input.userId
+      input.userId,
+      input.service
     )
     const post = await repository.add(postInput)
     

@@ -35,11 +35,9 @@ export class PostFormComponent {
       (res: any) => {
         let userLogged = res.data
         userLogged.services.forEach(async (service: any) =>{
-          console.log(service)
           await fetch('http://localhost:3000/api/services/'+  service)
           .then(res => res.json())
           .then(async response => {
-            console.log(await response.data)
             this.serviceData.push(await response.data);
           })
         })
@@ -87,10 +85,11 @@ export class PostFormComponent {
     
     const data: IPostFormData = {
       isServicePost: this.postFormState.isServicePost.value || false,
-      postType: this.postFormState.service.value || '',
+      postType: this.postFormState.isServicePost.value ? 'service' : 'normal',
       content: this.postFormState.text.value || '',
       media: this.postFormState.files.value,
-      date: new Date()
+      date: new Date(),
+      service: this.serviceData.find(service => service._id === this.postFormState.service.value ) || {}
     }
 
     if(!data.content){

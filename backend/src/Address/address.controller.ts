@@ -7,9 +7,8 @@ const repository = new AddressRepository()
 
 function sanitizeAddressInput(req: Request, res: Response, next:NextFunction){
   req.body.sanitizedInput = {
-    street: req.body.street,
-    streetNumber: req.body.streetNumber,
     country: req.body.country,
+    province: req.body.province,
     city: req.body.city,
   }
 
@@ -41,9 +40,8 @@ async function findOne(req: Request, res: Response){
 async function add(req:Request, res:Response){
   const input = req.body.sanitizedInput
   const addressInput = new Address(
-    input.street,
-    input.streetNumber,
     input.country,
+    input.province,
     input.city
   )
   const address = await repository.add(addressInput)

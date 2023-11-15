@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { Service } from '../Service/service.entity';
 
 export class Post {
     constructor(
@@ -9,6 +10,7 @@ export class Post {
         public likes: ObjectId[],
         public rePosts: ObjectId[],
         public userId: ObjectId,
+        public service: Service,
         public _id?: ObjectId
     ) {}
 }
