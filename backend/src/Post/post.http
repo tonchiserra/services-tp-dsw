@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/posts
 
 ### obtener un post por postId
-GET http://localhost:3000/api/posts/654d3857d2c16fec60c75571
+GET http://localhost:3000/api/posts/654e7f21400c77a98c3ccf46
 
 ### crear un nuevo post
 POST http://localhost:3000/api/posts
