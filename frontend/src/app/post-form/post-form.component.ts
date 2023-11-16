@@ -5,6 +5,8 @@ import { IPostForm, IPostFormData } from './post-form.interface';
 import { AuthService } from '../services/auth.service';
 import { PostService } from '../services/post.service';
 
+import { HomePageComponent } from '../home-page/home-page.component';
+
 @Component({
   selector: 'post-form',
   templateUrl: './post-form.component.html'
@@ -34,6 +36,9 @@ export class PostFormComponent {
     this.authService.getUserLogged().subscribe(
       (res: any) => {
         let userLogged = res.data
+
+        if(!!!userLogged.services) return
+        
         userLogged.services.forEach(async (service: any) =>{
           await fetch('http://localhost:3000/api/services/'+  service)
           .then(res => res.json())
@@ -101,7 +106,7 @@ export class PostFormComponent {
 
           this.postService.create({post: data, user: userLogged}).subscribe(
             (res: any) => {
-              console.log(res)
+              location.reload()
             },
             (err: any) => {
               console.log(err)

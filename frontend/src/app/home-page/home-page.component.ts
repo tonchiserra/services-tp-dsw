@@ -9,7 +9,9 @@ export class HomePageComponent {
   userLogged: any = undefined
   postsToShow: any = undefined
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService
+    ) {
     this.setEvents()
   }
 
@@ -41,17 +43,31 @@ export class HomePageComponent {
   }
 
   async getPostsToShow() {
-    this.postsToShow = [
-      ...this.userLogged.posts.map((post: any) => {
-        return { user: this.userLogged, post: post }
-      })
-    ]
 
-    for (const follow of this.userLogged.follows) {
-      await this.getFollowData(follow);
+    if(this.userLogged.posts) {
+      this.postsToShow = [
+        ...this.userLogged.posts.map((post: any) => {
+          return { user: this.userLogged, post: post }
+        })
+      ]
     }
 
-    console.log(this.postsToShow)
+    if(this.userLogged.follows) {
+      for (const follow of this.userLogged.follows) {
+        await this.getFollowData(follow);
+      }
+    }
+
+    if(!!this.postsToShow) this.postsToShow.sort(this.compareDates)
+  }
+
+  compareDates(objA: any, objB: any) {
+    const dateA = new Date(objA.post.date)
+    const dateB = new Date(objB.post.date)
+
+    if (dateA < dateB) return -1
+    if (dateA > dateB) return 1
+    return 0;
   }
 
   async getFollowData(id: string) {
@@ -66,7 +82,6 @@ export class HomePageComponent {
 
       let { data } = await response.json()
       let user = data
-
 
       let userPosts = [...user.posts.map((post: any) => {
         return { user: user, post: post }

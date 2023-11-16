@@ -42,4 +42,25 @@ export class AuthService {
   getUserLogged() {
     return this.http.get(`${this.URL}/users/token/${this.getToken()}`)
   }
+
+  deleteAccount() {
+    this.getUserLogged().subscribe(
+      async (res: any) => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1NGZlYjVhNmVhZDYxZDY2ZWFjY2UiLCJpYXQiOjE2OTkwNDYwMjd9.1NfC-CYXwPcoGmFo06dPnE-4sJ1-kwhk6isv-vJFq9w");
+        myHeaders.append("Content-Type", "application/json");
+
+        await fetch(`http://localhost:3000/api/users/${res.data._id}`, {
+          method: 'DELETE',
+          headers: myHeaders
+        })
+
+        localStorage.removeItem('services-tp-dsw-user-token')
+        this.router.navigate(['/login']) 
+      },
+      (err: any) => {
+        console.log(err)
+      }
+    )
+  }
 }
