@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class HomePageComponent {
   userLogged: any = undefined
-  postsToShow: any = undefined
+  postsToShow: any = []
 
   constructor(
     private authService: AuthService
