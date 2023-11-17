@@ -47,7 +47,7 @@ export class AuthService {
     this.getUserLogged().subscribe(
       async (res: any) => {
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTQ1NGZlYjVhNmVhZDYxZDY2ZWFjY2UiLCJpYXQiOjE2OTkwNDYwMjd9.1NfC-CYXwPcoGmFo06dPnE-4sJ1-kwhk6isv-vJFq9w");
+        myHeaders.append("Authorization", `Bearer ${res.data.token}`);
         myHeaders.append("Content-Type", "application/json");
 
         await fetch(`http://localhost:3000/api/users/${res.data._id}`, {

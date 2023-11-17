@@ -14,12 +14,12 @@ export class EditProfileFormComponent {
 
   ngOnInit() {
     this.editProfileState = {
-      username: new FormControl(this.user.username || ''),
-      name: new FormControl(this.user.name || ''),
-      description: new FormControl(this.user.description || ''),
-      city: new FormControl(this.user.address.city || ''),
-      province: new FormControl(this.user.address.province || ''),
-      country: new FormControl(this.user.address.country || '')
+      username: new FormControl(this.user?.username || ''),
+      name: new FormControl(this.user?.name || ''),
+      description: new FormControl(this.user?.description || ''),
+      city: new FormControl(this.user?.address?.city || ''),
+      province: new FormControl(this.user?.address?.province || ''),
+      country: new FormControl(this.user?.address?.country || '')
     }
   }
 
