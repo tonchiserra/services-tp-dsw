@@ -56,7 +56,7 @@ post-card {
                 padding-top: 15px;
 
                 .likes,
-                .reposts {
+                .delete {
                     display: flex;
                     align-items: center;
                     justify-content: flex-start;
@@ -68,7 +68,7 @@ post-card {
                 }
 
                 .like-btn,
-                .repost-btn {
+                .delete-btn {
                     border: none;
                     background: transparent;
                     padding: 0;

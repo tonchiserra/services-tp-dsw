@@ -15,7 +15,7 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         postType: post.postType,
         date: post.date,
         likes: post.likes,
-        userId: req.body.user._id,
+        userId: req.body.userId,
         service: post.service,
         rePosts: post.rePosts
     }   
