@@ -48,6 +48,6 @@
     </div>
 
     <div class="search-results" *ngIf="user && user.posts && user.posts.length > 0">
-        <post-card *ngFor="let post of user.posts" [user]="user" [post]="post"></post-card>
+        <post-card *ngFor="let post of user.posts" [user]="user" [post]="post" [userLogged]="userLogged"></post-card>
     </div>
 </div>
