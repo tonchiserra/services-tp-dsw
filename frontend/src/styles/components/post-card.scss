@@ -26,6 +26,10 @@ post-card {
             &__name {
                 font-size: 1.4rem;
                 font-weight: bold;
+
+                &:hover {
+                    text-decoration: underline;
+                }
             }
 
             &__username {

@@ -5,6 +5,7 @@ import { cleanErrors, showErrors } from 'src/helpers/form-errors';
 import { serviceSchema } from './service-form.schema';
 import { AuthService } from '../services/auth.service';
 import { ServicesService } from '../services/services.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'service-form',
@@ -21,7 +22,8 @@ export class ServiceFormComponent {
 
   constructor(
     private authService: AuthService,
-    private servicesService: ServicesService
+    private servicesService: ServicesService,
+    private router: Router
     ) {
     this.closeSubmenu()
   }
@@ -72,7 +74,7 @@ export class ServiceFormComponent {
 
           this.servicesService.create({service: result.data, user: userLogged}).subscribe(
             (res: any) => {
-              console.log(res)
+              this.router.navigate(['/home'])
             },
             (err: any) => {
               console.log(err)
