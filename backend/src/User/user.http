@@ -20,13 +20,14 @@ Content-Type: application/json
 }
 
 ###modificar un user con patch (parcial)
-PATCH http://localhost:3000/api/users/6543f89f751cd68be7870a86
+PATCH http://localhost:3000/api/users/655d03dd4c4ce18ad0a0aded
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 Content-Type: application/json
 
 {
-  "name": "Guidito123",
-  "mail": "guidito123@gmail.com"
+  "posts": []
 }
 
 ### delete user
-DELETE http://localhost:3000/api/users/654d3898d2c16fec60c75572
+DELETE http://localhost:3000/api/users/655d017a4c4ce18ad0a0ade5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM

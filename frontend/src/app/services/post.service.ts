@@ -15,4 +15,12 @@ export class PostService {
   create(data: { post: any, user: any}) {
     return this.http.post(`${this.URL}/posts`, data)
   }
+
+  updateLikes(post: any){
+    return this.http.patch(`${this.URL}/posts/${post._id}`, post)
+  }
+
+  deletePost(post:any){
+    return this.http.delete(`${this.URL}/posts/${post._id}`)
+  }
 }

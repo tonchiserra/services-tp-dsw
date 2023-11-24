@@ -7,7 +7,7 @@ export class Post {
         public media: string,
         public postType: string,
         public date: string,
-        public Likes: ObjectId[],
+        public likes: ObjectId[],
         public rePosts: ObjectId[],
         public userId: ObjectId,
         public service: Service,

@@ -2,6 +2,6 @@
 
 <ng-container *ngIf="postsToShow">
   <div class="search-results" *ngIf="postsToShow.length > 0">
-    <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post"></post-card>
+    <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post" [userLogged]="userLogged"></post-card>
   </div>
 </ng-container>
