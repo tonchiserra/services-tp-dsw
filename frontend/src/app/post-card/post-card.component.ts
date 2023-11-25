@@ -62,46 +62,51 @@ export class PostCardComponent implements AfterViewInit {
   handleLike(){
     
     let idIndex = this.post.likes.indexOf(this.userLogged._id);
-    let postUser: any;
 
     if(idIndex !== -1){
       this.post.likes.splice(idIndex,1);
       this.iconFill = "#2E3A59"
     }else{
-      this.post.likes.push(this.userLogged._id);
+      this.post.likes.push(this.userLogged._id)
       this.iconFill = 'red'
     }
 
+    let postUser: any
+
     this.userService.getUser(this.user._id).subscribe(
-      (res: any) => {
-        postUser = res.data;
+      async (res: any) => {
+        postUser = res.data
         
         postUser.posts.forEach((post: any) => {
           if(post._id === this.post._id){
-            post.likes = this.post.likes;
+            post.likes = this.post.likes
           }
-        });
+        })
+
+        if(postUser._id === this.userLogged._id) {
+          this.userLogged.posts.forEach((post: any) => {
+            if(post._id === this.post._id){
+              post.likes = this.post.likes
+            }
+          })
+        }
         
-        this.userService.update(postUser).subscribe(
-          (res: any) => {
-            //console.log(res);
-          },
-          (err: any) => {
-            console.log(err)
-          }
-        )
+        let resPostUser: any = await this.userService.update(postUser).toPromise()
+
+        if(!!!this.userLogged.postsLiked) this.userLogged.postsLiked = []
+        idIndex = this.userLogged.postsLiked.indexOf(this.post._id)
+    
+        if(idIndex !== -1) {
+          this.userLogged.postsLiked.splice(idIndex, 1)
+        }else {
+          this.userLogged.postsLiked.push(this.post._id)
+        }
+
+        let resUser = await this.userService.update(this.userLogged).toPromise()
+        let resPost = await this.postService.update(this.post).toPromise()
       },
       (err: any) => {
         console.log(err);
-      }
-    )
-
-    this.postService.updateLikes(this.post).subscribe(
-      (res: any) => {
-        //console.log(res);
-      },
-      (err: any) => {
-        console.log(err)
       }
     )
   }

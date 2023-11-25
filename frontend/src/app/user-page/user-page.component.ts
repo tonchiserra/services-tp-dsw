@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { PostService } from '../services/post.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'user-page',
@@ -9,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserPageComponent {
   userLogged: any = undefined
   user: any = undefined
+  postsToShow: any = []
 
   userPostsURL = '/user/'
   userLikesURL = '/user/'
@@ -16,7 +19,9 @@ export class UserPageComponent {
 
   constructor(
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private postService: PostService,
+    private userService: UserService
   ){ }
 
   ngOnInit() {
@@ -107,8 +112,46 @@ export class UserPageComponent {
       let { data } = await response.json()
       this.user = data
 
+      this.getPostsToShow()
+
     } catch(error) {
       console.log(error)
+    }
+  }
+
+  async getPostsToShow() {
+    if (location.pathname.includes('/posts')) {
+      this.postsToShow = [
+        ...this.user.posts.map((post: any) => {
+          return { user: this.user, post: post }
+        })
+      ]
+    }
+
+    if (location.pathname.includes('/likes')) {
+      this.postsToShow = []
+
+      if(!!this.user.postsLiked && this.user.postsLiked.length > 0) {
+        for (const postLiked of this.user.postsLiked) {
+          try {
+            let res: any
+  
+            res = await this.postService.getPost(postLiked).toPromise()
+            let post = res.data
+  
+            res = await this.userService.getUser(post.userId).toPromise()
+            let user = res.data
+            
+            this.postsToShow.push({ user: user, post: post })
+          } catch (err) {
+            console.log(err)
+          }
+        }
+      }
+    }    
+
+    if (location.pathname.includes('/media')) {
+      // to-do
     }
   }
 

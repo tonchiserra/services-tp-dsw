@@ -47,7 +47,11 @@
         <a [routerLink]="this.userMediaURL" routerLinkActive="active" class="tab" data-tab="media">Media</a>
     </div>
 
-    <div class="search-results" *ngIf="user && user.posts && user.posts.length > 0">
-        <post-card *ngFor="let post of user.posts" [user]="user" [post]="post" [userLogged]="userLogged"></post-card>
+    <div class="search-results" *ngIf="user && postsToShow && postsToShow.length > 0; else elseBlockPosts">
+        <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post" [userLogged]="userLogged"></post-card>
     </div>
+
+    <ng-template #elseBlockPosts>
+        <p class="no-posts-message">There aren't posts in this section</p>
+    </ng-template>
 </div>
