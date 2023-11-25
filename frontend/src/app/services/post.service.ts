@@ -12,11 +12,15 @@ export class PostService {
     private http: HttpClient,
   ) { }
 
+  getPost(postId: any) {
+    return this.http.get(`${this.URL}/posts/${postId}`);
+  }
+
   create(data: { post: any, user: any}) {
     return this.http.post(`${this.URL}/posts`, data)
   }
 
-  updateLikes(post: any){
+  update(post: any){
     return this.http.patch(`${this.URL}/posts/${post._id}`, post)
   }
 

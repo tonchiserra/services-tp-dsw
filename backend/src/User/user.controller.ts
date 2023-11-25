@@ -22,6 +22,7 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
         services: req.body.services,
         followers: req.body.followers,
         follows: req.body.follows,
+        postsLiked: req.body.postsLiked,
         posts: req.body.posts
     }
 
@@ -95,6 +96,7 @@ async function add(req: Request, res: Response) {
         input.services,
         input.followers,
         input.follows,
+        input.postsLiked,
         input.posts
     )
 

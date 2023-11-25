@@ -3,7 +3,7 @@
         <div class="profile-information__image">
             <!-- imagen -->
         </div>
-        <p class="profile-information__name">{{ user.name }}</p>
+        <a [href]="'/user/' + user._id + '/posts'" class="profile-information__name">{{ user.name }}</a>
         <p class="profile-information__username">@{{ user.username }}</p>
     </div>
 
@@ -41,7 +41,7 @@
             <div class="profile-information__image">
                 <!-- imagen -->
             </div>
-            <p class="profile-information__name">{{ user.name }}</p>
+            <a [href]="'/user/' + user._id + '/posts'" class="profile-information__name">{{ user.name }}</a>
             <p class="profile-information__username">@{{ user.username }}</p>
         </div>
     

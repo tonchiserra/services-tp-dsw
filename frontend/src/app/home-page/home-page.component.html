@@ -1,7 +1,11 @@
 <post-form></post-form>
 
-<ng-container *ngIf="postsToShow">
+<ng-container *ngIf="postsToShow; else elseBlockPosts">
   <div class="search-results" *ngIf="postsToShow.length > 0">
     <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post" [userLogged]="userLogged"></post-card>
   </div>
 </ng-container>
+
+<ng-template #elseBlockPosts>
+  <p class="no-posts-message">There aren't posts in this section</p>
+</ng-template>

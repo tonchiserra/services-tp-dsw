@@ -17,6 +17,7 @@ export class User {
         public posts: Post[],
         public followers: ObjectId[],
         public follows: ObjectId[],
+        public postsLiked: ObjectId[],
         public _id?: ObjectId
     ) {}
 }
