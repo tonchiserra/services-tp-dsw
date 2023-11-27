@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { ServiceFormComponent } from './service-form/service-form.component';
+import { UserCardComponent } from './user-card/user-card.component';
 
 import { UserPageModule } from './user-page/user-page.module';
 
@@ -35,7 +36,8 @@ const routes: Routes = [
     LoginPageComponent,
     HomePageComponent,
     PostFormComponent,
-    ServiceFormComponent
+    ServiceFormComponent,
+    UserCardComponent
   ],
   imports: [
     BrowserModule,

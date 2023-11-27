@@ -36,7 +36,9 @@ function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
 }
 
 async function findAll(req: Request, res: Response) {
-    res.json({ data: await repository.findAll() })
+
+    if(!!!req.query.user) res.json({ data: await repository.findAll() })
+    else res.json({ data: await repository.findByQuery((req.query.user as string)) })
 }
 
 async function findOne(req: Request, res: Response) {

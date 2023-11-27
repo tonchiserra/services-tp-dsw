@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
@@ -6,15 +6,13 @@ import { UserService } from '../services/user.service';
   selector: 'post-card',
   templateUrl: './post-card.component.html'
 })
-export class PostCardComponent implements AfterViewInit {
+export class PostCardComponent {
   @Input() user: any;
   @Input() post: any;
   @Input() userLogged: any;
   canDelete: boolean = false;
   iconFill: string = "#2E3A59";
 
-
-  @ViewChild('postText', { static: false }) postText!: ElementRef;
 
   constructor(
     private postService: PostService,
@@ -39,10 +37,6 @@ export class PostCardComponent implements AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.postText.nativeElement.addEventListener("click", this.handlePopup)
-  }
-
   closeSubmenu() {
     let submenu = document.querySelector<HTMLElement>('.submenu')
     if(!submenu) return
@@ -51,7 +45,16 @@ export class PostCardComponent implements AfterViewInit {
   }
 
   handlePopup(event: Event) {
-    let post = (event.target as HTMLElement)?.closest('.post-card')
+    let post = (event.target as HTMLElement)?.closest('.like-btn')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.delete-btn')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.profile-information__name')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.post-card')
     let postPopup = post?.parentElement?.querySelector('.post-card__popup')
 
     if(!postPopup) return

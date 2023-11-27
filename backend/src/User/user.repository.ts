@@ -9,6 +9,10 @@ export class UserRepository implements Repository<User>{
     public async findAll(): Promise<User[] | undefined> {
         return await users.find().toArray()
     }
+
+    public async findByQuery(query: string): Promise<User[] | undefined> {
+        return await users.find({ username: { $regex: query, $options: 'i' } }).toArray()
+    }
     
     public async findOne(item: {id: ObjectId}): Promise<User | undefined> {
         return await users.findOne({ _id: item.id }) as User

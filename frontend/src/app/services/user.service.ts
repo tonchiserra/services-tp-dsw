@@ -12,6 +12,9 @@ export class UserService {
     private http: HttpClient,
   ) { }
 
+  getByQuery(data: any){
+    return this.http.get(`${this.URL}/users?user=${data.query}`)
+  }
 
   getUser(userId: any){
     return this.http.get(`${this.URL}/users/${userId}`);

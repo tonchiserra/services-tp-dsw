@@ -1,23 +1,28 @@
 <div class="search-page__container">
-    <form class="search-form page-width">
-        <input type="text" name="search[posts]" id="searchPosts" placeholder="Type something...">
+    <form class="search-form page-width" (submit)="submitHandler($event)">
+        <input type="text" name="query" id="searchPosts" placeholder="Type something..." [formControl]="searchState.query">
         <button type="submit">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M18.677 19.607L12.962 13.891C10.4196 15.6985 6.91642 15.2564 4.90285 12.8739C2.88929 10.4915 3.03714 6.96361 5.24298 4.75802C7.44824 2.55147 10.9765 2.40298 13.3594 4.41644C15.7422 6.42989 16.1846 9.93347 14.377 12.476L20.092 18.192L18.678 19.606L18.677 19.607ZM9.48498 5.00001C7.58868 4.99958 5.95267 6.3307 5.56745 8.18745C5.18224 10.0442 6.15369 11.9163 7.89366 12.6703C9.63362 13.4242 11.6639 12.8528 12.7552 11.3021C13.8466 9.75129 13.699 7.64734 12.402 6.26402L13.007 6.86402L12.325 6.18402L12.313 6.17202C11.5648 5.4192 10.5464 4.99715 9.48498 5.00001Z" fill="#2E3A59"/>
             </svg>
         </button>
-        <select name="search[posts]" id="filterPosts" class="secondary">
-          <option value="all">Show all</option>
-          <!-- for tipo in tipoServicios <option value=""></option> -->
+        <select name="type" id="filterPosts" class="secondary" [formControl]="searchState.type">
+          <option value="posts" selected>Posts</option>
+          <option value="users">Users</option>
         </select>
     </form>
 
-    <div class="search-results show-error">
+    <ng-container *ngIf="!!!postsToShow.length && !!!usersToShow.length; else elseBlockResults">
+        <div class="search-results show-error">
+            <p class="search-result__message" *ngIf="searchState.query.value !== ''">Oops... We couldn't find what you are looking for</p>
+            <p class="search-result__message" *ngIf="searchState.query.value === ''">Search something</p>
+        </div>
+    </ng-container>
 
-        <!-- If input.value !== '' && searchResults.length === 0 -->
-        <!-- <p class="search-result__message">Oops... No pudimos encontrar lo que estás buscando.</p> -->
-
-        <!-- If input.value === '' -->
-        <!-- <p class="search-result__message">Haz una búsqueda.</p> -->
-    </div>
+    <ng-template #elseBlockResults>
+        <div class="search-results">
+            <user-card *ngFor="let user of usersToShow" [user]="user"></user-card>
+            <post-card *ngFor="let post of postsToShow" [user]="post.user" [post]="post.post" [userLogged]="userLogged"></post-card>
+        </div>
+    </ng-template>
 </div>

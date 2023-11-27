@@ -1,4 +1,4 @@
-<div #postCard class="post-card__container post-card">
+<div #postCard class="post-card__container post-card" (click)="handlePopup($event)">
     <div class="profile-information">
         <div class="profile-information__image">
             <!-- imagen -->
@@ -9,7 +9,7 @@
 
     <div class="post-information">
         <div class="post-information__date">{{ post.date }}</div>
-        <div #postText class="post-information__text">{{ post.content }}</div>
+        <div class="post-information__text">{{ post.content }}</div>
         <div class="post-information__stats">
             <div class="likes">
                 <button class="like-btn" (click)="handleLike()">

@@ -40,7 +40,7 @@
     </div> 
 </div>
 
-<div class="user-posts">
+<div class="user-posts" *ngIf="user">
     <div class="user-posts__tabs">
         <a [routerLink]="this.userPostsURL" routerLinkActive="active" class="tab" data-tab="posts">Posts</a>
         <a [routerLink]="this.userLikesURL" routerLinkActive="active" class="tab" data-tab="likes">Likes</a>

@@ -30,7 +30,9 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
 }
 
 async function findAll(req: Request, res: Response){
-    res.json({data: await repository.findAll() })
+
+    if(!!!req.query.content) res.json({data: await repository.findAll() })
+    else res.json({data: await repository.findByQuery((req.query.content as string))})
 }
 
 async function findOne(req: Request, res: Response){

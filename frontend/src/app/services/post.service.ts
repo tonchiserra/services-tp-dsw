@@ -12,6 +12,10 @@ export class PostService {
     private http: HttpClient,
   ) { }
 
+  getByQuery(data: any) {
+    return this.http.get(`${this.URL}/posts?content=${data.query}`)
+  }
+
   getPost(postId: any) {
     return this.http.get(`${this.URL}/posts/${postId}`);
   }
