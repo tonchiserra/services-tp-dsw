@@ -31,4 +31,9 @@ const signInSchema = z.object({
   })
 })
 
+const validateUsername = z.object({
+  username: z.string().refine((username) => (true), {
+    message: 'Username already in use'
+  }),
+})
 export { signUpSchema, signUpPasswordSchema, signInSchema }

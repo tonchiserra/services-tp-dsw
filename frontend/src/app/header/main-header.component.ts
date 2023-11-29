@@ -14,7 +14,7 @@ export class MainHeaderComponent {
   ngOnInit() {
     this.authService.getUserLogged().subscribe(
       (res: any) => {
-        this.profileURL = this.profileURL + res.data._id + '/posts'
+        this.profileURL = this.profileURL + res.data.username + '/posts'
       },
       (err: any) => {
         console.log(err)
