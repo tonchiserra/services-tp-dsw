@@ -2,8 +2,9 @@
 GET http://localhost:3000/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 
-### obtener un user por _id
-GET http://localhost:3000/api/users/6543f7ed22939aa00b6f3112
+### obtener un user por username
+GET http://localhost:3000/api/users/655d04214c4ce18ad0a0adf0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 
 ### crear un nuevo user
 POST http://localhost:3000/api/users
@@ -29,5 +30,5 @@ Content-Type: application/json
 }
 
 ### delete user
-DELETE http://localhost:3000/api/users/655d017a4c4ce18ad0a0ade5
+DELETE http://localhost:3000/api/users/65663b9ec425d145fd9b99a9
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM

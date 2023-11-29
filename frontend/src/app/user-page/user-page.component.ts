@@ -82,15 +82,14 @@ export class UserPageComponent {
     .subscribe(
       async (res: any) => {
         this.userLogged = res.data
-
+        
         this.route.params.subscribe(params => {
-          let id = params['id']
+          let username = params['username']
+          this.userPostsURL += `${username}/posts`
+          this.userLikesURL += `${username}/likes`
+          this.userMediaURL += `${username}/media`
 
-          this.userPostsURL += `${id}/posts`
-          this.userLikesURL += `${id}/likes`
-          this.userMediaURL += `${id}/media`
-
-          this.getUserProfileData(id)
+          this.getUserProfileData(username)
         })
       },
       (err: any) => {
@@ -99,17 +98,18 @@ export class UserPageComponent {
     )
   }
 
-  async getUserProfileData(id: string) {
+  async getUserProfileData(username: string) {
     try {
 
       var myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${this.userLogged.token}`);
       
-      let response = await fetch(`http://localhost:3000/api/users/${id}`, {
+      let response = await fetch(`http://localhost:3000/api/users/${username}`, {
         headers: myHeaders
       })
 
       let { data } = await response.json()
+      //this.user = !data ? : data (CREAR PERFIL PARA EL USUSARIO NO ENCONTRADO) 
       this.user = data
 
       this.getPostsToShow()

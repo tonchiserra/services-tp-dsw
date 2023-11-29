@@ -14,6 +14,10 @@ export class UserRepository implements Repository<User>{
         return await users.findOne({ _id: item.id }) as User
     }
 
+    public async findOneByUsername(item: {username: string}): Promise<User | undefined> {
+        return await users.findOne({ username: item.username }) as User
+    }
+
     public async findByEmailAndPassword(item: {email: string}): Promise<User | undefined> {
         return await users.findOne({ email: item.email }) as User
     }
@@ -35,5 +39,15 @@ export class UserRepository implements Repository<User>{
     public async delete(item: { id: string}): Promise<User | undefined> {
         const _id = new ObjectId(item.id)
         return await users.findOneAndDelete({ _id}) as User
+    }
+
+    public async verifyUsername(username: string): Promise<Boolean | undefined> {
+        const user = await users.findOne({ username: username })
+        return user !== null
+    }
+
+    public async verifyEmail(email: string): Promise<Boolean | undefined> {
+        const user = await users.findOne({ email: email })
+        return user !== null
     }
 } 

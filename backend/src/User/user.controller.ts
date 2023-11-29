@@ -40,8 +40,33 @@ async function findAll(req: Request, res: Response) {
 }
 
 async function findOne(req: Request, res: Response) {
-    const id = new ObjectId(req.params._id)
-    const user = await repository.findOne({ id })
+    const param = req.params._id
+
+    try{
+        const id = new ObjectId(param)
+        const user = await repository.findOne({ id })
+
+        if(!user){
+            return res.status(404).send({ message: "User not found" })
+        }
+
+        res.json({ data: user })
+        
+    } catch(err) {
+        const username = param
+        const user = await repository.findOneByUsername({ username })
+
+        if(!user){
+            return res.status(404).send({ message: "User not found" })
+        }
+
+        res.json({ data: user })
+    }
+}
+
+async function findOneByUsername(req: Request, res: Response) {
+    const username = req.params.username
+    const user = await repository.findOneByUsername({ username })
 
     if(!user){
         return res.status(404).send({ message: "User not found" })
@@ -100,11 +125,25 @@ async function add(req: Request, res: Response) {
         input.posts
     )
 
-    const user = await repository.add(userInput)
-    if(!user) return res.status(500).send({ message: 'Internal server error' })
+    let status;
+    let message = "";
+    if(await repository.verifyUsername(userInput.username)){
+        status = 400;
+        message += "Username "
+    }
+    if(await repository.verifyEmail(userInput.email)){
+        status=400
+        message += "Email "
+    }
+    if(status===400){
+        return res.status(status).send({message: message});
+    }else{ 
+        const user = await repository.add(userInput)
+        if(!user) return res.status(500).send({ message: 'Internal server error' })
 
-    const token = jwt.sign({_id: user._id}, jwtSecret)
-    return res.status(201).send({ message: 'User created', data: user, token: token })
+        const token = jwt.sign({_id: user._id}, jwtSecret)
+        return res.status(201).send({ message: 'User created', data: user, token: token })
+    }
 }
 
 async function update(req: Request, res: Response) {
@@ -139,4 +178,4 @@ function verifyToken(req: Request, res: Response, next: NextFunction) {
     next()
 }
 
-export { sanitizeUserInput, findAll, findOne, add, update, remove, findByEmailAndPassword, verifyToken, findByToken }
+export { sanitizeUserInput, findAll, findOne, findOneByUsername, add, update, remove, findByEmailAndPassword, verifyToken, findByToken }

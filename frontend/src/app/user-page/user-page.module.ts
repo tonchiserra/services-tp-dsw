@@ -8,9 +8,9 @@ import { PostCardComponent } from '../post-card/post-card.component';
 import { EditProfileFormComponent } from './edit-profile-form/edit-profile-form.component';
 
 const routesChild: Routes = [
-    { path: 'user/:id/posts', component: UserPageComponent },
-    { path: 'user/:id/likes', component: UserPageComponent },
-    { path: 'user/:id/media', component: UserPageComponent },
+    { path: 'user/:username/posts', component: UserPageComponent },
+    { path: 'user/:username/likes', component: UserPageComponent },
+    { path: 'user/:username/media', component: UserPageComponent },
 ]
 
 @NgModule({
