@@ -31,4 +31,8 @@ export class PostService {
   deletePost(post:any){
     return this.http.delete(`${this.URL}/posts/${post._id}`)
   }
+
+  quickcontact(data: any) {
+    return this.http.post(`${this.URL}/mailer/quickcontact`, data)
+  }
 }

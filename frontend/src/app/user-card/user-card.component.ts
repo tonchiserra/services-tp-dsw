@@ -6,7 +6,11 @@ import { Component, Input } from '@angular/core';
 })
 export class UserCardComponent {
   @Input() user: any;
+  imageColor = '#f4f4f4'
 
   constructor() { }
 
+  ngOnInit() {
+    this.imageColor = this.user.imageColor || '#f4f4f4'
+  }
 }

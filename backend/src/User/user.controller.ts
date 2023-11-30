@@ -11,7 +11,7 @@ const jwtSecret: string = 'services-tp-dsw-user-token'
 function sanitizeUserInput(req: Request, res: Response, next: NextFunction) {
     req.body.sanitizedInput = {
         name: req.body.name,
-        phone: req.body.phone,
+        imageColor: req.body.imageColor,
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
@@ -112,7 +112,7 @@ async function add(req: Request, res: Response) {
     const input = req.body.sanitizedInput
     const userInput = new User(
         input.name,
-        input.phone,
+        input.imageColor,
         input.email,
         input.username,
         input.password,
@@ -127,25 +127,24 @@ async function add(req: Request, res: Response) {
         input.posts
     )
 
-    let status;
-    let message = "";
     if(await repository.verifyUsername(userInput.username)){
-        status = 400;
-        message += "Username "
+        res.status(404)
+        res.statusMessage = '[{"validation": "username","code": "invalid_string","message": "Username already in use","path": ["username"]}]'
+        return res.send({ message: "Username already in use"})
     }
+     
     if(await repository.verifyEmail(userInput.email)){
-        status=400
-        message += "Email "
+        res.status(404)
+        res.statusMessage = '[{"validation": "email","code": "invalid_string","message": "Email already in use","path": ["email"]}]'
+        return res.send({ message: "Email already in use"})
     }
-    if(status===400){
-        return res.status(status).send({message: message});
-    }else{ 
-        const user = await repository.add(userInput)
-        if(!user) return res.status(500).send({ message: 'Internal server error' })
+    
+    const user = await repository.add(userInput)
+    if(!user) return res.status(500).send({ message: 'Internal server error' })
 
-        const token = jwt.sign({_id: user._id}, jwtSecret)
-        return res.status(201).send({ message: 'User created', data: user, token: token })
-    }
+    const token = jwt.sign({_id: user._id}, jwtSecret)
+    return res.status(201).send({ message: 'User created', data: user, token: token })
+    
 }
 
 async function update(req: Request, res: Response) {

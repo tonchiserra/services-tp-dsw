@@ -5,7 +5,7 @@ import { Address } from '../Address/address.entity';
 export class User {
     constructor(
         public name: string,
-        public phone: number,
+        public imageColor: string,
         public email: string,
         public username: string,
         public password: string,

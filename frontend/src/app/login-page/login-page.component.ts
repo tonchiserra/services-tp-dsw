@@ -99,23 +99,30 @@ export class LoginPageComponent {
     return signInSchema.safeParse(data)
   }
 
+  private getRandomColor(): string {
+    const hex = '0123456789ABCDEF'
+    let color = '#'
+
+    for (let i = 0; i < 6; i++) {
+      color += hex[Math.floor(Math.random() * 16)];
+    }
+
+    return color;
+  }
 
   private async signUp(userData: any, form: HTMLElement) {
+    userData.imageColor = this.getRandomColor()
+
     this.authService.signUp(userData)
       .subscribe(
         async (res: any) => {
-            localStorage.setItem('services-tp-dsw-user-token', res.token)
-            await this.updateUserToken(res.data, res.token)
-            this.router.navigate(['/'])
+          localStorage.setItem('services-tp-dsw-user-token', res.token)
+          await this.updateUserToken(res.data, res.token)
+          this.router.navigate(['/'])
         },
         (err: any) => {
           console.log(err)
-          if(err.error.message.includes('Username')){
-            document.getElementsByClassName("usernameError")[0].textContent = "Username already in use"
-          }
-          if(err.error.message.includes('Email')){
-            document.getElementsByClassName("emailError")[0].textContent = "Email already in use"
-          }
+          showErrors(err.statusText, form)
         }
       )
   }

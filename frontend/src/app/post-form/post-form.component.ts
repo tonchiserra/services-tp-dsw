@@ -21,6 +21,8 @@ export class PostFormComponent {
     files: new FormControl()
   };
 
+  imageColor = "#f4f4f4"
+
   constructor(
     private authService: AuthService,
     private postService: PostService
@@ -36,6 +38,7 @@ export class PostFormComponent {
     this.authService.getUserLogged().subscribe(
       (res: any) => {
         let userLogged = res.data
+        this.imageColor = userLogged.imageColor || '#f4f4f4'
 
         if(!!!userLogged.services) return
         

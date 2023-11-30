@@ -75,7 +75,7 @@ export class SearchPageComponent {
     
     if(response && response.data) {
       for (const post of response.data) {
-        if(post.userId) {
+        if(post.userId && typeof post.userId === 'string') {
           let resUser: any = await this.userService.getUser(post.userId).toPromise()
           let user = resUser.data
 

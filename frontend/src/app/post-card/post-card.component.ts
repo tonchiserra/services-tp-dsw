@@ -12,7 +12,7 @@ export class PostCardComponent {
   @Input() userLogged: any;
   canDelete: boolean = false;
   iconFill: string = "#2E3A59";
-
+  imageColor = '#f4f4f4'
 
   constructor(
     private postService: PostService,
@@ -35,6 +35,8 @@ export class PostCardComponent {
     }else{
       this.iconFill = "#2E3A59"
     }
+
+    this.imageColor = this.user.imageColor || '#f4f4f4'
   }
 
   closeSubmenu() {
@@ -135,5 +137,28 @@ export class PostCardComponent {
         console.log(err)
       }
     )
+  }
+
+  async sendMail() {
+    try {
+      let data = {
+        emailSender: this.userLogged.email || '',
+        nameSender: this.userLogged.name || '',
+        usernameSender: this.userLogged.username || '',
+        addressSender: `${ this.userLogged.city }, ${this.userLogged.province}, ${this.userLogged.country}` || '',
+        emailReceiver: this.user.email || '',
+        nameReceiver: this.user.name || '',
+        serviceType: this.post.service.type || '',
+        serviceDescription: this.post.service.description || '',
+        servicePrice: this.post.service.price || '',
+        postContent: this.post.content || ''
+      }
+  
+      let response = await this.postService.quickcontact(data).toPromise()
+
+      console.log(response)
+    } catch(err) {
+      console.log(err)
+    }
   }
 }

@@ -4,8 +4,11 @@
 
 <div class="user-info" *ngIf="user">
     <div class="top">
-        <div class="user-info__image">
-            <!-- profile image from database -->
+        <div class="user-info__image" [style.background-color]="imageColor">
+            <div class="profile-image">
+                <div class="profile-head"></div>
+                <div class="profile-body"></div>
+            </div>
         </div>
         <div class="user-info__buttons">
             <ng-container *ngIf="this.userLogged._id === this.user._id; else elseBlockFollow">
