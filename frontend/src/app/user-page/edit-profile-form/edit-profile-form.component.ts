@@ -11,6 +11,7 @@ import { editProfileSchema } from './edit-profile-form.schema';
 export class EditProfileFormComponent {
   @Input() user: any;
   editProfileState: any = {};
+  imageColor = '#f4f4f4'
 
   ngOnInit() {
     this.editProfileState = {
@@ -21,6 +22,8 @@ export class EditProfileFormComponent {
       province: new FormControl(this.user?.address?.province || ''),
       country: new FormControl(this.user?.address?.country || '')
     }
+
+    this.imageColor = this.user.imageColor || '#f4f4f4'
   }
 
   closeEditProfileModal(event: MouseEvent) {

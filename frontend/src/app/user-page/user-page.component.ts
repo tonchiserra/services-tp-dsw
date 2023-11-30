@@ -17,6 +17,8 @@ export class UserPageComponent {
   userLikesURL = '/user/'
   userMediaURL = '/user/'
 
+  imageColor = '#f4f4f4'
+
   constructor(
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -117,6 +119,8 @@ export class UserPageComponent {
     } catch(error) {
       console.log(error)
     }
+
+    this.imageColor = this.user.imageColor || '#f4f4f4'
   }
 
   async getPostsToShow() {

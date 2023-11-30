@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PostService } from '../services/post.service';
 import { UserService } from '../services/user.service';
 
@@ -6,15 +6,13 @@ import { UserService } from '../services/user.service';
   selector: 'post-card',
   templateUrl: './post-card.component.html'
 })
-export class PostCardComponent implements AfterViewInit {
+export class PostCardComponent {
   @Input() user: any;
   @Input() post: any;
   @Input() userLogged: any;
   canDelete: boolean = false;
   iconFill: string = "#2E3A59";
-
-
-  @ViewChild('postText', { static: false }) postText!: ElementRef;
+  imageColor = '#f4f4f4'
 
   constructor(
     private postService: PostService,
@@ -37,10 +35,8 @@ export class PostCardComponent implements AfterViewInit {
     }else{
       this.iconFill = "#2E3A59"
     }
-  }
 
-  ngAfterViewInit() {
-    this.postText.nativeElement.addEventListener("click", this.handlePopup)
+    this.imageColor = this.user.imageColor || '#f4f4f4'
   }
 
   closeSubmenu() {
@@ -51,7 +47,16 @@ export class PostCardComponent implements AfterViewInit {
   }
 
   handlePopup(event: Event) {
-    let post = (event.target as HTMLElement)?.closest('.post-card')
+    let post = (event.target as HTMLElement)?.closest('.like-btn')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.delete-btn')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.profile-information__name')
+    if(post) return
+
+    post = (event.target as HTMLElement)?.closest('.post-card')
     let postPopup = post?.parentElement?.querySelector('.post-card__popup')
 
     if(!postPopup) return
@@ -132,5 +137,28 @@ export class PostCardComponent implements AfterViewInit {
         console.log(err)
       }
     )
+  }
+
+  async sendMail() {
+    try {
+      let data = {
+        emailSender: this.userLogged.email || '',
+        nameSender: this.userLogged.name || '',
+        usernameSender: this.userLogged.username || '',
+        addressSender: `${ this.userLogged.city }, ${this.userLogged.province}, ${this.userLogged.country}` || '',
+        emailReceiver: this.user.email || '',
+        nameReceiver: this.user.name || '',
+        serviceType: this.post.service.type || '',
+        serviceDescription: this.post.service.description || '',
+        servicePrice: this.post.service.price || '',
+        postContent: this.post.content || ''
+      }
+  
+      let response = await this.postService.quickcontact(data).toPromise()
+
+      console.log(response)
+    } catch(err) {
+      console.log(err)
+    }
   }
 }

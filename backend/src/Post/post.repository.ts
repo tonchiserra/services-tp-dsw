@@ -10,6 +10,10 @@ export class PostRepository implements Repository<Post>{
         return await posts.find().toArray()
     }
 
+    public async findByQuery(query: string): Promise<Post[] | undefined> {
+        return await posts.find({ content: { $regex: query, $options: 'i' } }).toArray()
+    }
+
     public async findOne(item: {id: ObjectId}): Promise<Post | undefined> {
         return await posts.findOne({ _id: item.id }) as Post
     }

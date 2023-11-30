@@ -1,8 +1,11 @@
 <div class="new-post page-width">
     <form class="form-post" (submit)="submitHandler($event)">
         <div class="top">
-            <div class="user-image">
-                <!-- imagen -->
+            <div class="user-image" [style.background-color]="imageColor">
+                <div class="profile-image">
+                    <div class="profile-head"></div>
+                    <div class="profile-body"></div>
+                </div>
             </div>
             <div class="field">
                 <input type="checkbox" name="post[type]" id="typePost" [formControl]="postFormState.isServicePost">

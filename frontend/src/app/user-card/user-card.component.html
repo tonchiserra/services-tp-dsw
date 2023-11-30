@@ -1,0 +1,12 @@
+<div class="post-card__container post-card">
+    <div class="profile-information">
+        <div class="profile-information__image" [style.background-color]="imageColor">
+            <div class="profile-image">
+                <div class="profile-head"></div>
+                <div class="profile-body"></div>
+            </div>
+        </div>
+        <a [href]="'/user/' + user.username + '/posts'" class="profile-information__name">{{ user.name }}</a>
+        <p class="profile-information__username">@{{ user.username }}</p>
+    </div>
+</div>

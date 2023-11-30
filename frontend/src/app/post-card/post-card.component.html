@@ -1,7 +1,10 @@
-<div #postCard class="post-card__container post-card">
+<div #postCard class="post-card__container post-card" (click)="handlePopup($event)">
     <div class="profile-information">
-        <div class="profile-information__image">
-            <!-- imagen -->
+        <div class="profile-information__image" [style.background-color]="imageColor">
+            <div class="profile-image">
+                <div class="profile-head"></div>
+                <div class="profile-body"></div>
+            </div>
         </div>
         <a [href]="'/user/' + user.username + '/posts'" class="profile-information__name">{{ user.name }}</a>
         <p class="profile-information__username">@{{ user.username }}</p>
@@ -9,7 +12,7 @@
 
     <div class="post-information">
         <div class="post-information__date">{{ post.date }}</div>
-        <div #postText class="post-information__text">{{ post.content }}</div>
+        <div class="post-information__text">{{ post.content }}</div>
         <div class="post-information__stats">
             <div class="likes">
                 <button class="like-btn" (click)="handleLike()">
@@ -38,8 +41,11 @@
         </button>
     
         <div class="profile-information">
-            <div class="profile-information__image">
-                <!-- imagen -->
+            <div class="profile-information__image" [style.background-color]="imageColor">
+                <div class="profile-image">
+                    <div class="profile-head"></div>
+                    <div class="profile-body"></div>
+                </div>
             </div>
             <a [href]="'/user/' + user._id + '/posts'" class="profile-information__name">{{ user.name }}</a>
             <p class="profile-information__username">@{{ user.username }}</p>
@@ -51,14 +57,14 @@
             <p><strong>Post type:</strong> {{ post.postType }}</p>
             <ng-container *ngIf="post.service">
                 <p><strong>Service:</strong> {{ post.service.type }}</p>
-                <p><strong>Price:</strong> {{ post.service.price }}</p>
+                <p><strong>Price:</strong> $ARS {{ post.service.price }}</p>
                 <p><strong>Description:</strong> {{ post.service.description }}</p>
             </ng-container>
             <p><strong>Content:</strong> <br>{{ post.content }}</p>
         </div>
     
-        <div class="contact-button" *ngIf="post.postType === 'service'">
-            <button class="primary">Quick contact</button>
+        <div class="contact-button" *ngIf="post.postType === 'service' && user._id !== userLogged._id">
+            <button class="primary" (click)="sendMail()">Quick contact</button>
         </div>
     </div>
 </div>

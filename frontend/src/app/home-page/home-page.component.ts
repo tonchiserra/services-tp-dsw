@@ -11,7 +11,7 @@ export class HomePageComponent {
 
   constructor(
     private authService: AuthService
-    ) {
+  ) {
     this.setEvents()
   }
 

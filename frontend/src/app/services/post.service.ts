@@ -12,6 +12,10 @@ export class PostService {
     private http: HttpClient,
   ) { }
 
+  getByQuery(data: any) {
+    return this.http.get(`${this.URL}/posts?content=${data.query}`)
+  }
+
   getPost(postId: any) {
     return this.http.get(`${this.URL}/posts/${postId}`);
   }
@@ -26,5 +30,9 @@ export class PostService {
 
   deletePost(post:any){
     return this.http.delete(`${this.URL}/posts/${post._id}`)
+  }
+
+  quickcontact(data: any) {
+    return this.http.post(`${this.URL}/mailer/quickcontact`, data)
   }
 }

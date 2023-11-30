@@ -7,8 +7,11 @@
         <form (submit)="submitHandler($event)">
             <div class="group-field">
                 <div class="field">
-                    <div class="user-info__image">
-                        <!-- user image -->
+                    <div class="user-info__image" [style.background-color]="imageColor">
+                        <div class="profile-image">
+                            <div class="profile-head"></div>
+                            <div class="profile-body"></div>
+                        </div>
                     </div>
                 </div>
 
