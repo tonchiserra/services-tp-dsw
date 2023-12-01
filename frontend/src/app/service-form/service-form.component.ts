@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { cleanErrors, showErrors } from 'src/helpers/form-errors';
@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class ServiceFormComponent {
   serviceTypeData: any[] = [];
+  @Input() service :any;
 
   serviceState = {
     type: new FormControl(''),
@@ -30,6 +31,15 @@ export class ServiceFormComponent {
 
   async ngOnInit(): Promise<void>{
     await this.fetchDataServiceTypes();
+    if(this.service){
+      this.serviceDataLoad()
+    }
+  }
+
+  serviceDataLoad(){
+    this.serviceState.type.setValue(this.service.type);
+    this.serviceState.price.setValue(this.service.price);
+    this.serviceState.description.setValue(this.service.description);
   }
 
   async fetchDataServiceTypes() {
@@ -71,15 +81,25 @@ export class ServiceFormComponent {
       this.authService.getUserLogged().subscribe(
         (res: any) => {
           let userLogged = res.data
-
-          this.servicesService.create({service: result.data, user: userLogged}).subscribe(
-            (res: any) => {
-              this.router.navigate(['/home'])
-            },
-            (err: any) => {
-              console.log(err)
-            }
-          )
+          if(!this.service){
+            this.servicesService.create({service: result.data, user: userLogged}).subscribe(
+              (res: any) => {
+                this.router.navigate(['/home'])
+              },
+              (err: any) => {
+                console.log(err)
+              }
+            )
+          }else{
+            this.servicesService.update({service: result.data, user: userLogged}, this.service._id).subscribe(
+              (res: any) => {
+                this.router.navigate(['/edit-service'])
+              },
+              (err: any) => {
+                console.log(err)
+              }
+            )
+          }
         },
         (err: any) => {
           console.log(err)
