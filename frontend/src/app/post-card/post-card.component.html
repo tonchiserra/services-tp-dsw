@@ -64,7 +64,7 @@
         </div>
     
         <div class="contact-button" *ngIf="post.postType === 'service' && user._id !== userLogged._id">
-            <button class="primary" (click)="sendMail()">Quick contact</button>
+            <button class="primary" (click)="sendMail($event)">Quick contact</button>
         </div>
     </div>
 </div>

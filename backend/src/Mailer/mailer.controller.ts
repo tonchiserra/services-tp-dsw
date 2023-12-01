@@ -8,11 +8,10 @@ async function submitMail(req: Request, res: Response){
     const infoMailerContact = await repository.sendMail(req)
 
     if(infoMailerContact.rejected.length > 0) {
-        console.log(`Email not sent due to: ${infoMailerContact.response}`)
-
-        return res.json({ data: infoMailerContact })
+        return res.status(400).send({ message: `Email not sent due to: ${infoMailerContact.response}` })
     }
-    
+
+    return res.status(200).json({ data: infoMailerContact })
 }
  
 export { submitMail }
