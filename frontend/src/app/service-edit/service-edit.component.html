@@ -1,0 +1,33 @@
+<div class="list-conteiner content-up" *ngIf="showList">
+    <div class="info-conteiner" *ngFor="let service of serviceList">
+        <div><h3>Tipo</h3> {{service.type}}</div>
+        <div><h3>Precio</h3> {{service.price}}</div>
+        <div><h3>Descripcion</h3> {{service.description}}</div>
+        <div class="button">
+            <div class="edit">
+                <button class="edit-btn" (click)="handleEdit(service)">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="16" width="16" version="1.1" id="Capa_1" viewBox="0 0 107.373 107.373" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path style="fill:#010002;" d="M106.317,37.463c-1.406-1.403-3.672-1.403-5.071,0L70.013,68.692L26.104,88.029l-6.764-6.768    l19.344-43.905L69.909,6.123c1.403-1.399,1.403-3.668,0-5.071c-1.406-1.403-3.672-1.403-5.071,0L32.657,33.226L0.004,107.373    l74.136-32.657l32.177-32.181C107.72,41.139,107.72,38.863,106.317,37.463z"/>
+                                <path style="fill:#010002;" d="M60.815,62.265c0.698,0.694,1.618,1.049,2.537,1.049c0.92,0,1.836-0.354,2.537-1.049l30.07-30.07    c1.406-1.406,1.406-3.675,0-5.075c-1.403-1.406-3.668-1.406-5.075,0l-30.07,30.07C59.416,58.589,59.416,60.862,60.815,62.265z"/>
+                                <path style="fill:#010002;" d="M52.967,54.413c0.701,0.698,1.621,1.049,2.537,1.049c0.92,0,1.836-0.351,2.537-1.049l30.073-30.07    c1.403-1.406,1.403-3.675,0-5.075c-1.406-1.406-3.672-1.406-5.075,0l-30.073,30.07C51.564,50.737,51.564,53.014,52.967,54.413z"/>
+                                <path style="fill:#010002;" d="M45.115,46.561c0.701,0.698,1.621,1.049,2.537,1.049c0.916,0,1.836-0.351,2.537-1.049l30.073-30.07    c1.403-1.406,1.403-3.675,0-5.075c-1.403-1.406-3.672-1.406-5.075,0l-30.073,30.07C43.716,42.885,43.716,45.162,45.115,46.561z"/>
+                            </g>
+                        </g>
+                        </svg>
+                </button>
+            </div>
+            <div class="delete">
+                <button class="delete-btn" (click)="handleDelete(service)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" fill="#2E3A59"/>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" fill="#2E3A59"/>
+                    </svg>
+                </button>
+            </div>            
+        </div>
+    </div>
+</div>
+
+<service-form *ngIf="showServiceForm" [service]="this.selectedService"></service-form>

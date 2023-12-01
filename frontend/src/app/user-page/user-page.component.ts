@@ -27,6 +27,7 @@ export class UserPageComponent {
   ){ }
 
   ngOnInit() {
+    this.postsToShow = []
     this.getUserLogged()
     this.setFollowEvent()
   }
@@ -124,6 +125,7 @@ export class UserPageComponent {
   }
 
   async getPostsToShow() {
+    this.postsToShow=[]
     if (location.pathname.includes('/posts')) {
       this.postsToShow = [
         ...this.user.posts.map((post: any) => {

@@ -15,4 +15,12 @@ export class ServicesService {
   create(data: { service: any, user: any}) {
     return this.http.post(`${this.URL}/services`, data)
   }
+
+  update(data:{ service: any, user: any}, _id:any) {
+    return this.http.patch(`${this.URL}/services/${_id}`, data)
+  }
+
+  delete(_id:any){
+    return this.http.delete(`${this.URL}/services/${_id}`)
+  }
 }
