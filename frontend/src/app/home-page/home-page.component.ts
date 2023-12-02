@@ -83,7 +83,7 @@ export class HomePageComponent {
       let { data } = await response.json()
       let user = data
 
-      let userPosts = [...user.posts.map((post: any) => {
+      let userPosts = !!!user.posts ? [] : [...user.posts.map((post: any) => {
         return { user: user, post: post }
       })]
 

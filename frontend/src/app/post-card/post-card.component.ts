@@ -139,7 +139,11 @@ export class PostCardComponent {
     )
   }
 
-  async sendMail() {
+  async sendMail(event: MouseEvent) {
+    let button: HTMLElement = event.target as HTMLElement
+    button.textContent = 'Sending...'
+    button.setAttribute("disabled", "true")
+
     try {
       let data = {
         emailSender: this.userLogged.email || '',
@@ -153,10 +157,11 @@ export class PostCardComponent {
         servicePrice: this.post.service.price || '',
         postContent: this.post.content || ''
       }
-  
-      let response = await this.postService.quickcontact(data).toPromise()
 
-      console.log(response)
+      await this.postService.quickcontact(data).toPromise()
+
+      button.textContent = 'Email sended!'
+      
     } catch(err) {
       console.log(err)
     }

@@ -4,14 +4,14 @@ export interface IPostForm {
     isServicePost: FormControl<boolean | null>,
     service: FormControl<string | null>,
     text: FormControl<string | null>,
-    files: FormControl<FileList | null>
+    files: FormControl<File | null>
 }
 
 export interface IPostFormData {
     isServicePost: boolean,
     postType: 'normal' | 'service',
     content: string,
-    media: FileList | null,
+    media: File | null | undefined,
     date: Date,
     service: {}
 }

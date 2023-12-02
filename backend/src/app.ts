@@ -13,6 +13,7 @@ const PORT = Number(process.env.PORT) || 3000
 
 app.use(express.json())
 app.use(cors())
+app.use('/uploads', express.static('uploads'));
 
 app.use('/api/addresses', addressRouter)
 app.use('/api/users', userRouter)

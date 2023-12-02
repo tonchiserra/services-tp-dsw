@@ -5,8 +5,6 @@ import { IPostForm, IPostFormData } from './post-form.interface';
 import { AuthService } from '../services/auth.service';
 import { PostService } from '../services/post.service';
 
-import { HomePageComponent } from '../home-page/home-page.component';
-
 @Component({
   selector: 'post-form',
   templateUrl: './post-form.component.html'
@@ -22,6 +20,9 @@ export class PostFormComponent {
   };
 
   imageColor = "#f4f4f4"
+
+  fileSelected: File | null = null
+  photoSelected: string | ArrayBuffer = ''
 
   constructor(
     private authService: AuthService,
@@ -90,12 +91,22 @@ export class PostFormComponent {
   submitHandler(event: Event) {
     event.preventDefault()
     event.stopPropagation()
+
+    let eventTarget = event.target as any
+
+    if (eventTarget.mediaPost && eventTarget.mediaPost.files && eventTarget.mediaPost.files[0]) {
+      this.fileSelected = <File>eventTarget.mediaPost.files[0];
+
+      const reader = new FileReader();
+      reader.onload = e => this.photoSelected = reader.result || '';
+      reader.readAsDataURL(this.fileSelected);
+    }
     
     const data: IPostFormData = {
       isServicePost: this.postFormState.isServicePost.value || false,
       postType: this.postFormState.isServicePost.value ? 'service' : 'normal',
       content: this.postFormState.text.value || '',
-      media: this.postFormState.files.value,
+      media: this.fileSelected,
       date: new Date(),
       service: this.serviceData.find(service => service._id === this.postFormState.service.value ) || {}
     }
@@ -107,7 +118,12 @@ export class PostFormComponent {
         (res: any) => {
           let userLogged = res.data
 
-          this.postService.create({post: data, user: userLogged}).subscribe(
+          let formData = new FormData()
+          formData.append('post', JSON.stringify(data))
+          formData.append('user', JSON.stringify(userLogged))
+          formData.append('media', this.fileSelected as Blob)
+
+          this.postService.create(formData).subscribe(
             (res: any) => {
               location.reload()
             },
