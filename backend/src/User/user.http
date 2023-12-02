@@ -2,8 +2,12 @@
 GET http://localhost:3000/api/users
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 
+### delete user
+DELETE http://localhost:3000/api/users/6567a38f1581c83ca08ab6db
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
+
 ### obtener un user por username
-GET http://localhost:3000/api/users/655d04214c4ce18ad0a0adf0
+GET http://localhost:3000/api/users/6568f4d6b22533fd219c69e4
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM
 
 ### crear un nuevo user
@@ -29,6 +33,3 @@ Content-Type: application/json
   "posts": []
 }
 
-### delete user
-DELETE http://localhost:3000/api/users/65663b9ec425d145fd9b99a9
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTRkMzkyMzk2YzY0MDRjN2M5M2VlY2EiLCJpYXQiOjE2OTk1NTk3MTV9.SL8go6nw49PyjK9qJa6sf81Ek4RDT-vCCoPA99x34QM

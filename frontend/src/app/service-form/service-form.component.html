@@ -6,7 +6,7 @@
                 <div class="field">
                     <label for="typeService">Type of service:</label>
                     <select name="type" id="typeService" class="secondary" [formControl]="serviceState.type">
-                        <option value="" selected disabled>Type of service</option>
+                        <option value="" selected disable>Type of service</option>
                         <option *ngFor="let serviceType of serviceTypeData" [value]="serviceType.name">{{ serviceType.name }}</option>
                         
                     </select>

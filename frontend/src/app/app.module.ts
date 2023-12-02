@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PostFormComponent } from './post-form/post-form.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { ServiceFormComponent } from './service-form/service-form.component';
+import { ServiceEditComponent } from './service-edit/service-edit.component';
 import { UserCardComponent } from './user-card/user-card.component';
 
 import { UserPageModule } from './user-page/user-page.module';
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'home', component: HomePageComponent, canActivate: [authGuard] },
   { path: 'search', component: SearchPageComponent, canActivate: [authGuard] },
   { path: 'user/:username', component: UserPageComponent, canActivate: [authGuard] },
-  { path: 'new-service', component: ServiceFormComponent, canActivate: [authGuard] }
+  { path: 'new-service', component: ServiceFormComponent, canActivate: [authGuard] },
+  { path: 'edit-service', component: ServiceEditComponent, canActivate: [authGuard] }
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const routes: Routes = [
     HomePageComponent,
     PostFormComponent,
     ServiceFormComponent,
-    UserCardComponent
+    UserCardComponent,
+    ServiceEditComponent
   ],
   imports: [
     BrowserModule,
