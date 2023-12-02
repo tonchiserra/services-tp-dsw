@@ -20,7 +20,7 @@ export class PostService {
     return this.http.get(`${this.URL}/posts/${postId}`);
   }
 
-  create(data: { post: any, user: any}) {
+  create(data: { post: any, user: any} | FormData) {
     return this.http.post(`${this.URL}/posts`, data)
   }
 

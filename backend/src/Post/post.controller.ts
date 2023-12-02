@@ -9,9 +9,13 @@ const userRepository = new UserRepository()
 
 function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
     let post = req.body.post ? req.body.post: req.body
+    if(typeof post === 'string') {
+        post = JSON.parse(post)
+    }
+
     req.body.sanitizedInput ={
         content: post.content,
-        media: post.media,
+        media: req.file ? req.file.path : '',
         postType: post.postType,
         date: post.date,
         likes: post.likes,
@@ -63,7 +67,11 @@ async function add(req:Request, res:Response){
     
     if(!post) return res.status(404).send({ message: 'Post not found' })
 
-    const userToUpdate = req.body.user
+    let userToUpdate = req.body.user
+    if(typeof userToUpdate === 'string') {
+        userToUpdate = JSON.parse(userToUpdate)
+    }
+
     userToUpdate.posts ? userToUpdate.posts.push(post) : userToUpdate.posts = [post]
 
     let userId = userToUpdate._id

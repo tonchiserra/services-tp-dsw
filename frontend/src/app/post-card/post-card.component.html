@@ -12,7 +12,10 @@
 
     <div class="post-information">
         <div class="post-information__date">{{ post.date }}</div>
-        <div class="post-information__text">{{ post.content }}</div>
+        <div class="post-information__text">
+            {{ post.content }}
+            <img *ngIf="post.media" [src]="'http://localhost:3000/' + post.media" alt="post-img" />
+        </div>
         <div class="post-information__stats">
             <div class="likes">
                 <button class="like-btn" (click)="handleLike()">
@@ -60,7 +63,7 @@
                 <p><strong>Price:</strong> $ARS {{ post.service.price }}</p>
                 <p><strong>Description:</strong> {{ post.service.description }}</p>
             </ng-container>
-            <p><strong>Content:</strong> <br>{{ post.content }}</p>
+            <p><strong>Content:</strong> <br>{{ post.content }}<br><img *ngIf="post.media" [src]="'http://localhost:3000/' + post.media" alt="post-img" /></p>
         </div>
     
         <div class="contact-button" *ngIf="post.postType === 'service' && user._id !== userLogged._id">
