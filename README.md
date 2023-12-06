@@ -313,6 +313,6 @@ En el siguiente link se puede acceder a los link de los distintos PR: https://gi
  
 ## Issues
 
-### Resueltos
+### Pendientes
 - [ ] Al crear una cuenta, el proceso de verificacion primero verifica que los datos sean correctos y luego si estan correctos verifica si esta repetido el mail o username.
  
