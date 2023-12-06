@@ -13,6 +13,8 @@ function sanitizePostInput(req: Request, res: Response, next: NextFunction) {
         post = JSON.parse(post)
     }
 
+    console.log(req.body)
+
     req.body.sanitizedInput ={
         content: post.content,
         media: req.file ? req.file.path : '',

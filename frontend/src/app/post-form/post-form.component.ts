@@ -121,6 +121,7 @@ export class PostFormComponent {
           let formData = new FormData()
           formData.append('post', JSON.stringify(data))
           formData.append('user', JSON.stringify(userLogged))
+          formData.append('userId', userLogged._id)
           formData.append('media', this.fileSelected as Blob)
 
           this.postService.create(formData).subscribe(
