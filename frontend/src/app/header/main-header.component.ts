@@ -10,6 +10,9 @@ export class MainHeaderComponent {
 
   auth = this.authService
   profileURL = '/user/'
+  confirmationMessage = ''
+  showConfirmationModal = false
+  currentConfirmationModal = ''
 
   ngOnInit() {
     this.authService.getUserLogged().subscribe(
@@ -31,4 +34,20 @@ export class MainHeaderComponent {
     
     submenu.classList.toggle('open')
   }
+
+  handleConfirmationModal(event: string) {
+    if(event === 'logout') this.confirmationMessage = 'Are you sure you want to log out?'
+    
+    if(event === 'delete') this.confirmationMessage = 'Are you sure you want to delete your account?'
+
+    if(event === 'confirmation') {
+      if(this.currentConfirmationModal === 'logout') this.auth.logOut()
+      if(this.currentConfirmationModal === 'delete') this.auth.deleteAccount()
+    }
+
+    this.showConfirmationModal = !this.showConfirmationModal
+    this.currentConfirmationModal = event
+  }
+
+
 }

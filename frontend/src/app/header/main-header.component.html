@@ -36,8 +36,8 @@
                     <ul>
                         <li><a routerLink="/new-service" routerLinkActive="active">Create a service</a></li>
                         <li><a routerLink="/edit-service" routerLinkActive="active">Edit a service</a></li>
-                        <li><a (click)="this.auth.logOut()">Log out</a></li>
-                        <li><a (click)="this.auth.deleteAccount()">Delete account</a></li>
+                        <li><a (click)="this.handleConfirmationModal('logout')">Log out</a></li>
+                        <li><a (click)="this.handleConfirmationModal('delete')" style="color: #af0707">Delete account</a></li>
                     </ul>
                 </nav>
             </li>
@@ -52,3 +52,14 @@
         </ul>
     </nav>
 </header>
+
+<div class="confirmation-modal" *ngIf="this.showConfirmationModal">
+    <div class="confirmation-modal__container">
+        <p>{{ this.confirmationMessage }}</p>
+        <div class="buttons">
+            <button class="secondary" (click)="this.handleConfirmationModal('confirmation')">Accept</button>
+            <button class="primary" (click)="this.handleConfirmationModal('')">Cancel</button>
+        </div>
+    </div>
+
+</div>
