@@ -183,4 +183,40 @@ main-header {
             }
         }
     }
+
+    .confirmation-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__container {
+            background-color: $white-color;
+            width: max-content;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            border-radius: 10px;
+
+            .buttons {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+
+                button {
+                    width: 100%;
+                }
+            }
+        }
+    }
 }

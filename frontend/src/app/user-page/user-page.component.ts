@@ -157,7 +157,14 @@ export class UserPageComponent {
     }    
 
     if (location.pathname.includes('/media')) {
-      // to-do
+      this.postsToShow = [
+        ...this.user.posts.filter((post: any) => post.media && post.media !== '')
+      ]
+      this.postsToShow = [
+        ...this.postsToShow.map((post: any) => {
+          return { user: this.user, post: post }
+        })
+      ]
     }
   }
 
