@@ -287,3 +287,22 @@ En el siguiente link se puede acceder a los link de los distintos PR: https://gi
 
 # Seguimiento de Features, Bugs e Issues
 
+## Features
+
+### Completadas
+
+- [x] Poder buscar post o user.
+- [x] Buscar perfil por username y no id.
+- [x] Poder agregar media a un post. 
+
+## Bugs
+
+### Resueltos
+
+- [x] User page muestra post de otro user
+  - cuando se accedia al perfil del usuario loggeado desde la pagina de otro usuario quedaban los post del usuario visitado con la informacion del perfil del usuario loggeado si este no tenia posts. Se soluciono haciendo que el listado de post arranque como un arreglo vacio.
+     
+### Pendientes
+- [] Like en la home page
+  - cuando se le da like en la home page a una publicacion se pierden las fechas de todos los posts de ese usuario.
+ 
