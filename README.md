@@ -306,10 +306,8 @@ En el siguiente link se puede acceder a los link de los distintos PR: https://gi
 - cuando se accedia al perfil del usuario loggeado desde la pagina de otro usuario quedaban los post del usuario visitado con la informacion del perfil del usuario loggeado si este no tenia posts. Se soluciono haciendo que el listado de post arranque como un arreglo vacio.
 - [x] Problema al mostrar el perfil del usuario.
 - cuando se accedia al perfil de un usuario no seleccionaba la solapa de posts, se soluciono modificando la ruta a la que se accedia cuando se elegia un perfil.
-     
-### Pendientes
-- [ ] Like en la home page
-  - cuando se le da like en la home page a una publicacion se pierden las fechas de todos los posts de ese usuario.
+- [x] Like en la home page
+- cuando se le da like en la home page a una publicacion se pierden las fechas de todos los posts de ese usuario.
  
 ## Issues
 
