@@ -60,7 +60,7 @@ Abre una terminal en la carpeta services-tp-dsw/frontend y ejecuta el siguiente 
 npm install
 ```
 
-##Inicio del servidor
+## Inicio del servidor
 En la terminal de la carpeta services-tp-dsw/frontend, ejecuta el siguiente comando para iniciar el servidor del frontend:
 ```bash
 ng serve
