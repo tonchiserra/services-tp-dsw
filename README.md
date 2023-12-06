@@ -43,7 +43,38 @@ Adicionales para Aprobación
 |CUU/Epic|-|
 |Otros|1. Notificaciones<br> 2. Like/repost en posts|
 
-#Doumentacion
+# Instruciones para la instalacion
+## Descarga del proyecto e instalacion de dependencias.
+Abrir una terminal y ejecuta el siguiente comando para clonar el repositorio:
+```bash
+git clone https://github.com/tonchiserra/services-tp-dsw.git
+```
+
+Abre una terminal en la carpeta services-tp-dsw/backend y ejecuta el siguiente comando:
+```bash
+npm install
+```
+
+Abre una terminal en la carpeta services-tp-dsw/frontend y ejecuta el siguiente comando:
+```bash
+npm install
+```
+
+##Inicio del servidor
+En la terminal de la carpeta services-tp-dsw/frontend, ejecuta el siguiente comando para iniciar el servidor del frontend:
+```bash
+ng serve
+```
+Esto iniciará la aplicación Angular y podrás acceder a ella en tu navegador en http://localhost:4200/.
+
+##Inicio del servidor
+En la terminal de la carpeta services-tp-dsw/backend, ejecuta el siguiente comando para iniciar el servidor del backend:
+```bash
+npm run start:dev
+```
+Esto iniciará el servidor del backend en http://localhost:3000/.
+
+# Doumentacion
 
 ## Resumen de Avance y Discusión
 
@@ -250,4 +281,5 @@ Adicionales para Aprobación
    - Generar popup para confirmar eliminacion y logout del usuario.
    - Creacion del edit y delete page de los servicios.
 
+# Seguimiento de Features, Bugs e Issues
 
