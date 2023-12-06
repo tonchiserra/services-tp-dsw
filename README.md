@@ -74,6 +74,10 @@ npm run start:dev
 ```
 Esto iniciará el servidor del backend en http://localhost:3000/.
 
+#Link a los PR.
+En el siguiente link se puede acceder a los link de los distintos PR.
+https://github.com/tonchiserra/services-tp-dsw/pulls
+
 # Doumentacion
 
 ## Resumen de Avance y Discusión
