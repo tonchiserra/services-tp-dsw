@@ -293,16 +293,26 @@ En el siguiente link se puede acceder a los link de los distintos PR: https://gi
 
 - [x] Poder buscar post o user.
 - [x] Buscar perfil por username y no id.
-- [x] Poder agregar media a un post. 
+- [x] Poder agregar media a un post.
+- [x] Poder indicar que te gusta un post.
+- [x] Poder crear una red de seguidos y seguidores.
+- [x] Ver detalle del post. 
 
 ## Bugs
 
 ### Resueltos
 
-- [x] User page muestra post de otro user
-  - cuando se accedia al perfil del usuario loggeado desde la pagina de otro usuario quedaban los post del usuario visitado con la informacion del perfil del usuario loggeado si este no tenia posts. Se soluciono haciendo que el listado de post arranque como un arreglo vacio.
+- [x] User page muestra post de otro user.
+- cuando se accedia al perfil del usuario loggeado desde la pagina de otro usuario quedaban los post del usuario visitado con la informacion del perfil del usuario loggeado si este no tenia posts. Se soluciono haciendo que el listado de post arranque como un arreglo vacio.
+- [x] Problema al mostrar el perfil del usuario.
+- cuando se accedia al perfil de un usuario no seleccionaba la solapa de posts, se soluciono modificando la ruta a la que se accedia cuando se elegia un perfil.
      
 ### Pendientes
-- [] Like en la home page
+- [ ] Like en la home page
   - cuando se le da like en la home page a una publicacion se pierden las fechas de todos los posts de ese usuario.
+ 
+## Issues
+
+### Resueltos
+- [x] Al crear una cuenta, el proceso de verificacion primero verifica que los datos sean correctos y luego si estan correctos verifica si esta repetido el mail o username.
  
